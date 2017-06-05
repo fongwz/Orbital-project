@@ -20,6 +20,7 @@ public class LoggedInPage extends AppCompatActivity {
         Intent i = new Intent(this, Settings1.class);
 
         // add extra boolean attribute to note that user does not want to save preferences to list of saved preferences already
+        i.putExtra("savePreferences", false);
         startActivity(i);
     }
 

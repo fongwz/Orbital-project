@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.weizheng.forkedmain.Settings3">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dish Type Preference"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="61dp"
+        android:layout_marginEnd="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/dishButton"
+        android:layout_marginTop="39dp" />
+
+    <CheckBox
+        android:id="@+id/checkboxMeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meat"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="144dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginTop="30dp" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seafood"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="213dp"
+        android:layout_below="@+id/checkboxMeat"
+        android:layout_alignStart="@+id/checkboxMeat" />
+
+    <CheckBox
+        android:id="@+id/checkBoxVeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vegetables"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="284dp"
+        android:layout_marginBottom="60dp"
+        android:layout_above="@+id/dishButton"
+        android:layout_alignStart="@+id/checkBoxFish" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Desserts"
+        android:layout_above="@+id/dishButton"
+        android:layout_alignStart="@+id/checkBoxVeg" />
+
+    <Button
+        android:id="@+id/dishButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android.onClick="onDishClick"
+        android:layout_marginBottom="184dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="147dp" />
+
+</RelativeLayout>

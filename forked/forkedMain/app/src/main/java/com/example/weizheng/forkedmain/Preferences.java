@@ -7,16 +7,16 @@ public class Preferences {
     /** insert attributes, constructors, setters, getters **********/
 
     /** cuisines */
-    private boolean _chinese;
-    private boolean _malay;
-    private boolean _indian;
-    private boolean _western;
-    private boolean _korean;
+    private int _chinese;
+    private int _malay;
+    private int _indian;
+    private int _western;
+    private int _korean;
 
     /** tastes */
-    private boolean _sweet;
-    private boolean _sour;
-    private boolean _spicy;
+    private int _sweet;
+    private int _sour;
+    private int _spicy;
 
     /** dish types */
     //fill in dish types here
@@ -25,7 +25,7 @@ public class Preferences {
         /** empty constructor */
     }
 
-    public Preferences(boolean _chinese, boolean _malay, boolean _indian, boolean _western, boolean _korean, boolean _sweet, boolean _sour, boolean _spicy) {
+    public Preferences(int _chinese, int _malay, int _indian, int _western, int _korean, int _sweet, int _sour, int _spicy) {
         this._chinese = _chinese;
         this._malay = _malay;
         this._indian = _indian;
@@ -38,69 +38,69 @@ public class Preferences {
 
     /** getter methods *********************************************/
 
-    public boolean is_chinese() {
+    public int is_chinese() {
         return _chinese;
     }
 
-    public boolean is_malay() {
+    public int is_malay() {
         return _malay;
     }
 
-    public boolean is_indian() {
+    public int is_indian() {
         return _indian;
     }
 
-    public boolean is_western() {
+    public int is_western() {
         return _western;
     }
 
-    public boolean is_korean() {
+    public int is_korean() {
         return _korean;
     }
 
-    public boolean is_sweet() {
+    public int is_sweet() {
         return _sweet;
     }
 
-    public boolean is_sour() {
+    public int is_sour() {
         return _sour;
     }
 
-    public boolean is_spicy() {
+    public int is_spicy() {
         return _spicy;
     }
 
     /** setter methods ***********************************************/
 
-    public void set_chinese(boolean _chinese) {
+    public void set_chinese(int _chinese) {
         this._chinese = _chinese;
     }
 
-    public void set_malay(boolean _malay) {
+    public void set_malay(int _malay) {
         this._malay = _malay;
     }
 
-    public void set_indian(boolean _indian) {
+    public void set_indian(int _indian) {
         this._indian = _indian;
     }
 
-    public void set_western(boolean _western) {
+    public void set_western(int _western) {
         this._western = _western;
     }
 
-    public void set_korean(boolean _korean) {
+    public void set_korean(int _korean) {
         this._korean = _korean;
     }
 
-    public void set_sweet(boolean _sweet) {
+    public void set_sweet(int _sweet) {
         this._sweet = _sweet;
     }
 
-    public void set_sour(boolean _sour) {
+    public void set_sour(int _sour) {
         this._sour = _sour;
     }
 
-    public void set_spicy(boolean _spicy) {
+    public void set_spicy(int _spicy) {
         this._spicy = _spicy;
     }
 }

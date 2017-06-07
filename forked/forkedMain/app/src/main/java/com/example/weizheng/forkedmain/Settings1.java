@@ -31,21 +31,40 @@ public class Settings1 extends AppCompatActivity {
 
     public void onCuisineClick(View view){
 
-        /** Launching sqlitedb to save user preferences */
-        if(savePreferences) {
-            chinese = (CheckBox) findViewById(R.id.settings_cuisine_chinese);
-            malay = (CheckBox) findViewById(R.id.settings_cuisine_malay);
-            indian = (CheckBox) findViewById(R.id.settings_cuisine_indian);
-            western = (CheckBox) findViewById(R.id.settings_cuisine_western);
-            korean = (CheckBox) findViewById(R.id.settings_cuisine_korean);
+        int[] preferenceValues={};
+        chinese = (CheckBox) findViewById(R.id.settings_cuisine_chinese);
+        malay = (CheckBox) findViewById(R.id.settings_cuisine_malay);
+        indian = (CheckBox) findViewById(R.id.settings_cuisine_indian);
+        western = (CheckBox) findViewById(R.id.settings_cuisine_western);
+        korean = (CheckBox) findViewById(R.id.settings_cuisine_korean);
 
+        /** if save preferences, store them as 1/0 integer value in array first, initialize sqlite at last settings */
+        if(savePreferences) {
             if (chinese.isChecked()) {
-            }//add chinese to temporary user preferences
+                preferenceValues[0]=1;
+            }else{ preferenceValues[0]=0; }
+
             if (malay.isChecked()) {
-            }//add malay to temporary user preferences
-        }else{
+                preferenceValues[1]=1;
+            }else{ preferenceValues[1]=0; }
+
+            if(indian.isChecked()){
+                preferenceValues[2]=1;
+            }else{ preferenceValues[2]=0; }
+
+            if(western.isChecked()){
+                preferenceValues[3]=1;
+            }else{ preferenceValues[3]=0; }
+
+            if(korean.isChecked()){
+                preferenceValues[4]=1;
+            }else{ preferenceValues[4]=0; }
+        } else{//add temp preference?}
+
         Intent i = new Intent(this, Settings2.class);
         i.putExtra("saveRecipe",false);
+        i.putExtra("cuisineValues", preferenceValues);
+
         startActivity(i);
     }
 }

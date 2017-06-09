@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
+import android.util.MutableShort;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
@@ -19,6 +20,11 @@ public class MyDBHandler extends SQLiteOpenHelper{
     public static final String COLUMN_SWEET = "sweet";
     public static final String COLUMN_SOUR = "sour";
     public static final String COLUMN_SPICY = "spicy";
+    public static final String COLUMN_MEAT = "meat";
+    public static final String COLUMN_SEAFOOD = "seafood";
+    public static final String COLUMN_VEG = "veg";
+    public static final String COLUMN_DESSERT = "dessert";
+    public static final String COLUMN_SAVE = "save";
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -36,6 +42,11 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 COLUMN_SWEET + "INTEGER " +
                 COLUMN_SOUR + "INTEGER " +
                 COLUMN_SPICY + "INTEGER " +
+                COLUMN_MEAT + "INTEGER " +
+                COLUMN_SEAFOOD + "INTEGER" +
+                COLUMN_VEG + "INTEGER" +
+                COLUMN_DESSERT + "INTEGER" +
+                COLUMN_SAVE + "TEXT" +
                 ");";
         db.execSQL(query);
     }
@@ -46,7 +57,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public void addPreferences(Preferences preferences){
+    public void addSavePreferences(Preferences preferences){
         ContentValues values = new ContentValues();
         values.put(COLUMN_CHINESE, preferences.is_chinese());
         values.put(COLUMN_MALAY, preferences.is_malay());
@@ -56,9 +67,39 @@ public class MyDBHandler extends SQLiteOpenHelper{
         values.put(COLUMN_SWEET, preferences.is_sweet());
         values.put(COLUMN_SOUR, preferences.is_sour());
         values.put(COLUMN_SPICY, preferences.is_spicy());
+        values.put(COLUMN_MEAT, preferences.is_meat());
+        values.put(COLUMN_SEAFOOD, preferences.is_seafood());
+        values.put(COLUMN_VEG, preferences.is_veg());
+        values.put(COLUMN_DESSERT, preferences.is_dessert());
+        values.put(COLUMN_SAVE, "true");
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_PREFERENCES, null, values);
         db.close();
+    }
+
+    public void addTempPreferences(Preferences preferences){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CHINESE, preferences.is_chinese());
+        values.put(COLUMN_MALAY, preferences.is_malay());
+        values.put(COLUMN_INDIAN, preferences.is_indian());
+        values.put(COLUMN_WESTERN, preferences.is_western());
+        values.put(COLUMN_KOREAN, preferences.is_korean());
+        values.put(COLUMN_SWEET, preferences.is_sweet());
+        values.put(COLUMN_SOUR, preferences.is_sour());
+        values.put(COLUMN_SPICY, preferences.is_spicy());
+        values.put(COLUMN_MEAT, preferences.is_meat());
+        values.put(COLUMN_SEAFOOD, preferences.is_seafood());
+        values.put(COLUMN_VEG, preferences.is_veg());
+        values.put(COLUMN_DESSERT, preferences.is_dessert());
+        values.put(COLUMN_SAVE, "false");
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(TABLE_PREFERENCES, null, values);
+        db.close();
+    }
+
+    public void deleteTempPreferences(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_PREFERENCES + " WHERE " + COLUMN_SAVE + " = 'false';");
     }
 
     public void resetPreferences(){
@@ -68,7 +109,7 @@ public class MyDBHandler extends SQLiteOpenHelper{
 
     public void updatePreferences(Preferences preferences){
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("UPDATE " + TABLE_PREFERENCES + "SET " +
+        db.execSQL("UPDATE " + TABLE_PREFERENCES + " SET " +
                 COLUMN_CHINESE + " = " + preferences.is_chinese() + ", " +
                 COLUMN_MALAY + " = " + preferences.is_malay() + ", " +
                 COLUMN_INDIAN + " = " + preferences.is_indian() + ", " +
@@ -76,7 +117,13 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 COLUMN_KOREAN + " = " + preferences.is_korean() + ", " +
                 COLUMN_SWEET + " = " + preferences.is_sweet() + ", " +
                 COLUMN_SOUR + " = " + preferences.is_sour() + ", " +
-                COLUMN_SPICY + " = " + preferences.is_spicy()
+                COLUMN_SPICY + " = " + preferences.is_spicy() + ", " +
+                COLUMN_MEAT + " = " + preferences.is_meat() + ", " +
+                COLUMN_SEAFOOD + " = " + preferences.is_seafood() + ", " +
+                COLUMN_VEG + " = " + preferences.is_veg() + ", " +
+                COLUMN_DESSERT + " = " + preferences.is_dessert()
+                + " WHERE " +
+                COLUMN_SAVE + " = 'true';"
         );
     }
 }

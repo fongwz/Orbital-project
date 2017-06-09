@@ -28,30 +28,36 @@ public class Settings2 extends AppCompatActivity {
         preferenceValues = data.getIntArray("preferenceValues");
     }
 
-    public void onTasteClick(View view){
+    public void onTasteClick(View view) {
 
-        sweet = (CheckBox)findViewById(R.id.settings_taste_sweet);
-        sour = (CheckBox)findViewById(R.id.settings_taste_sour);
-        spicy = (CheckBox)findViewById(R.id.settings_taste_spicy);
+        sweet = (CheckBox) findViewById(R.id.settings_taste_sweet);
+        sour = (CheckBox) findViewById(R.id.settings_taste_sour);
+        spicy = (CheckBox) findViewById(R.id.settings_taste_spicy);
 
-        if(savePreferences){
+        if (sweet.isChecked()) {
+            preferenceValues[5] = 1;
+        } else {
+            preferenceValues[5] = 0;
+        }
 
-            if(sweet.isChecked()){
-                preferenceValues[5]=1;
-            }else{ preferenceValues[5]=0; }
+        if (sour.isChecked()) {
+            preferenceValues[6] = 1;
+        } else {
+            preferenceValues[6] = 0;
+        }
 
-            if(sour.isChecked()){
-                preferenceValues[6]=1;
-            }else{ preferenceValues[6]=0; }
-
-            if(spicy.isChecked()){
-                preferenceValues[7]=1;
-            }else{ preferenceValues[7]=0; }
-
-        }else {//add temp reference?}
+        if (spicy.isChecked()) {
+            preferenceValues[7] = 1;
+        } else {
+            preferenceValues[7] = 0;
+        }
 
         Intent i = new Intent(this, Settings3.class);
-        i.putExtra("saveRecipe",false);
+        if(savePreferences) {
+            i.putExtra("savePreferences", true);
+        } else {
+            i.putExtra("savePreferences", false);
+        }
         i.putExtra("cuisineValues", preferenceValues);
         startActivity(i);
     }

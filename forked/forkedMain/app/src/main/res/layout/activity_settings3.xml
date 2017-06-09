@@ -52,12 +52,12 @@
         android:layout_alignStart="@+id/checkBoxFish" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBoxDessert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Desserts"
         android:layout_above="@+id/dishButton"
-        android:layout_alignStart="@+id/checkBoxVeg" />
+        android:layout_alignStart="@+id/checkBoxVeg"
+        android:text="Desserts" />
 
     <Button
         android:id="@+id/dishButton"

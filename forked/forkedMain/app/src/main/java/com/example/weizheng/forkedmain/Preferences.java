@@ -19,13 +19,16 @@ public class Preferences {
     private int _spicy;
 
     /** dish types */
-    //fill in dish types here
+    private int _meat;
+    private int _seafood;
+    private int _veg;
+    private int _dessert;
 
     public Preferences(){
         /** empty constructor */
     }
 
-    public Preferences(int _chinese, int _malay, int _indian, int _western, int _korean, int _sweet, int _sour, int _spicy) {
+    public Preferences(int _chinese, int _malay, int _indian, int _western, int _korean, int _sweet, int _sour, int _spicy, int _meat, int _seafood, int _veg, int _dessert) {
         this._chinese = _chinese;
         this._malay = _malay;
         this._indian = _indian;
@@ -34,6 +37,10 @@ public class Preferences {
         this._sweet = _sweet;
         this._sour = _sour;
         this._spicy = _spicy;
+        this._meat = _meat;
+        this._seafood = _seafood;
+        this._veg = _veg;
+        this._dessert = _dessert;
     }
 
     /** getter methods *********************************************/
@@ -70,6 +77,22 @@ public class Preferences {
         return _spicy;
     }
 
+    public int is_meat() {
+        return _meat;
+    }
+
+    public int is_seafood() {
+        return _seafood;
+    }
+
+    public int is_veg() {
+        return _veg;
+    }
+
+    public int is_dessert() {
+        return _dessert;
+    }
+
     /** setter methods ***********************************************/
 
     public void set_chinese(int _chinese) {
@@ -102,5 +125,21 @@ public class Preferences {
 
     public void set_spicy(int _spicy) {
         this._spicy = _spicy;
+    }
+
+    public void set_meat(int _meat) {
+        this._meat = _meat;
+    }
+
+    public void set_seafood(int _seafood) {
+        this._seafood = _seafood;
+    }
+
+    public void set_veg(int _veg) {
+        this._veg = _veg;
+    }
+
+    public void set_dessert(int _dessert) {
+        this._dessert = _dessert;
     }
 }

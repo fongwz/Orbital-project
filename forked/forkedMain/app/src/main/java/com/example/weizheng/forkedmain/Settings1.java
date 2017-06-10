@@ -31,7 +31,7 @@ public class Settings1 extends AppCompatActivity {
 
     public void onCuisineClick(View view) {
 
-        int[] preferenceValues = {};
+        int[] preferenceValues = new int[12];
         chinese = (CheckBox) findViewById(R.id.settings_cuisine_chinese);
         malay = (CheckBox) findViewById(R.id.settings_cuisine_malay);
         indian = (CheckBox) findViewById(R.id.settings_cuisine_indian);
@@ -77,7 +77,7 @@ public class Settings1 extends AppCompatActivity {
         } else {
             i.putExtra("savePreferences", false);
         }
-        i.putExtra("cuisineValues", preferenceValues);
+        i.putExtra("preferenceValues", preferenceValues);
         startActivity(i);
     }
 }

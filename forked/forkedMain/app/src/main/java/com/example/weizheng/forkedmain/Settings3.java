@@ -79,11 +79,12 @@ public class Settings3 extends AppCompatActivity {
         if(savePreferences) {
             dbHandler = new MyDBHandler(this, null, null, 1);
             dbHandler.addSavePreferences(preferences);
+            //online check
         }else{
-        dbHandler = new MyDBHandler(this, null, null, 1);
-        dbHandler.addTempPreferences(preferences);
-        //perform online check(discover a recipe)
-        dbHandler.deleteTempPreferences(); // finished using temp references
+            dbHandler = new MyDBHandler(this, null, null, 1);
+            dbHandler.addTempPreferences(preferences);
+            //perform online check(discover a recipe)
+            dbHandler.deleteTempPreferences(); // finished using temp references
         }
     }
 }

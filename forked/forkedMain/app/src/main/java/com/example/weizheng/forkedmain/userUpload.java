@@ -135,8 +135,8 @@ public class userUpload extends AppCompatActivity {
         /** Creating new Step number */
         TextView addStepNum = new TextView(this);
         RelativeLayout.LayoutParams addStepNumParams = new RelativeLayout.LayoutParams(
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, r.getDisplayMetrics()),
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 22, r.getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, r.getDisplayMetrics())
         );
         addStepNumParams.addRule(RelativeLayout.BELOW, R.id.upload_recipe_recipe_num);
         addStepNumParams.addRule(RelativeLayout.ALIGN_START, R.id.upload_recipe_recipe_num);

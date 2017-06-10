@@ -8,15 +8,15 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText was;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        was=(EditText)findViewById(R.id.editText2);
+
     }
 
     public void onClick(View view){
+        EditText was=(EditText)findViewById(R.id.editText2);
         Intent i = new Intent(this, LoggedInPage.class);
         String text=was.getText().toString();
         if(text.equals("hi")) {

@@ -30,4 +30,11 @@ public class LoggedInPage extends AppCompatActivity {
         startActivity(i);
 
     }
+
+    public void onUpdatePrefClick(View view){
+
+        Intent i = new Intent(this, Settings1.class);
+        i.putExtra("savePreferences", true);
+        startActivity(i);
+    }
 }

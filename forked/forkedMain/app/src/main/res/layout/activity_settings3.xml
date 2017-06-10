@@ -37,6 +37,7 @@
         android:text="Seafood"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="213dp"
+        android:layout_marginTop="38dp"
         android:layout_below="@+id/checkboxMeat"
         android:layout_alignStart="@+id/checkboxMeat" />
 
@@ -47,17 +48,18 @@
         android:text="Vegetables"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="284dp"
-        android:layout_marginBottom="60dp"
-        android:layout_above="@+id/dishButton"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/checkBoxFish"
         android:layout_alignStart="@+id/checkBoxFish" />
 
     <CheckBox
         android:id="@+id/checkBoxDessert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/dishButton"
+        android:text="Desserts"
+        android:layout_alignTop="@+id/checkBoxVeg"
         android:layout_alignStart="@+id/checkBoxVeg"
-        android:text="Desserts" />
+        android:layout_marginTop="58dp" />
 
     <Button
         android:id="@+id/dishButton"
@@ -65,9 +67,9 @@
         android:layout_height="wrap_content"
         android:text="Next"
         android.onClick="onDishClick"
-        android:layout_marginBottom="184dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="147dp" />
+        android:layout_marginEnd="143dp"
+        android:layout_marginTop="49dp"
+        android:layout_below="@+id/checkBoxVeg"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -102,6 +102,13 @@ public class userUpload extends AppCompatActivity {
         addName.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ingredientTextTranslation, r.getDisplayMetrics()));
         addName.setBackgroundResource(R.drawable.user_upload_rectangle_border);
         addName.setId(ingredientNameID);
+        addName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        addName.setPadding(
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, r.getDisplayMetrics()),
+                0,
+                0,
+                0
+        );
         wzsLayout.addView(addName);
 
 
@@ -117,6 +124,13 @@ public class userUpload extends AppCompatActivity {
         addQty.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ingredientTextTranslation, r.getDisplayMetrics()));
         addQty.setBackgroundResource(R.drawable.user_upload_rectangle_border);
         addQty.setId(ingredientQtyID);
+        addQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        addQty.setPadding(
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, r.getDisplayMetrics()),
+                0,
+                0,
+                0
+        );
         wzsLayout.addView(addQty);
 
         /** Translating button downwards */
@@ -172,6 +186,13 @@ public class userUpload extends AppCompatActivity {
         addStepName.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, recipeTextTranslation, r.getDisplayMetrics()));
         addStepName.setBackgroundResource(R.drawable.user_upload_rectangle_border);
         addStepName.setId(recipeID);
+        addStepName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        addStepName.setPadding(
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, r.getDisplayMetrics()),
+                0,
+                0,
+                0
+        );
         wzsBottomLayout.addView(addStepName);
 
         /** Updating Step parameters */

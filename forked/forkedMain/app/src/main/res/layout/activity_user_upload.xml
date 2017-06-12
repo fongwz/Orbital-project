@@ -24,6 +24,7 @@
             app:layout_constraintRight_toRightOf="parent"
             tools:layout_editor_absoluteY="-154dp">
 
+
             <ImageView
                 android:id="@+id/upload_recipe_imageView"
                 android:layout_width="200dp"
@@ -71,28 +72,28 @@
                 android:id="@+id/upload_recipe_ingredients_name"
                 android:layout_width="240dp"
                 android:layout_height="30dp"
-                android:paddingLeft="5dp"
                 android:layout_alignStart="@+id/upload_recipe_ingredients_textView"
                 android:layout_below="@+id/upload_recipe_ingredients_textView"
+                android:background="@drawable/user_upload_rectangle_border"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:paddingLeft="5dp"
                 android:textAppearance="@android:style/TextAppearance.Small"
-                android:background="@drawable/user_upload_rectangle_border"
                 android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/upload_recipe_ingredients_qty"
                 android:layout_width="60dp"
                 android:layout_height="30sp"
-                android:paddingLeft="5dp"
                 android:layout_alignBaseline="@+id/upload_recipe_ingredients_name"
                 android:layout_alignBottom="@+id/upload_recipe_ingredients_name"
                 android:layout_marginStart="11dp"
                 android:layout_toEndOf="@+id/upload_recipe_ingredients_name"
+                android:background="@drawable/user_upload_rectangle_border"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:paddingLeft="5dp"
                 android:textAppearance="@android:style/TextAppearance.Small"
-                android:background="@drawable/user_upload_rectangle_border"
                 android:textSize="18sp" />
 
             <Button
@@ -133,15 +134,15 @@
                     android:id="@+id/upload_recipe_recipe_name"
                     android:layout_width="240sp"
                     android:layout_height="30sp"
-                    android:paddingLeft="5dp"
                     android:layout_alignBaseline="@id/upload_recipe_recipe_num"
                     android:layout_alignBottom="@id/upload_recipe_recipe_num"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/upload_recipe_recipe_num"
+                    android:background="@drawable/user_upload_rectangle_border"
                     android:ems="10"
                     android:inputType="textPersonName"
+                    android:paddingLeft="5dp"
                     android:textAppearance="@android:style/TextAppearance.Small"
-                    android:background="@drawable/user_upload_rectangle_border"
                     android:textSize="18sp" />
 
                 <Button
@@ -153,6 +154,16 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/black_add_box"
                     android:onClick="addRecipe" />
+
+                <Button
+                    android:id="@+id/upload_recipe_upload_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload!"
+                    android:layout_below="@+id/upload_recipe_recipe_button"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:onClick="uploadRecipe" />
             </RelativeLayout>
 
 

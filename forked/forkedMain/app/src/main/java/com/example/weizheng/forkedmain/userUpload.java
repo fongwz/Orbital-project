@@ -23,6 +23,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 public class userUpload extends AppCompatActivity {
 
     private static final int GET_FROM_GALLERY = 1;
@@ -33,6 +35,10 @@ public class userUpload extends AppCompatActivity {
     private float recipeButtonTranslation = 0;
     private float recipeTextTranslation = 0;
     private ImageView imageview;
+    private Firebase myFirebaseRef;
+    private int ingredientNameID = 0;  // increment max to 99
+    private int ingredientQtyID = 100; // increment max to 199
+    private int recipeID = 200;        // increment max to 299
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,9 @@ public class userUpload extends AppCompatActivity {
         setContentView(R.layout.activity_user_upload);
 
         imageview = (ImageView)findViewById(R.id.upload_recipe_imageView);
+        Firebase.setAndroidContext(this);
+
+        myFirebaseRef = new Firebase("https://forked-up.firebaseio.com/"); //reference to root directory
     }
 
     /**** Uploading Image *********************************************************/
@@ -92,6 +101,7 @@ public class userUpload extends AppCompatActivity {
         addName.setLayoutParams(addNameParams);
         addName.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ingredientTextTranslation, r.getDisplayMetrics()));
         addName.setBackgroundResource(R.drawable.user_upload_rectangle_border);
+        addName.setId(ingredientNameID);
         wzsLayout.addView(addName);
 
 
@@ -106,6 +116,7 @@ public class userUpload extends AppCompatActivity {
         addQty.setLayoutParams(addQtyParams);
         addQty.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ingredientTextTranslation, r.getDisplayMetrics()));
         addQty.setBackgroundResource(R.drawable.user_upload_rectangle_border);
+        addQty.setId(ingredientQtyID);
         wzsLayout.addView(addQty);
 
         /** Translating button downwards */
@@ -115,6 +126,10 @@ public class userUpload extends AppCompatActivity {
 
         /** Updating Edit Text translation */
         ingredientTextTranslation += 30;
+
+        /** Updating Edit Text Id numbers */
+        ingredientNameID++;
+        ingredientQtyID++;
 
         /** Shifting recipe section downwards */
         recipeLayoutTranslation += 30;
@@ -156,19 +171,72 @@ public class userUpload extends AppCompatActivity {
         addStepName.setLayoutParams(addStepNameParams);
         addStepName.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, recipeTextTranslation, r.getDisplayMetrics()));
         addStepName.setBackgroundResource(R.drawable.user_upload_rectangle_border);
+        addStepName.setId(recipeID);
         wzsBottomLayout.addView(addStepName);
 
         /** Updating Step parameters */
         stepNumber++;
+        recipeID++;
         recipeTextTranslation += 30;
 
         /** Translating button downwards */
         Button recipeButton = (Button) findViewById(R.id.upload_recipe_recipe_button);
+        Button uploadButton = (Button) findViewById(R.id.upload_recipe_upload_button);
         recipeButtonTranslation += 30;
         recipeButton.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, recipeButtonTranslation, r.getDisplayMetrics()));
+        uploadButton.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, recipeButtonTranslation, r.getDisplayMetrics()));
 
         /** Readjusting Layout */
         wzsTopLayout.setMinimumHeight((wzsTopLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())));
         wzsBottomLayout.setMinimumHeight((wzsBottomLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())));
+    }
+
+    /**** Uploading Recipe ********************************************************/
+    public void uploadRecipe(View view){
+
+        /** Getting reference to initial edit texts */
+        EditText firstIngredientName = (EditText) findViewById(R.id.upload_recipe_ingredients_name);
+        EditText firstIngredientQty = (EditText) findViewById(R.id.upload_recipe_ingredients_qty);
+        EditText firstRecipeName = (EditText) findViewById(R.id.upload_recipe_recipe_name);
+
+        String ingredientName = firstIngredientName.getText().toString();
+        String ingredientQty = firstIngredientQty.getText().toString();
+        String recipeName = firstRecipeName.getText().toString();
+
+        /** Uploading initial edit texts to FireBase */
+        Firebase ingredientNameRef = myFirebaseRef.child("users").child("Recipe").child("Ingredients").child(ingredientName);
+        Firebase ingredientQtyRef = ingredientNameRef.child("Qty");
+        Firebase recipeRef = myFirebaseRef.child("users").child("Recipe").child("Steps").child("1");
+
+        ingredientQtyRef.setValue(ingredientQty);
+        recipeRef.setValue(recipeName);
+
+        /** Uploading subsequent ingredient edit texts to Fire base */
+        for(int i=0,j=100 ; i<ingredientNameID && j<ingredientQtyID ; i++,j++){
+
+            int nameID = this.getResources().getIdentifier(""+i, "id", this.getPackageName());
+            int qtyID = this.getResources().getIdentifier(""+j, "id", this.getPackageName());
+            EditText subsequentIngredientName = (EditText) findViewById(nameID);
+            EditText subsequentIngredientQty = (EditText) findViewById(qtyID);
+
+            ingredientName = subsequentIngredientName.getText().toString();
+            ingredientQty = subsequentIngredientQty.getText().toString();
+
+            ingredientNameRef = myFirebaseRef.child("users").child("Recipe").child("Ingredients").child(ingredientName);
+            ingredientQtyRef = ingredientNameRef.child("Qty");
+            ingredientQtyRef.setValue(ingredientQty);
+        }
+
+        /** Uploading subsequent recipe edit texts to Fire base */
+        for(int i=200; i<recipeID ; i++){
+
+            int id = this.getResources().getIdentifier(""+i, "id", this.getPackageName());
+            EditText subsequentRecipe = (EditText) findViewById(id);
+
+            recipeName = subsequentRecipe.getText().toString();
+            recipeRef = myFirebaseRef.child("users").child("Recipe").child("Steps").child();
+
+        }
+
     }
 }

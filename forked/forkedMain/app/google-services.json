@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "760434959371",
+    "firebase_url": "https://forked-up.firebaseio.com",
+    "project_id": "forked-up",
+    "storage_bucket": "forked-up.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760434959371:android:15c7f4a136f4fc72",
+        "android_client_info": {
+          "package_name": "com.example.weizheng.forkedmain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760434959371-klscja34a3jf03c1a3gt2la650q695hs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpV0AwwXGA6L1ZJg7MYjqheI7Zgu2KOpk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

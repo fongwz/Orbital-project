@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.content.Intent;
 
-public class Settings2 extends AppCompatActivity {
+public class    Settings2 extends AppCompatActivity {
 
     private static CheckBox sweet;
     private static CheckBox sour;

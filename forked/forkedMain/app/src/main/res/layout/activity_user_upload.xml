@@ -28,10 +28,24 @@
                 android:id="@+id/upload_recipe_imageView"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:layout_below="@+id/editText3"
+                android:layout_marginTop="63dp"
+                android:background="@drawable/user_upload_rectangle_border"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="17dp"
-                android:background="@drawable/user_upload_rectangle_border" />
+                android:layout_centerHorizontal="true" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:hint="Enter Recipe Name"
+                android:paddingLeft="5dp"
+                android:ems="10"
+                android:background="@drawable/user_upload_rectangle_border"
+                android:inputType="textPersonName"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
             <Button
                 android:id="@+id/upload_recipe_image_button"
@@ -140,6 +154,8 @@
                     android:background="@drawable/black_add_box"
                     android:onClick="addRecipe" />
             </RelativeLayout>
+
+
 
         </RelativeLayout>
     </com.example.VerticalScrollview>

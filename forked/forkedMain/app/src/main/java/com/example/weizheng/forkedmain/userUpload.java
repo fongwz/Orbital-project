@@ -194,6 +194,8 @@ public class userUpload extends AppCompatActivity {
     /**** Uploading Recipe ********************************************************/
     public void uploadRecipe(View view){
 
+        Integer stepNum=2;
+
         /** Getting reference to initial edit texts */
         EditText firstIngredientName = (EditText) findViewById(R.id.upload_recipe_ingredients_name);
         EditText firstIngredientQty = (EditText) findViewById(R.id.upload_recipe_ingredients_qty);
@@ -232,11 +234,16 @@ public class userUpload extends AppCompatActivity {
 
             int id = this.getResources().getIdentifier(""+i, "id", this.getPackageName());
             EditText subsequentRecipe = (EditText) findViewById(id);
+            String stepNumToDB = stepNum.toString();
 
             recipeName = subsequentRecipe.getText().toString();
-            recipeRef = myFirebaseRef.child("users").child("Recipe").child("Steps").child();
-
+            recipeRef = myFirebaseRef.child("users").child("Recipe").child("Steps").child(stepNumToDB);
+            recipeRef.setValue(recipeName);
+            stepNum++;
         }
+        stepNum=2; //housekeeping in case
 
     }
+
+    /**** TO-DO: CREATE A BUTTON TO DELETE INGREDIENTS AND RECIPES ***************/
 }

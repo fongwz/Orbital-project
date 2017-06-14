@@ -61,4 +61,14 @@
         android:text="Update your preferences"
         android:onClick="onUpdatePrefClick"/>
 
+    <Button
+        android:id="@+id/logged_in_sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/logged_in_upload_button"
+        android:layout_marginBottom="21dp"
+        android:text="Sign out"
+        android:onClick="onSignOutClick"/>
+
 </RelativeLayout>

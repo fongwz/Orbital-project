@@ -7,7 +7,7 @@
     tools:context="com.example.weizheng.forkedmain.Settings3">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/log_in_email_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dish Type Preference"
@@ -26,8 +26,8 @@
         android:text="Meat"
         tools:layout_editor_absoluteX="40dp"
         tools:layout_editor_absoluteY="144dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/log_in_email_textview"
+        android:layout_alignStart="@+id/log_in_email_textview"
         android:layout_marginTop="30dp" />
 
     <CheckBox

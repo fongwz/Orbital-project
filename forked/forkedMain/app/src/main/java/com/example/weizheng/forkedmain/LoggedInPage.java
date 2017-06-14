@@ -1,16 +1,26 @@
 package com.example.weizheng.forkedmain;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Toast;
+
+import com.firebase.client.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoggedInPage extends AppCompatActivity {
+
+    private Firebase myFirebaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in_page);
+
+        Firebase.setAndroidContext(this);
+        myFirebaseRef = new Firebase("https://forked-up.firebaseio.com/"); //reference to root directory
     }
 
     //public void onPreferenceClick()
@@ -35,6 +45,15 @@ public class LoggedInPage extends AppCompatActivity {
 
         Intent i = new Intent(this, Settings1.class);
         i.putExtra("savePreferences", true);
+        startActivity(i);
+    }
+
+    public void onSignOutClick(View view){
+        FirebaseAuth myFirebaseAuth = FirebaseAuth.getInstance();
+        myFirebaseAuth.signOut();
+        finish();
+        Toast.makeText(this, "Signed out", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 

@@ -5,10 +5,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.content.Intent;
@@ -24,6 +26,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class userUpload extends AppCompatActivity {
 
@@ -35,7 +42,9 @@ public class userUpload extends AppCompatActivity {
     private float recipeButtonTranslation = 0;
     private float recipeTextTranslation = 0;
     private ImageView imageview;
+    private Uri selectedImage;
     private Firebase myFirebaseRef;
+    private StorageReference myStorageRef;
     private int ingredientNameID = 0;  // increment max to 99
     private int ingredientQtyID = 100; // increment max to 199
     private int recipeID = 200;        // increment max to 299
@@ -48,14 +57,16 @@ public class userUpload extends AppCompatActivity {
         imageview = (ImageView)findViewById(R.id.upload_recipe_imageView);
         Firebase.setAndroidContext(this);
 
+        myStorageRef = FirebaseStorage.getInstance().getReference();
         myFirebaseRef = new Firebase("https://forked-up.firebaseio.com/"); //reference to root directory
     }
 
-    /**** Uploading Image *********************************************************/
+    /**** Selecting Image *********************************************************/
 
-    public void uploadImage(View view) {
+    public void selectImage(View view) {
 
-        Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
         startActivityForResult(i, GET_FROM_GALLERY);
 
     }
@@ -67,7 +78,7 @@ public class userUpload extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GET_FROM_GALLERY && resultCode == RESULT_OK && null != data) {
 
-            Uri selectedImage = data.getData();
+            selectedImage = data.getData();
             InputStream inputStream;
             try {
                 inputStream = getContentResolver().openInputStream(selectedImage);
@@ -217,19 +228,45 @@ public class userUpload extends AppCompatActivity {
 
         Integer stepNum=2;
 
+
         /** Getting reference to initial edit texts */
         EditText firstIngredientName = (EditText) findViewById(R.id.upload_recipe_ingredients_name);
         EditText firstIngredientQty = (EditText) findViewById(R.id.upload_recipe_ingredients_qty);
         EditText firstRecipeName = (EditText) findViewById(R.id.upload_recipe_recipe_name);
+        EditText firstRecipeTitle = (EditText) findViewById(R.id.upload_recipe_recipe_title);
 
         String ingredientName = firstIngredientName.getText().toString();
         String ingredientQty = firstIngredientQty.getText().toString();
         String recipeName = firstRecipeName.getText().toString();
+        String recipeTitle = firstRecipeTitle.getText().toString();
+
+        /** Uploading Image to Fire Base */
+        try {
+            StorageReference uploadPath = myStorageRef.child("user").child(recipeTitle);
+            uploadPath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(userUpload.this, "Upload Success", Toast.LENGTH_SHORT).show();
+
+                    /** Sending back to main screen */
+                    Intent i = new Intent(userUpload.this, LoggedInPage.class);
+                    startActivity(i);
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(userUpload.this, "Upload In Progress", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch (Exception e) {
+            Toast.makeText(this, "No Image has been uploaded", Toast.LENGTH_LONG).show();
+        }
+
 
         /** Uploading initial edit texts to FireBase */
-        Firebase ingredientNameRef = myFirebaseRef.child("users").child("Recipe").child("Ingredients").child(ingredientName);
+        Firebase ingredientNameRef = myFirebaseRef.child("users").child(recipeTitle).child("Ingredients").child(ingredientName);
         Firebase ingredientQtyRef = ingredientNameRef.child("Qty");
-        Firebase recipeRef = myFirebaseRef.child("users").child("Recipe").child("Steps").child("1");
+        Firebase recipeRef = myFirebaseRef.child("users").child(recipeTitle).child("Steps").child("1");
 
         ingredientQtyRef.setValue(ingredientQty);
         recipeRef.setValue(recipeName);
@@ -245,7 +282,7 @@ public class userUpload extends AppCompatActivity {
             ingredientName = subsequentIngredientName.getText().toString();
             ingredientQty = subsequentIngredientQty.getText().toString();
 
-            ingredientNameRef = myFirebaseRef.child("users").child("Recipe").child("Ingredients").child(ingredientName);
+            ingredientNameRef = myFirebaseRef.child("users").child(recipeTitle).child("Ingredients").child(ingredientName);
             ingredientQtyRef = ingredientNameRef.child("Qty");
             ingredientQtyRef.setValue(ingredientQty);
         }
@@ -258,11 +295,12 @@ public class userUpload extends AppCompatActivity {
             String stepNumToDB = stepNum.toString();
 
             recipeName = subsequentRecipe.getText().toString();
-            recipeRef = myFirebaseRef.child("users").child("Recipe").child("Steps").child(stepNumToDB);
+            recipeRef = myFirebaseRef.child("users").child(recipeTitle).child("Steps").child(stepNumToDB);
             recipeRef.setValue(recipeName);
             stepNum++;
         }
         stepNum=2; //housekeeping in case
+
 
     }
 

@@ -37,4 +37,10 @@ public class LoggedInPage extends AppCompatActivity {
         i.putExtra("savePreferences", true);
         startActivity(i);
     }
+
+    /** Remove back button functionality *****************************************/
+    @Override
+    public void onBackPressed(){
+
+    }
 }

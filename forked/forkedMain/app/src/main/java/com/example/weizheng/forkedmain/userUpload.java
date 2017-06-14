@@ -240,29 +240,6 @@ public class userUpload extends AppCompatActivity {
         String recipeName = firstRecipeName.getText().toString();
         String recipeTitle = firstRecipeTitle.getText().toString();
 
-        /** Uploading Image to Fire Base */
-        try {
-            StorageReference uploadPath = myStorageRef.child("user").child(recipeTitle);
-            uploadPath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(userUpload.this, "Upload Success", Toast.LENGTH_SHORT).show();
-
-                    /** Sending back to main screen */
-                    Intent i = new Intent(userUpload.this, LoggedInPage.class);
-                    startActivity(i);
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(userUpload.this, "Upload In Progress", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }catch (Exception e) {
-            Toast.makeText(this, "No Image has been uploaded", Toast.LENGTH_LONG).show();
-        }
-
-
         /** Uploading initial edit texts to FireBase */
         Firebase ingredientNameRef = myFirebaseRef.child("users").child(recipeTitle).child("Ingredients").child(ingredientName);
         Firebase ingredientQtyRef = ingredientNameRef.child("Qty");
@@ -300,6 +277,28 @@ public class userUpload extends AppCompatActivity {
             stepNum++;
         }
         stepNum=2; //housekeeping in case
+
+        /** Uploading Image to Fire Base */
+        try {
+            StorageReference uploadPath = myStorageRef.child("user").child(recipeTitle);
+            uploadPath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(userUpload.this, "Upload Success", Toast.LENGTH_SHORT).show();
+
+                    /** Sending back to main screen */
+                    Intent i = new Intent(userUpload.this, LoggedInPage.class);
+                    startActivity(i);
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(userUpload.this, "Upload In Progress", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch (Exception e) {
+            Toast.makeText(this, "No Image has been uploaded", Toast.LENGTH_LONG).show();
+        }
 
 
     }

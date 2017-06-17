@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.weizheng.forkedmain">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +22,8 @@
         <activity android:name=".Settings2" />
         <activity android:name=".Settings3" />
         <activity android:name=".userUpload" />
-        <activity android:name=".LoggedInPage"></activity>
+        <activity android:name=".LoggedInPage" />
+        <activity android:name=".Register"></activity>
     </application>
 
 </manifest>

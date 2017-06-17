@@ -9,10 +9,13 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoggedInPage extends AppCompatActivity {
 
     private Firebase myFirebaseRef;
+    private FirebaseAuth myFirebaseAuth;
+    private FirebaseUser myFirebaseuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +23,10 @@ public class LoggedInPage extends AppCompatActivity {
         setContentView(R.layout.activity_logged_in_page);
 
         Firebase.setAndroidContext(this);
+        myFirebaseAuth = FirebaseAuth.getInstance();
+        myFirebaseuser=myFirebaseAuth.getCurrentUser();
         myFirebaseRef = new Firebase("https://forked-up.firebaseio.com/"); //reference to root directory
+
     }
 
     //public void onPreferenceClick()
@@ -36,6 +42,8 @@ public class LoggedInPage extends AppCompatActivity {
 
     public void onUploadClick(View view){
 
+        String uid = myFirebaseuser.getUid();
+        Toast.makeText(this, "uid = "+uid, Toast.LENGTH_SHORT).show(); //debugging purposes
         Intent i = new Intent(this, userUpload.class);
         startActivity(i);
 

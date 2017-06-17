@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.weizheng.forkedmain.Register">
+
+    <TextView
+        android:id="@+id/register_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="83dp"
+        android:text="Register a new account"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/register_email_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email:"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/register_email_edittext"
+        android:layout_alignBottom="@+id/register_email_edittext"
+        android:layout_alignEnd="@+id/register_displayname_textview" />
+
+    <EditText
+        android:id="@+id/register_email_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/register_text"
+        android:layout_below="@+id/register_text"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/register_displayname_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display Name:"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/register_displayname_edittext"
+        android:layout_alignBottom="@+id/register_displayname_edittext"
+        android:layout_toStartOf="@+id/register_displayname_edittext" />
+
+    <EditText
+        android:id="@+id/register_displayname_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/register_email_edittext"
+        android:layout_below="@+id/register_email_edittext"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/register_password_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password:"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/register_password_edittext"
+        android:layout_alignBottom="@+id/register_password_edittext"
+        android:layout_toStartOf="@+id/register_password_edittext" />
+
+    <EditText
+        android:id="@+id/register_password_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/register_displayname_edittext"
+        android:layout_below="@+id/register_displayname_edittext"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <CheckBox
+        android:id="@+id/register_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/register_password_edittext"
+        android:layout_below="@+id/register_password_edittext"
+        android:onClick="registerDisplayPassword"
+        android:text="Show password"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_password_edittext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp"
+        android:onClick="register"
+        android:text="Register" />
+
+</RelativeLayout>

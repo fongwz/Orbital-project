@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +27,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -45,6 +49,7 @@ public class userUpload extends AppCompatActivity {
     private Uri selectedImage;
     private Firebase myFirebaseRef;
     private StorageReference myStorageRef;
+    private FirebaseAuth myFirebaseAuth;
     private int ingredientNameID = 0;  // increment max to 99
     private int ingredientQtyID = 100; // increment max to 199
     private int recipeID = 200;        // increment max to 299
@@ -57,6 +62,7 @@ public class userUpload extends AppCompatActivity {
         imageview = (ImageView)findViewById(R.id.upload_recipe_imageView);
         Firebase.setAndroidContext(this);
 
+        myFirebaseAuth = FirebaseAuth.getInstance();
         myStorageRef = FirebaseStorage.getInstance().getReference();
         myFirebaseRef = new Firebase("https://forked-up.firebaseio.com/"); //reference to root directory
     }
@@ -241,9 +247,9 @@ public class userUpload extends AppCompatActivity {
         String recipeTitle = firstRecipeTitle.getText().toString();
 
         /** Uploading initial edit texts to FireBase */
-        Firebase ingredientNameRef = myFirebaseRef.child("users").child(recipeTitle).child("Ingredients").child(ingredientName);
+        Firebase ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
         Firebase ingredientQtyRef = ingredientNameRef.child("Qty");
-        Firebase recipeRef = myFirebaseRef.child("users").child(recipeTitle).child("Steps").child("1");
+        Firebase recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child("1");
 
         ingredientQtyRef.setValue(ingredientQty);
         recipeRef.setValue(recipeName);
@@ -259,9 +265,14 @@ public class userUpload extends AppCompatActivity {
             ingredientName = subsequentIngredientName.getText().toString();
             ingredientQty = subsequentIngredientQty.getText().toString();
 
-            ingredientNameRef = myFirebaseRef.child("users").child(recipeTitle).child("Ingredients").child(ingredientName);
+            ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
             ingredientQtyRef = ingredientNameRef.child("Qty");
-            ingredientQtyRef.setValue(ingredientQty);
+            ingredientQtyRef.setValue(ingredientQty, new Firebase.CompletionListener(){
+                @Override
+                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                    Toast.makeText(userUpload.this, "worked", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         /** Uploading subsequent recipe edit texts to Fire base */
@@ -272,7 +283,7 @@ public class userUpload extends AppCompatActivity {
             String stepNumToDB = stepNum.toString();
 
             recipeName = subsequentRecipe.getText().toString();
-            recipeRef = myFirebaseRef.child("users").child(recipeTitle).child("Steps").child(stepNumToDB);
+            recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child(stepNumToDB);
             recipeRef.setValue(recipeName);
             stepNum++;
         }
@@ -287,6 +298,7 @@ public class userUpload extends AppCompatActivity {
                     Toast.makeText(userUpload.this, "Upload Success", Toast.LENGTH_SHORT).show();
 
                     /** Sending back to main screen */
+                    finish();
                     Intent i = new Intent(userUpload.this, LoggedInPage.class);
                     startActivity(i);
                 }
@@ -294,6 +306,11 @@ public class userUpload extends AppCompatActivity {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(userUpload.this, "Upload In Progress", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(userUpload.this, "Upload Failed", Toast.LENGTH_SHORT).show();
                 }
             });
         }catch (Exception e) {

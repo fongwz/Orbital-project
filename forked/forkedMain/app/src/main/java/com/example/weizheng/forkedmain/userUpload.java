@@ -251,9 +251,9 @@ public class userUpload extends AppCompatActivity {
         String recipeTitle = firstRecipeTitle.getText().toString();
 
         /** Uploading initial edit texts to FireBase */
-        DatabaseReference ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
+        DatabaseReference ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
         DatabaseReference ingredientQtyRef = ingredientNameRef.child("Qty");
-        DatabaseReference recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child("1");
+        DatabaseReference recipeRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Steps").child("1");
 
         ingredientQtyRef.setValue(ingredientQty);
         recipeRef.setValue(recipeName);
@@ -269,7 +269,7 @@ public class userUpload extends AppCompatActivity {
             ingredientName = subsequentIngredientName.getText().toString();
             ingredientQty = subsequentIngredientQty.getText().toString();
 
-            ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
+            ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
             ingredientQtyRef = ingredientNameRef.child("Qty");
             ingredientQtyRef.setValue(ingredientQty, new Firebase.CompletionListener(){
                 @Override
@@ -287,7 +287,7 @@ public class userUpload extends AppCompatActivity {
             String stepNumToDB = stepNum.toString();
 
             recipeName = subsequentRecipe.getText().toString();
-            recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child(stepNumToDB);
+            recipeRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Steps").child(stepNumToDB);
             recipeRef.setValue(recipeName);
             stepNum++;
         }
@@ -295,7 +295,7 @@ public class userUpload extends AppCompatActivity {
 
         /** Uploading Image to Fire Base */
         try {
-            StorageReference uploadPath = myStorageRef.child("user").child(recipeTitle);
+            StorageReference uploadPath = myStorageRef.child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle);
             uploadPath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

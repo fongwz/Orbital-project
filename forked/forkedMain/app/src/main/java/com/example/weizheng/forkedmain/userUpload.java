@@ -31,6 +31,8 @@ import com.firebase.client.FirebaseError;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -47,9 +49,10 @@ public class userUpload extends AppCompatActivity {
     private float recipeTextTranslation = 0;
     private ImageView imageview;
     private Uri selectedImage;
-    private Firebase myFirebaseRef;
+    private FirebaseDatabase myFirebaseDatabase;
     private StorageReference myStorageRef;
     private FirebaseAuth myFirebaseAuth;
+    private DatabaseReference myFirebaseRef;
     private int ingredientNameID = 0;  // increment max to 99
     private int ingredientQtyID = 100; // increment max to 199
     private int recipeID = 200;        // increment max to 299
@@ -64,7 +67,8 @@ public class userUpload extends AppCompatActivity {
 
         myFirebaseAuth = FirebaseAuth.getInstance();
         myStorageRef = FirebaseStorage.getInstance().getReference();
-        myFirebaseRef = new Firebase("https://forked-up.firebaseio.com/"); //reference to root directory
+        myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
+        myFirebaseRef = myFirebaseDatabase.getReference();
     }
 
     /**** Selecting Image *********************************************************/
@@ -247,9 +251,9 @@ public class userUpload extends AppCompatActivity {
         String recipeTitle = firstRecipeTitle.getText().toString();
 
         /** Uploading initial edit texts to FireBase */
-        Firebase ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
-        Firebase ingredientQtyRef = ingredientNameRef.child("Qty");
-        Firebase recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child("1");
+        DatabaseReference ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
+        DatabaseReference ingredientQtyRef = ingredientNameRef.child("Qty");
+        DatabaseReference recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child("1");
 
         ingredientQtyRef.setValue(ingredientQty);
         recipeRef.setValue(recipeName);

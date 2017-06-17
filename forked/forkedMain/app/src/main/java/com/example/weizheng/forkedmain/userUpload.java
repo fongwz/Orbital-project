@@ -271,12 +271,7 @@ public class userUpload extends AppCompatActivity {
 
             ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
             ingredientQtyRef = ingredientNameRef.child("Qty");
-            ingredientQtyRef.setValue(ingredientQty, new Firebase.CompletionListener(){
-                @Override
-                public void onComplete(FirebaseError firebaseError, Firebase firebase) {
-                    Toast.makeText(userUpload.this, "worked", Toast.LENGTH_SHORT).show();
-                }
-            });
+            ingredientQtyRef.setValue(ingredientQty);
         }
 
         /** Uploading subsequent recipe edit texts to Fire base */

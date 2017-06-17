@@ -49,7 +49,7 @@
     <EditText
         android:id="@+id/log_in_email_edittext"
         android:layout_width="210dp"
-        android:layout_height="42dp"
+        android:layout_height="44dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textSize="23sp"
@@ -73,7 +73,7 @@
     <EditText
         android:id="@+id/log_in_password_edittext"
         android:layout_width="211dp"
-        android:layout_height="43dp"
+        android:layout_height="44dp"
         android:ems="10"
         android:inputType="textPassword"
         android:textSize="23sp"

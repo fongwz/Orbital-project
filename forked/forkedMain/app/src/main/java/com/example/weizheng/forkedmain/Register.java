@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class Register extends AppCompatActivity {
@@ -25,7 +27,8 @@ public class Register extends AppCompatActivity {
     private EditText register_displayname;
     private EditText register_password;
     private CheckBox register_checkbox;
-    private Firebase myFirebaseRef;
+    private DatabaseReference myFirebaseRef;
+    private FirebaseDatabase myFirebaseDatabase;
     private FirebaseAuth myFirebaseAuth;
 
     @Override
@@ -35,7 +38,8 @@ public class Register extends AppCompatActivity {
         Firebase.setAndroidContext(this);
 
         myFirebaseAuth = FirebaseAuth.getInstance();
-        myFirebaseRef = new Firebase("https://forked-up.firebaseio.com/"); //reference to root directory
+        myFirebaseDatabase = FirebaseDatabase.getInstance();
+        myFirebaseRef = myFirebaseDatabase.getReference(); //reference to root directory
         register_email = (EditText) findViewById(R.id.register_email_edittext);
         register_displayname = (EditText) findViewById(R.id.register_displayname_edittext);
         register_password = (EditText) findViewById(R.id.register_password_edittext);
@@ -61,7 +65,7 @@ public class Register extends AppCompatActivity {
 
     }
 
-    private void createAccount(String email, final String displayname, String password){
+    private void createAccount(String email,final String displayname, String password){
 
         myFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -69,9 +73,9 @@ public class Register extends AppCompatActivity {
                 if(task.isSuccessful()){
                     //update user object inside the database
                     FirebaseUser currentUser = myFirebaseAuth.getCurrentUser();
-                    Firebase userDetailsAdmin = myFirebaseRef.child("Users").child(currentUser.getUid()).child("isAdmin");
-                    userDetailsAdmin.setValue("false");
-                    Firebase userDetailsDisplayName = myFirebaseRef.child("Users").child(currentUser.getUid()).child("Display");
+                    DatabaseReference userDetailsAdmin = myFirebaseRef.child("Users").child(currentUser.getUid()).child("isAdmin");
+                    userDetailsAdmin.setValue(false);
+                    DatabaseReference userDetailsDisplayName = myFirebaseRef.child("Users").child(currentUser.getUid()).child("Display");
                     userDetailsDisplayName.setValue(displayname);
                     //move to sign in page with only email filled in
                     Toast.makeText(Register.this, "Account created", Toast.LENGTH_SHORT).show();

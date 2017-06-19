@@ -252,10 +252,9 @@ public class userUpload extends AppCompatActivity {
 
         /** Uploading initial edit texts to FireBase */
         DatabaseReference ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
-        DatabaseReference ingredientQtyRef = ingredientNameRef.child("Qty");
         DatabaseReference recipeRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Steps").child("1");
 
-        ingredientQtyRef.setValue(ingredientQty);
+        ingredientNameRef.setValue(ingredientQty);
         recipeRef.setValue(recipeName);
 
         /** Uploading subsequent ingredient edit texts to Fire base */
@@ -270,8 +269,7 @@ public class userUpload extends AppCompatActivity {
             ingredientQty = subsequentIngredientQty.getText().toString();
 
             ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
-            ingredientQtyRef = ingredientNameRef.child("Qty");
-            ingredientQtyRef.setValue(ingredientQty);
+            ingredientNameRef.setValue(ingredientQty);
         }
 
         /** Uploading subsequent recipe edit texts to Fire base */

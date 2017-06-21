@@ -23,7 +23,11 @@
         <activity android:name=".Settings3" />
         <activity android:name=".userUpload" />
         <activity android:name=".LoggedInPage" />
-        <activity android:name=".Register"></activity>
+        <activity android:name=".Register" />
+        <activity
+            android:name=".userUploadSlide"
+            android:label="@string/title_activity_user_upload_slide"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

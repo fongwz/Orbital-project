@@ -65,6 +65,11 @@ public class LoggedInPage extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void testClick(View view){
+        Intent i = new Intent(this, userUploadSlide.class);
+        startActivity(i);
+    }
+
     /** Remove back button functionality *****************************************/
     @Override
     public void onBackPressed(){

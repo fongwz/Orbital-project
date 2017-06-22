@@ -46,7 +46,7 @@ public class userUploadRecipe extends Fragment {
     private float recipeLayoutTranslation = 0;
     private float recipeButtonTranslation = 0;
     private float recipeTextTranslation = 0;
-    private ImageView imageview;
+    private ImageView uploadImage;
     private Uri selectedImage;
     private FirebaseDatabase myFirebaseDatabase;
     private StorageReference myStorageRef;
@@ -62,12 +62,18 @@ public class userUploadRecipe extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.activity_user_upload, container, false);
 
-        Button addImage = (Button) rootView.findViewById(R.id.upload_recipe_image_button);
+        myFirebaseAuth = FirebaseAuth.getInstance();
+        myStorageRef = FirebaseStorage.getInstance().getReference();
+        myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
+        myFirebaseRef = myFirebaseDatabase.getReference();
+
+        final Button addImage = (Button) rootView.findViewById(R.id.upload_recipe_image_button);
         final Button addIngredient = (Button) rootView.findViewById(R.id.upload_recipe_ingredients_button);
         final Button addRecipe = (Button) rootView.findViewById(R.id.upload_recipe_recipe_button);
+        final Button uploadRecipe = (Button) rootView.findViewById(R.id.upload_recipe_upload_button);
 
         addImage.setOnClickListener(
-                new View.OnClickListener() {
+                new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         selectImage(v);
@@ -76,7 +82,7 @@ public class userUploadRecipe extends Fragment {
         );
 
         addIngredient.setOnClickListener(
-                new View.OnClickListener() {
+                new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         addIngredient(v);
@@ -85,10 +91,19 @@ public class userUploadRecipe extends Fragment {
         );
 
         addRecipe.setOnClickListener(
-                new View.OnClickListener() {
+                new Button.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         addRecipe(v);
+                    }
+                }
+        );
+
+        uploadRecipe.setOnClickListener(
+                new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        uploadRecipe(v);
                     }
                 }
         );
@@ -116,14 +131,14 @@ public class userUploadRecipe extends Fragment {
             selectedImage = data.getData();
 
             try {
-                InputStream inputStream = getContext().getContentResolver().openInputStream(selectedImage);
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImage);
                 Bitmap image = BitmapFactory.decodeStream(inputStream);
 
-                imageview.setImageBitmap(image);
+                uploadImage.setImageBitmap(image);
 
 
             } catch (Exception e) {
-                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_LONG)
+                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG)
                         .show();
             }
         }
@@ -137,7 +152,7 @@ public class userUploadRecipe extends Fragment {
         RelativeLayout wzsLayout = (RelativeLayout) rootView.findViewById(R.id.upload_recipe_top_relative_layout);
 
         /** Creating new Edit Text for name */
-        EditText addName = new EditText(getContext());
+        EditText addName = new EditText(getActivity());
         RelativeLayout.LayoutParams addNameParams = new RelativeLayout.LayoutParams(
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 240, r.getDisplayMetrics()),
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())
@@ -159,7 +174,7 @@ public class userUploadRecipe extends Fragment {
 
 
         /** Creating new Edit Text for qty */
-        EditText addQty = new EditText(getContext());
+        EditText addQty = new EditText(getActivity());
         RelativeLayout.LayoutParams addQtyParams = new RelativeLayout.LayoutParams(
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, r.getDisplayMetrics()),
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())
@@ -208,7 +223,7 @@ public class userUploadRecipe extends Fragment {
         RelativeLayout wzsBottomLayout =(RelativeLayout)rootView.findViewById(R.id.upload_recipe_bottom_relative_layout);
 
         /** Creating new Step number */
-        TextView addStepNum = new TextView(getContext());
+        TextView addStepNum = new TextView(getActivity());
         RelativeLayout.LayoutParams addStepNumParams = new RelativeLayout.LayoutParams(
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 22, r.getDisplayMetrics()),
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, r.getDisplayMetrics())
@@ -221,7 +236,7 @@ public class userUploadRecipe extends Fragment {
         wzsBottomLayout.addView(addStepNum);
 
         /** Creating new Step name */
-        EditText addStepName = new EditText(getContext());
+        EditText addStepName = new EditText(getActivity());
         RelativeLayout.LayoutParams addStepNameParams = new RelativeLayout.LayoutParams(
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 240, r.getDisplayMetrics()),
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())
@@ -257,6 +272,106 @@ public class userUploadRecipe extends Fragment {
         wzsTopLayout.setMinimumHeight((wzsTopLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())));
         wzsBottomLayout.setMinimumHeight((wzsBottomLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())));
     }
+
+    /**** Uploading Recipe ********************************************************/
+    public void uploadRecipe(View view){
+
+        Integer stepNum=2;
+
+        /** Getting reference to initial edit texts */
+        EditText firstIngredientName = (EditText) rootView.findViewById(R.id.upload_recipe_ingredients_name);
+        EditText firstIngredientQty = (EditText) rootView.findViewById(R.id.upload_recipe_ingredients_qty);
+        EditText firstRecipeName = (EditText) rootView.findViewById(R.id.upload_recipe_recipe_name);
+        EditText firstRecipeTitle = (EditText) rootView.findViewById(R.id.upload_recipe_recipe_title);
+
+        String ingredientName = firstIngredientName.getText().toString();
+        String ingredientQty = firstIngredientQty.getText().toString();
+        String recipeName = firstRecipeName.getText().toString();
+        String recipeTitle = firstRecipeTitle.getText().toString();
+
+        /** Uploading category information to FireBase */
+        DatabaseReference categoryRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Categories");
+
+        categoryRef.child("isChinese").setValue(userUploadSlide.myBundle.getInt("isChinese"));
+        categoryRef.child("isMalay").setValue(userUploadSlide.myBundle.getInt("isMalay"));
+        categoryRef.child("isIndian").setValue(userUploadSlide.myBundle.getInt("isIndian"));
+        categoryRef.child("isWestern").setValue(userUploadSlide.myBundle.getInt("isWestern"));
+        categoryRef.child("isKorean").setValue(userUploadSlide.myBundle.getInt("isKorean"));
+        categoryRef.child("isSweet").setValue(userUploadSlide.myBundle.getInt("isSweet"));
+        categoryRef.child("isSour").setValue(userUploadSlide.myBundle.getInt("isSour"));
+        categoryRef.child("isSpicy").setValue(userUploadSlide.myBundle.getInt("isSpicy"));
+        categoryRef.child("isMeat").setValue(userUploadSlide.myBundle.getInt("isMeat"));
+        categoryRef.child("isSeafood").setValue(userUploadSlide.myBundle.getInt("isSeafood"));
+        categoryRef.child("isVegetables").setValue(userUploadSlide.myBundle.getInt("isVegetables"));
+        categoryRef.child("isDessert").setValue(userUploadSlide.myBundle.getInt("isDessert"));
+
+        /** Uploading initial edit texts to FireBase */
+        DatabaseReference ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
+        DatabaseReference recipeRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Steps").child("1");
+
+        ingredientNameRef.setValue(ingredientQty);
+        recipeRef.setValue(recipeName);
+
+        /** Uploading subsequent ingredient edit texts to FireBase */
+        for(int i=0,j=100 ; i<ingredientNameID && j<ingredientQtyID ; i++,j++){
+
+            int nameID = this.getResources().getIdentifier(""+i, "id", getActivity().getPackageName());
+            int qtyID = this.getResources().getIdentifier(""+j, "id", getActivity().getPackageName());
+            EditText subsequentIngredientName = (EditText) rootView.findViewById(nameID);
+            EditText subsequentIngredientQty = (EditText) rootView.findViewById(qtyID);
+
+            ingredientName = subsequentIngredientName.getText().toString();
+            ingredientQty = subsequentIngredientQty.getText().toString();
+
+            ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
+            ingredientNameRef.setValue(ingredientQty);
+        }
+
+        /** Uploading subsequent recipe edit texts to Fire base */
+        for(int i=200; i<recipeID ; i++){
+
+            int id = this.getResources().getIdentifier(""+i, "id", getActivity().getPackageName());
+            EditText subsequentRecipe = (EditText) rootView.findViewById(id);
+            String stepNumToDB = stepNum.toString();
+
+            recipeName = subsequentRecipe.getText().toString();
+            recipeRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Steps").child(stepNumToDB);
+            recipeRef.setValue(recipeName);
+            stepNum++;
+        }
+        stepNum=2; //housekeeping in case
+
+        /** Uploading Image to Fire Base */
+        try {
+            StorageReference uploadPath = myStorageRef.child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle);
+            uploadPath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(getActivity(), "Upload Success", Toast.LENGTH_SHORT).show();
+
+                    /** Sending back to main screen */
+                    getActivity().finish();
+                    Intent i = new Intent(getActivity(), LoggedInPage.class);
+                    startActivity(i);
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(getActivity(), "Upload In Progress", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getActivity(), "Upload Failed", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }catch (Exception e) {
+            Toast.makeText(getActivity(), "No Image has been uploaded", Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
 
     /**** TO-DO: CREATE A BUTTON TO DELETE INGREDIENTS AND RECIPES ***************/
 }

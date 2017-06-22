@@ -126,11 +126,11 @@
                 android:layout_below="@+id/user_upload_categories_seafood"/>
 
             <CheckBox
-                android:id="@+id/user_upload_categories_desert"
+                android:id="@+id/user_upload_categories_dessert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Desert"
-                android:layout_below="@+id/user_upload_categories_vegetables"/>
+                android:layout_below="@+id/user_upload_categories_vegetables"
+                android:text="Dessert" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

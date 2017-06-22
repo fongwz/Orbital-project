@@ -44,7 +44,7 @@ public class LoggedInPage extends AppCompatActivity {
 
         String uid = myFirebaseuser.getUid();
         Toast.makeText(this, "uid = "+uid, Toast.LENGTH_SHORT).show(); //debugging purposes
-        Intent i = new Intent(this, userUpload.class);
+        Intent i = new Intent(this, userUploadSlide.class);
         startActivity(i);
 
     }
@@ -62,11 +62,6 @@ public class LoggedInPage extends AppCompatActivity {
         finish();
         Toast.makeText(this, "Signed out", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
-
-    public void testClick(View view){
-        Intent i = new Intent(this, userUploadSlide.class);
         startActivity(i);
     }
 

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
 import android.util.MutableShort;
+import android.widget.Toast;
 
 public class MyDBHandler extends SQLiteOpenHelper{
 
@@ -125,5 +126,25 @@ public class MyDBHandler extends SQLiteOpenHelper{
                 + " WHERE " +
                 COLUMN_SAVE + " = 'true';"
         );
+    }
+
+    public int[] getPreferences(){
+        SQLiteDatabase db = getWritableDatabase();
+        int[] preferences = new int[12];
+        int i = 0;
+
+
+        String query = "SELECT * FROM " + TABLE_PREFERENCES + " WHERE " + COLUMN_SAVE + "='true';";
+        Cursor c = db.rawQuery(query, null);
+
+        c.moveToFirst();
+
+        while(!c.isAfterLast() && i<12){
+            preferences[i] = c.getInt(0);
+            i++;
+            c.moveToNext();
+        }
+
+        return preferences;
     }
 }

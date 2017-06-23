@@ -289,8 +289,12 @@ public class userUploadRecipe extends Fragment {
         String recipeName = firstRecipeName.getText().toString();
         String recipeTitle = firstRecipeTitle.getText().toString();
 
+        /** Updating list of user uploads in FireBase */
+        DatabaseReference userUploadsRef = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Uploads").child(recipeTitle);
+        userUploadsRef.setValue(true);
+
         /** Uploading category information to FireBase */
-        DatabaseReference categoryRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Categories");
+        DatabaseReference categoryRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Categories");
 
         categoryRef.child("isChinese").setValue(userUploadSlide.myBundle.getInt("isChinese"));
         categoryRef.child("isMalay").setValue(userUploadSlide.myBundle.getInt("isMalay"));
@@ -306,8 +310,8 @@ public class userUploadRecipe extends Fragment {
         categoryRef.child("isDessert").setValue(userUploadSlide.myBundle.getInt("isDessert"));
 
         /** Uploading initial edit texts to FireBase */
-        DatabaseReference ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
-        DatabaseReference recipeRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Steps").child("1");
+        DatabaseReference ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
+        DatabaseReference recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child("1");
 
         ingredientNameRef.setValue(ingredientQty);
         recipeRef.setValue(recipeName);
@@ -323,7 +327,7 @@ public class userUploadRecipe extends Fragment {
             ingredientName = subsequentIngredientName.getText().toString();
             ingredientQty = subsequentIngredientQty.getText().toString();
 
-            ingredientNameRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Ingredients").child(ingredientName);
+            ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
             ingredientNameRef.setValue(ingredientQty);
         }
 
@@ -335,7 +339,7 @@ public class userUploadRecipe extends Fragment {
             String stepNumToDB = stepNum.toString();
 
             recipeName = subsequentRecipe.getText().toString();
-            recipeRef = myFirebaseRef.child("Recipe List").child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle).child("Steps").child(stepNumToDB);
+            recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child(stepNumToDB);
             recipeRef.setValue(recipeName);
             stepNum++;
         }
@@ -343,7 +347,7 @@ public class userUploadRecipe extends Fragment {
 
         /** Uploading Image to Fire Base */
         try {
-            StorageReference uploadPath = myStorageRef.child(myFirebaseAuth.getCurrentUser().getUid()).child(recipeTitle);
+            StorageReference uploadPath = myStorageRef.child(recipeTitle);
             uploadPath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

@@ -26,7 +26,8 @@
         <activity
             android:name=".userUploadSlide"
             android:label="@string/title_activity_user_upload_slide"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Result"></activity>
     </application>
 
 </manifest>

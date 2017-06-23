@@ -29,6 +29,7 @@
         android:layout_below="@+id/logged_in_welcome1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="84dp"
+        android:onClick="onPreferenceClick"
         android:text="Use current preferences" />
 
     <Button

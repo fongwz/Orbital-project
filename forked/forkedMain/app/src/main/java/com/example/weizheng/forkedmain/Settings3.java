@@ -83,8 +83,12 @@ public class Settings3 extends AppCompatActivity {
         }else{
             dbHandler = new MyDBHandler(this, null, null, 1);
             dbHandler.addTempPreferences(preferences);
-            //perform online check(discover a recipe)
-            dbHandler.deleteTempPreferences(); // finished using temp references
+            Intent i = new Intent(this, Result.class);
+            i.putExtra("preferences", preferenceValues);
+
+            dbHandler.deleteTempPreferences();
+            finish();
+            startActivity(i);
         }
     }
 }

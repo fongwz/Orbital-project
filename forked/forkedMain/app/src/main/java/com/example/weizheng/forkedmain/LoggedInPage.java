@@ -29,7 +29,11 @@ public class LoggedInPage extends AppCompatActivity {
 
     }
 
-    //public void onPreferenceClick()
+    public void onPreferenceClick(View view){
+        Intent i = new Intent(this, Result.class);
+        startActivity(i);
+
+    }
 
     public void onDiscoverClick(View view){
 

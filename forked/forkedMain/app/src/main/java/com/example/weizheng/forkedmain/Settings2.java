@@ -58,7 +58,7 @@ public class    Settings2 extends AppCompatActivity {
         } else {
             i.putExtra("savePreferences", false);
         }
-        i.putExtra("cuisineValues", preferenceValues);
+        i.putExtra("preferenceValues", preferenceValues);
         startActivity(i);
     }
 }

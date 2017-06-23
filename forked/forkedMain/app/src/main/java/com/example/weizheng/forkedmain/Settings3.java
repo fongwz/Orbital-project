@@ -21,13 +21,14 @@ public class Settings3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings3);
-
+        dbHandler = new MyDBHandler(this, null, null, 1);
         data = getIntent().getExtras();
         if(data==null){
             return;
         }
         savePreferences = data.getBoolean("savePreferences");
         preferenceValues = data.getIntArray("preferenceValues");
+        savePreferences=false;
 
     }
 
@@ -81,12 +82,12 @@ public class Settings3 extends AppCompatActivity {
             dbHandler.addSavePreferences(preferences);
             //online check
         }else{
-            dbHandler = new MyDBHandler(this, null, null, 1);
-            dbHandler.addTempPreferences(preferences);
+
+            //dbHandler.addTempPreferences(preferences);
             Intent i = new Intent(this, Result.class);
             i.putExtra("preferences", preferenceValues);
 
-            dbHandler.deleteTempPreferences();
+            //dbHandler.deleteTempPreferences();
             finish();
             startActivity(i);
         }

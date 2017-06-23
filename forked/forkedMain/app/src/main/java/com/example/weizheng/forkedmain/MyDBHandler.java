@@ -34,20 +34,20 @@ public class MyDBHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String query = "CREATE TABLE " + TABLE_PREFERENCES + "( " +
-                COLUMN_CHINESE + "INTEGER " +
-                COLUMN_MALAY + "INTEGER " +
-                COLUMN_INDIAN + "INTEGER " +
-                COLUMN_WESTERN + "INTEGER " +
-                COLUMN_KOREAN + "INTEGER " +
-                COLUMN_SWEET + "INTEGER " +
-                COLUMN_SOUR + "INTEGER " +
-                COLUMN_SPICY + "INTEGER " +
-                COLUMN_MEAT + "INTEGER " +
-                COLUMN_SEAFOOD + "INTEGER" +
-                COLUMN_VEG + "INTEGER" +
-                COLUMN_DESSERT + "INTEGER" +
-                COLUMN_SAVE + "TEXT" +
+        String query = "CREATE TABLE " + TABLE_PREFERENCES + "(" +
+                COLUMN_CHINESE + " INTEGER, " +
+                COLUMN_MALAY + " INTEGER, " +
+                COLUMN_INDIAN + " INTEGER, " +
+                COLUMN_WESTERN + " INTEGER, " +
+                COLUMN_KOREAN + " INTEGER, " +
+                COLUMN_SWEET + " INTEGER, " +
+                COLUMN_SOUR + " INTEGER, " +
+                COLUMN_SPICY + " INTEGER, " +
+                COLUMN_MEAT + " INTEGER, " +
+                COLUMN_SEAFOOD + " INTEGER, " +
+                COLUMN_VEG + " INTEGER, " +
+                COLUMN_DESSERT + " INTEGER, " +
+                COLUMN_SAVE + " TEXT " +
                 ");";
         db.execSQL(query);
     }

@@ -28,12 +28,6 @@ public class resultAdapter extends ArrayAdapter<String> {
         ImageView apple = (ImageView) customView.findViewById(R.id.resultImage);
 
         wzsText.setText(recipeName);
-        if(singleFruitItem=="apple")
-            apple.setImageResource(R.drawable.apple);
-        else if(singleFruitItem=="lemon")
-            apple.setImageResource(R.drawable.lemon);
-        else if(singleFruitItem=="orange")
-            apple.setImageResource(R.drawable.orange);
         return customView;
     }
 }

@@ -6,17 +6,11 @@
     android:layout_height="match_parent"
     tools:context="com.example.weizheng.forkedmain.Result">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
-
         <ListView
             android:id="@+id/result_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
-    </ScrollView>
+
 </RelativeLayout>

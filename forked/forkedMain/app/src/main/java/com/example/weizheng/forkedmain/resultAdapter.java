@@ -7,9 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class resultAdapter extends ArrayAdapter<String> {
 
@@ -23,11 +26,23 @@ public class resultAdapter extends ArrayAdapter<String> {
         LayoutInflater wzsInflator = LayoutInflater.from(getContext());
         View customView = wzsInflator.inflate(R.layout.custom_row, parent, false);
 
-        String recipeName = getItem(position);
+        final String recipeName = getItem(position);
         TextView wzsText = (TextView) customView.findViewById(R.id.resultText);
         ImageView apple = (ImageView) customView.findViewById(R.id.resultImage);
 
         wzsText.setText(recipeName);
+
+        customView.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Animation shake = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+                        v.startAnimation(shake);
+                        final String name=recipeName;
+                        Toast.makeText(getContext(), name, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
         return customView;
     }
 }

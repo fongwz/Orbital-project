@@ -57,7 +57,4 @@ public class Result extends AppCompatActivity {
         });
 
     }
-
-    @Override
-    public void onBackPressed(){}
 }

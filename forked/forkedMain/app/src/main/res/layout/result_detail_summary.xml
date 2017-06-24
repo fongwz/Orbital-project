@@ -12,10 +12,11 @@
         android:id="@+id/result_detail_summary_imageView"
         android:layout_width="120dp"
         android:layout_height="230dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="80dp"
-        android:adjustViewBounds="true" />
+        android:adjustViewBounds="true"
+        android:layout_marginStart="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp" />
 
     <TextView
         android:id="@+id/result_detail_summary_textView"

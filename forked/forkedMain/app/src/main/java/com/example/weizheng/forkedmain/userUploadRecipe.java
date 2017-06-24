@@ -67,6 +67,8 @@ public class userUploadRecipe extends Fragment {
         myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
         myFirebaseRef = myFirebaseDatabase.getReference();
 
+
+        uploadImage = (ImageView) rootView.findViewById(R.id.upload_recipe_imageView);
         final Button addImage = (Button) rootView.findViewById(R.id.upload_recipe_image_button);
         final Button addIngredient = (Button) rootView.findViewById(R.id.upload_recipe_ingredients_button);
         final Button addRecipe = (Button) rootView.findViewById(R.id.upload_recipe_recipe_button);

@@ -30,7 +30,10 @@ public class LoggedInPage extends AppCompatActivity {
     }
 
     public void onPreferenceClick(View view){
+        int[] stuff = new int[3];
+        stuff[0]=1;stuff[1]=2;stuff[2]=3;
         Intent i = new Intent(this, Result.class);
+        i.putExtra("preferences",stuff);
         startActivity(i);
 
     }

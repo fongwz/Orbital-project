@@ -27,4 +27,21 @@
         android:layout_toRightOf="@+id/result_detail_summary_imageView"
         android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/result_detail_summary_displayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/result_detail_summary_textView"
+        android:layout_below="@+id/result_detail_summary_textView"
+        android:layout_marginTop="18dp"
+        android:text="Uploaded by:"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/result_detail_summary_userDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/result_detail_summary_displayText"
+        android:layout_alignStart="@+id/result_detail_summary_textView"/>
+
 </RelativeLayout>

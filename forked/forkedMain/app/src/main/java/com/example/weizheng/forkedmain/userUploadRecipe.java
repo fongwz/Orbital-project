@@ -28,8 +28,11 @@ import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -292,7 +295,7 @@ public class userUploadRecipe extends Fragment {
         String recipeTitle = firstRecipeTitle.getText().toString();
 
         /** Updating list of user uploads in FireBase */
-        DatabaseReference userUploadsRef = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Uploads").child(recipeTitle);
+        final DatabaseReference userUploadsRef = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Uploads").child(recipeTitle);
         userUploadsRef.setValue(true);
 
         /** Uploading category information to FireBase */
@@ -312,9 +315,22 @@ public class userUploadRecipe extends Fragment {
         categoryRef.child("isDessert").setValue(userUploadSlide.myBundle.getInt("isDessert"));
 
         /** Uploading initial edit texts to FireBase */
+        DatabaseReference userDisplayRef = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Display");
+        final DatabaseReference uploadUserRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("User Upload");
         DatabaseReference ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
         DatabaseReference recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child("1");
 
+        userDisplayRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                uploadUserRef.setValue(dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         ingredientNameRef.setValue(ingredientQty);
         recipeRef.setValue(recipeName);
 

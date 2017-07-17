@@ -33,19 +33,19 @@
             <RelativeLayout
                 android:id="@+id/result_detail_detail_steps_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="18dp"
+                android:layout_height="300dp"
                 android:layout_alignStart="@+id/result_detail_detail_textview1"
-                android:layout_below="@+id/result_detail_detail_textview1" >
+                android:layout_below="@+id/result_detail_detail_textview1"
+                android:layout_marginBottom="18dp">
 
                 <TextView
                     android:id="@+id/result_detail_detail_textview2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
                     android:text="Recipe"
                     android:textColor="#000000"
-                    android:textSize="24sp"
-                    android:layout_marginTop="30dp"/>
+                    android:textSize="24sp" />
 
             </RelativeLayout>
 

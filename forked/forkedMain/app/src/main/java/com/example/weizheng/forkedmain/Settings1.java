@@ -15,18 +15,16 @@ public class Settings1 extends AppCompatActivity {
     private static CheckBox western;
     private static CheckBox korean;
     private Bundle data;
-    private Boolean savePreferences;
+    private Boolean updatePreferences = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings1);
-
         data = getIntent().getExtras();
-        if(data==null){
-            return;
+        if(data!=null){
+            updatePreferences = data.getBoolean("updatePreferences");
         }
-        savePreferences = data.getBoolean("savePreferences");
     }
 
     public void onCuisineClick(View view) {
@@ -38,8 +36,6 @@ public class Settings1 extends AppCompatActivity {
         western = (CheckBox) findViewById(R.id.settings_cuisine_western);
         korean = (CheckBox) findViewById(R.id.settings_cuisine_korean);
 
-        /** if save preferences, store them as 1/0 integer value in array first, initialize sqlite at last settings */
-
         if (chinese.isChecked()) {
             preferenceValues[0] = 1;
         } else {
@@ -47,9 +43,9 @@ public class Settings1 extends AppCompatActivity {
         }
 
         if (malay.isChecked()) {
-            preferenceValues[1] = 1;
+            preferenceValues[4] = 1;
         } else {
-            preferenceValues[1] = 0;
+            preferenceValues[4] = 0;
         }
 
         if (indian.isChecked()) {
@@ -59,25 +55,21 @@ public class Settings1 extends AppCompatActivity {
         }
 
         if (western.isChecked()) {
+            preferenceValues[11] = 1;
+        } else {
+            preferenceValues[11] = 0;
+        }
+
+        if (korean.isChecked()) {
             preferenceValues[3] = 1;
         } else {
             preferenceValues[3] = 0;
         }
 
-        if (korean.isChecked()) {
-            preferenceValues[4] = 1;
-        } else {
-            preferenceValues[4] = 0;
-        }
-
 
         Intent i = new Intent(this, Settings2.class);
-        if(savePreferences){
-            i.putExtra("savePreferences", true);
-        } else {
-            i.putExtra("savePreferences", false);
-        }
         i.putExtra("preferenceValues", preferenceValues);
+        i.putExtra("updatePreferences",updatePreferences);
         startActivity(i);
     }
 }

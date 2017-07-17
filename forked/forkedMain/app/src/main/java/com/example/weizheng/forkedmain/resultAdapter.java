@@ -49,6 +49,4 @@ public class resultAdapter extends ArrayAdapter<String> {
         );
         return customView;
     }
-
-
 }

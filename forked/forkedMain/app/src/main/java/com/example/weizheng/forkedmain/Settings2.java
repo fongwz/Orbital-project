@@ -12,7 +12,7 @@ public class    Settings2 extends AppCompatActivity {
     private static CheckBox sour;
     private static CheckBox spicy;
     private Bundle data;
-    private Boolean savePreferences;
+    private Boolean updatePreferences;
     private int[] preferenceValues;
 
     @Override
@@ -24,8 +24,8 @@ public class    Settings2 extends AppCompatActivity {
         if(data==null){
             return;
         }
-        savePreferences = data.getBoolean("savePreferences");
         preferenceValues = data.getIntArray("preferenceValues");
+        updatePreferences = data.getBoolean("updatePreferences");
     }
 
     public void onTasteClick(View view) {
@@ -35,30 +35,26 @@ public class    Settings2 extends AppCompatActivity {
         spicy = (CheckBox) findViewById(R.id.settings_taste_spicy);
 
         if (sweet.isChecked()) {
-            preferenceValues[5] = 1;
+            preferenceValues[9] = 1;
         } else {
-            preferenceValues[5] = 0;
+            preferenceValues[9] = 0;
         }
 
         if (sour.isChecked()) {
-            preferenceValues[6] = 1;
-        } else {
-            preferenceValues[6] = 0;
-        }
-
-        if (spicy.isChecked()) {
             preferenceValues[7] = 1;
         } else {
             preferenceValues[7] = 0;
         }
 
-        Intent i = new Intent(this, Settings3.class);
-        if(savePreferences) {
-            i.putExtra("savePreferences", true);
+        if (spicy.isChecked()) {
+            preferenceValues[8] = 1;
         } else {
-            i.putExtra("savePreferences", false);
+            preferenceValues[8] = 0;
         }
+
+        Intent i = new Intent(this, Settings3.class);
         i.putExtra("preferenceValues", preferenceValues);
+        i.putExtra("updatePreferences",updatePreferences);
         startActivity(i);
     }
 }

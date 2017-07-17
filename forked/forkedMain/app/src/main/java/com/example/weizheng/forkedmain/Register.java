@@ -73,10 +73,10 @@ public class Register extends AppCompatActivity {
                 if(task.isSuccessful()){
                     //update user object inside the database
                     FirebaseUser currentUser = myFirebaseAuth.getCurrentUser();
-                    DatabaseReference userDetailsAdmin = myFirebaseRef.child("Users").child(currentUser.getUid()).child("isAdmin");
-                    userDetailsAdmin.setValue(false);
-                    DatabaseReference userDetailsDisplayName = myFirebaseRef.child("Users").child(currentUser.getUid()).child("Display");
-                    userDetailsDisplayName.setValue(displayname);
+                    Toast.makeText(getApplicationContext(), currentUser.getUid(), Toast.LENGTH_SHORT).show();
+                    DatabaseReference userDetailsAdmin = myFirebaseRef.child("Users");
+                    userDetailsAdmin.child(currentUser.getUid()).child("Display").setValue(displayname);
+                    userDetailsAdmin.child(currentUser.getUid()).child("isAdmin").setValue(false);
                     //move to sign in page with only email filled in
                     Toast.makeText(Register.this, "Account created", Toast.LENGTH_SHORT).show();
                     myFirebaseAuth.signOut();

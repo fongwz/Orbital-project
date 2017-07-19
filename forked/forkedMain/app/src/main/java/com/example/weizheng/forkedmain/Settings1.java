@@ -16,6 +16,7 @@ public class Settings1 extends AppCompatActivity {
     private static CheckBox korean;
     private Bundle data;
     private Boolean updatePreferences = false;
+    private Boolean setupPreferences = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,10 @@ public class Settings1 extends AppCompatActivity {
         setContentView(R.layout.activity_settings1);
         data = getIntent().getExtras();
         if(data!=null){
-            updatePreferences = data.getBoolean("updatePreferences");
+            try{
+                updatePreferences = data.getBoolean("updatePreferences");
+                setupPreferences = data.getBoolean("setupPreferences");
+            }catch (Exception e) { }
         }
     }
 
@@ -70,6 +74,7 @@ public class Settings1 extends AppCompatActivity {
         Intent i = new Intent(this, Settings2.class);
         i.putExtra("preferenceValues", preferenceValues);
         i.putExtra("updatePreferences",updatePreferences);
+        i.putExtra("setupPreferences",setupPreferences);
         startActivity(i);
     }
 }

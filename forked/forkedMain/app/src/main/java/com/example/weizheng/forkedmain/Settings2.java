@@ -13,6 +13,7 @@ public class    Settings2 extends AppCompatActivity {
     private static CheckBox spicy;
     private Bundle data;
     private Boolean updatePreferences;
+    private Boolean setupPreferences;
     private int[] preferenceValues;
 
     @Override
@@ -26,6 +27,7 @@ public class    Settings2 extends AppCompatActivity {
         }
         preferenceValues = data.getIntArray("preferenceValues");
         updatePreferences = data.getBoolean("updatePreferences");
+        setupPreferences = data.getBoolean("setupPreferences");
     }
 
     public void onTasteClick(View view) {
@@ -55,6 +57,7 @@ public class    Settings2 extends AppCompatActivity {
         Intent i = new Intent(this, Settings3.class);
         i.putExtra("preferenceValues", preferenceValues);
         i.putExtra("updatePreferences",updatePreferences);
+        i.putExtra("setupPreferences",setupPreferences);
         startActivity(i);
     }
 }

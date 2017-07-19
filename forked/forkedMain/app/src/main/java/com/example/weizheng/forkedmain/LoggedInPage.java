@@ -23,6 +23,8 @@ public class LoggedInPage extends AppCompatActivity {
     private DatabaseReference myFirebaseRef;
     private FirebaseDatabase myFirebaseDatabase;
     private FirebaseAuth myFirebaseAuth;
+    private Bundle data;
+    private Boolean firstSetup = false;
 
 
     @Override
@@ -30,27 +32,50 @@ public class LoggedInPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in_page);
 
+        data = getIntent().getExtras();
+        if(data!=null){
+            firstSetup = data.getBoolean("firstSetup");
+        }
+
         Firebase.setAndroidContext(this);
         myFirebaseAuth = FirebaseAuth.getInstance();
         myFirebaseDatabase = FirebaseDatabase.getInstance();
         myFirebaseRef = myFirebaseDatabase.getReference(); //reference to root directory
+        checkForPreferences();
+        performFirstSetup(firstSetup);
 
-        //checkForPreferences();
     }
 
-    public void checkForPreferences(){
+    public void performFirstSetup(Boolean firstSetup) {
+
+        if(firstSetup){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("You have successfully set your preferences! To change your preferences at any time, click on <Update Preferences> in the main menu.")
+                    .setCancelable(false)
+                    .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
+    public void checkForPreferences() {
 
         DatabaseReference preferenceReference = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Preferences");
         preferenceReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.exists()){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoggedInPage.this);
                     builder.setMessage("You don't have any preferences set! Please set some preferences first!")
                             .setCancelable(false)
                             .setPositiveButton("Proceed>>", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Toast.makeText(getApplicationContext(), "LUL", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(LoggedInPage.this, Settings1.class);
+                                    i.putExtra("setupPreferences",true);
+                                    startActivity(i);
                                 }
                             });
                     AlertDialog alert = builder.create();

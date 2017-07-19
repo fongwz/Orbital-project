@@ -1,6 +1,8 @@
 package com.example.weizheng.forkedmain;
 
+import android.content.DialogInterface;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +25,8 @@ public class Settings3 extends AppCompatActivity {
     private static CheckBox dessert;
     private Bundle data;
     private int[] preferenceValues;
-    private boolean updatePreferences;
+    private Boolean updatePreferences;
+    private Boolean setupPreferences;
     private FirebaseDatabase myFirebaseDatabase;
     private DatabaseReference myFirebaseRef;
     private FirebaseAuth myFirebaseAuth;
@@ -39,6 +42,7 @@ public class Settings3 extends AppCompatActivity {
         }
         preferenceValues = data.getIntArray("preferenceValues");
         updatePreferences = data.getBoolean("updatePreferences");
+        setupPreferences = data.getBoolean("setupPreferences");
         myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
         myFirebaseRef = myFirebaseDatabase.getReference();
         myFirebaseAuth = FirebaseAuth.getInstance();
@@ -75,7 +79,29 @@ public class Settings3 extends AppCompatActivity {
             preferenceValues[1] = 0;
         }
 
-        if (updatePreferences) {
+
+        if(setupPreferences) {
+
+            DatabaseReference preferenceReference = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Preferences");
+            preferenceReference.child("isChinese").setValue(preferenceValues[0]);
+            preferenceReference.child("isDessert").setValue(preferenceValues[1]);
+            preferenceReference.child("isIndian").setValue(preferenceValues[2]);
+            preferenceReference.child("isKorean").setValue(preferenceValues[3]);
+            preferenceReference.child("isMalay").setValue(preferenceValues[4]);
+            preferenceReference.child("isMeat").setValue(preferenceValues[5]);
+            preferenceReference.child("isSeafood").setValue(preferenceValues[6]);
+            preferenceReference.child("isSour").setValue(preferenceValues[7]);
+            preferenceReference.child("isSpicy").setValue(preferenceValues[8]);
+            preferenceReference.child("isSweet").setValue(preferenceValues[9]);
+            preferenceReference.child("isVegetables").setValue(preferenceValues[10]);
+            preferenceReference.child("isWestern").setValue(preferenceValues[11]);
+
+            Intent i = new Intent(this, LoggedInPage.class);
+            i.putExtra("firstSetup", true);
+            finish();
+            startActivity(i);
+
+        } else if (updatePreferences) {
 
             DatabaseReference preferenceReference = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Preferences");
             preferenceReference.addValueEventListener(new ValueEventListener() {

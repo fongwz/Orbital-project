@@ -10,6 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -66,7 +67,6 @@ public class Result extends AppCompatActivity {
                     ListView list = (ListView) findViewById(R.id.result_list_view);
                     list.setAdapter(adapter);
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 

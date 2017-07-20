@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox log_in_checkbox;
     private FirebaseAuth myFirebaseAuth;
     private Firebase myFirebaseRef;
+    private static final String TAG = "Results";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +61,17 @@ public class MainActivity extends AppCompatActivity {
                     FirebaseUser currentUser = myFirebaseAuth.getCurrentUser();
                     updateUI(currentUser);
                 } else {
+                    task.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.i(TAG, e.getMessage());
+                        }
+                    });
                     Toast.makeText(MainActivity.this, "Authentication error", Toast.LENGTH_SHORT).show();
                     updateUI(null);
                 }
             }
+
         });
     }
 

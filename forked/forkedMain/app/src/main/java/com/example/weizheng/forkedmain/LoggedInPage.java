@@ -90,7 +90,7 @@ public class LoggedInPage extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoggedInPage.this);
                     builder.setMessage("You don't have any preferences set! Please set some preferences first!")
                             .setCancelable(false)
-                            .setPositiveButton("Proceed>>", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Proceed >>", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     Intent i = new Intent(LoggedInPage.this, Settings1.class);
                                     i.putExtra("setupPreferences",true);
@@ -124,9 +124,6 @@ public class LoggedInPage extends AppCompatActivity {
 
     public void onUploadClick(View view){
 
-        FirebaseUser myFirebaseUser = myFirebaseAuth.getCurrentUser();
-        String uid = myFirebaseUser.getUid();
-        Toast.makeText(this, "uid = "+uid, Toast.LENGTH_SHORT).show(); //debugging purposes
         Intent i = new Intent(this, userUploadSlide.class);
         startActivity(i);
 
@@ -148,9 +145,24 @@ public class LoggedInPage extends AppCompatActivity {
         startActivity(i);
     }
 
-    /** Remove back button functionality *****************************************/
+    /** Override back button functionality *****************************************/
     @Override
     public void onBackPressed(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to sign out?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        FirebaseAuth myFirebaseAuth = FirebaseAuth.getInstance();
+                        myFirebaseAuth.signOut();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

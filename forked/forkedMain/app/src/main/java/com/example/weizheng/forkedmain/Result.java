@@ -1,6 +1,8 @@
 package com.example.weizheng.forkedmain;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,6 +68,20 @@ public class Result extends AppCompatActivity {
                     ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes);
                     ListView list = (ListView) findViewById(R.id.result_list_view);
                     list.setAdapter(adapter);
+                    if(recipes[0].isEmpty()){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Result.this);
+                        builder.setMessage("Sorry! No results were found with your preferences.")
+                                .setCancelable(false)
+                                .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent i = new Intent(Result.this, LoggedInPage.class);
+                                        finish();
+                                        startActivity(i);
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {

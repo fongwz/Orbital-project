@@ -17,11 +17,14 @@ public class Settings1 extends AppCompatActivity {
     private Bundle data;
     private Boolean updatePreferences = false;
     private Boolean setupPreferences = false;
+    static Settings1 mRemove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings1);
+        mRemove = this;
+
         data = getIntent().getExtras();
         if(data!=null){
             try{
@@ -76,5 +79,9 @@ public class Settings1 extends AppCompatActivity {
         i.putExtra("updatePreferences",updatePreferences);
         i.putExtra("setupPreferences",setupPreferences);
         startActivity(i);
+    }
+
+    public static Settings1 getInstance(){
+        return mRemove;
     }
 }

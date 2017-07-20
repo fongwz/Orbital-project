@@ -131,6 +131,13 @@ public class LoggedInPage extends AppCompatActivity {
 
     public void onUpdatePrefClick(View view){
 
+        /**
+
+         Intent i = new Intent(this, ProfilePage.class);
+         startActivity(i);
+
+         */
+
         Intent i = new Intent(this, Settings1.class);
         i.putExtra("updatePreferences", true);
         startActivity(i);
@@ -139,10 +146,12 @@ public class LoggedInPage extends AppCompatActivity {
     public void onSignOutClick(View view){
         FirebaseAuth myFirebaseAuth = FirebaseAuth.getInstance();
         myFirebaseAuth.signOut();
-        finish();
+
         Toast.makeText(this, "Signed out", Toast.LENGTH_SHORT).show();
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(LoggedInPage.this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
+        finish();
     }
 
     /** Override back button functionality *****************************************/
@@ -155,6 +164,11 @@ public class LoggedInPage extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         FirebaseAuth myFirebaseAuth = FirebaseAuth.getInstance();
                         myFirebaseAuth.signOut();
+
+                        Intent i = new Intent(LoggedInPage.this, MainActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                        finish();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

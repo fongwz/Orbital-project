@@ -80,8 +80,9 @@ public class Register extends AppCompatActivity {
                     //move to sign in page with only email filled in
                     Toast.makeText(Register.this, "Account created", Toast.LENGTH_SHORT).show();
                     myFirebaseAuth.signOut();
-                    finish();
+
                     Intent i = new Intent(Register.this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
 
                 } else {

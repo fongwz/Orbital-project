@@ -5,6 +5,7 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.content.Intent;
@@ -30,6 +31,7 @@ public class Settings3 extends AppCompatActivity {
     private FirebaseDatabase myFirebaseDatabase;
     private DatabaseReference myFirebaseRef;
     private FirebaseAuth myFirebaseAuth;
+    private static final String TAG = "Results";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class Settings3 extends AppCompatActivity {
         myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
         myFirebaseRef = myFirebaseDatabase.getReference();
         myFirebaseAuth = FirebaseAuth.getInstance();
+
+        Log.i(TAG,updatePreferences.toString());
+        Log.i(TAG,setupPreferences.toString());
 
     }
 
@@ -128,7 +133,7 @@ public class Settings3 extends AppCompatActivity {
         } else {
             Intent i = new Intent(this, Result.class);
             i.putExtra("preferences", preferenceValues);
-            finish();
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
         }
     }

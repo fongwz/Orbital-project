@@ -65,10 +65,10 @@ public class Result extends AppCompatActivity {
                         if(i>4){break;}
                     }
                     Log.i(TAG, "created string array to display in adapter");
-                    ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes);
-                    ListView list = (ListView) findViewById(R.id.result_list_view);
-                    list.setAdapter(adapter);
-                    if(recipes[0].isEmpty()){
+
+
+                    if( i==0 ){
+                        Log.i(TAG,"no results found");
                         AlertDialog.Builder builder = new AlertDialog.Builder(Result.this);
                         builder.setMessage("Sorry! No results were found with your preferences.")
                                 .setCancelable(false)
@@ -81,6 +81,11 @@ public class Result extends AppCompatActivity {
                                 });
                         AlertDialog alert = builder.create();
                         alert.show();
+                    } else {
+                        Log.i(TAG, "loading adapter");
+                        ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes);
+                        ListView list = (ListView) findViewById(R.id.result_list_view);
+                        list.setAdapter(adapter);
                     }
                 }
                 @Override
@@ -112,9 +117,26 @@ public class Result extends AppCompatActivity {
                         if(i>4){break;}
                     }
                     Log.i(TAG, "created string array to display in adapter");
-                    ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes);
-                    ListView list = (ListView) findViewById(R.id.result_list_view);
-                    list.setAdapter(adapter);
+
+                    if( i == 0){
+                        Log.i(TAG,"no results found");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Result.this);
+                        builder.setMessage("Sorry! No results were found with your preferences.")
+                                .setCancelable(false)
+                                .setPositiveButton("Back", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent i = new Intent(Result.this, LoggedInPage.class);
+                                        finish();
+                                        startActivity(i);
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    } else {
+                        ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes);
+                        ListView list = (ListView) findViewById(R.id.result_list_view);
+                        list.setAdapter(adapter);
+                    }
                 }
 
                 @Override

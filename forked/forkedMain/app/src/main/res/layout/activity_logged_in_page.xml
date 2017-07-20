@@ -64,11 +64,11 @@
         android:id="@+id/logged_in_upate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/logged_in_currentPref_button"
-        android:layout_marginBottom="82dp"
-        android:text="Update your preferences"
-        android:onClick="onUpdatePrefClick"/>
+        android:layout_marginBottom="16dp"
+        android:onClick="onUpdatePrefClick"
+        android:text="My Profile"
+        android:layout_above="@+id/logged_in_sign_out_button"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/logged_in_sign_out_button"

@@ -140,6 +140,7 @@ public class userUploadRecipe extends Fragment {
                 Bitmap image = BitmapFactory.decodeStream(inputStream);
 
                 uploadImage.setImageBitmap(image);
+                uploadImage.setBackgroundResource(0);
 
 
             } catch (Exception e) {

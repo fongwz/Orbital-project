@@ -6,7 +6,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -25,6 +27,7 @@ public class LoggedInPage extends AppCompatActivity {
     private FirebaseAuth myFirebaseAuth;
     private Bundle data;
     private Boolean firstSetup = false;
+    private static final String TAG = "Results";
 
 
     @Override
@@ -42,11 +45,10 @@ public class LoggedInPage extends AppCompatActivity {
         myFirebaseDatabase = FirebaseDatabase.getInstance();
         myFirebaseRef = myFirebaseDatabase.getReference(); //reference to root directory
         checkForPreferences();
-        performFirstSetup(firstSetup);
-
+        performSetup(firstSetup);
     }
 
-    public void performFirstSetup(Boolean firstSetup) {
+    public void performSetup(Boolean firstSetup) {
 
         if(firstSetup){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -59,6 +61,23 @@ public class LoggedInPage extends AppCompatActivity {
             AlertDialog alert = builder.create();
             alert.show();
         }
+
+
+        DatabaseReference displayReference = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Display");
+        displayReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    TextView userDisplay = (TextView) findViewById(R.id.logged_in_welcome2);
+                    userDisplay.setText(dataSnapshot.getValue().toString());
+                } catch (Exception e) { }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.i(TAG, databaseError.getMessage());
+            }
+        });
     }
 
     public void checkForPreferences() {

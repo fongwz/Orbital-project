@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/qw"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.weizheng.forkedmain.profilesettings.ProfilePage">
+
+    <EditText
+        android:id="@+id/profile_page_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:focusable="false"
+        android:fontFamily="casual"
+        android:inputType="textPersonName"
+        android:text=" Profile Settings"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textSize="30sp"
+        android:clickable="false"/>
+
+    <ListView
+        android:id="@+id/profile_page_listview"
+        android:layout_width="match_parent"
+        android:layout_height="643dp"
+        android:layout_below="@+id/profile_page_textview"
+        android:layout_marginTop="10dp" />
+</RelativeLayout>

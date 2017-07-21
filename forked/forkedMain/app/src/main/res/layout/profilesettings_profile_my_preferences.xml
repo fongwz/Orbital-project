@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.example.weizheng.forkedmain.profilesettings.ProfileMyPreferences">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/profile_preferences_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="18dp"
+                android:text="Preferences"
+                android:textSize="35sp" />
+
+            <Button
+                android:id="@+id/profile_preferences_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preferences_textview"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp"
+                android:onClick="profileUpdatePref"
+                android:text="Update"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_chinese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preferences_textview"
+                android:layout_marginTop="23dp"
+                android:layout_marginLeft="5dp"
+                android:text="Chinese"
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:id="@+id/profile_preferences_chinese_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preferences_chinese"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_malay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preferences_chinese"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Malay"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_malay_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preferences_malay"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_indian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preferences_malay"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Indian"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_indian_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preferences_indian"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_western"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preferences_indian"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Western"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_western_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preferences_western"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_korean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preferences_western"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Korean"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_korean_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preferences_korean"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_sweet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preferences_korean"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Sweet"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_sweet_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preferences_sweet"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preference_sour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preferences_sweet"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Sour"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_sour_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preference_sour"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preference_spicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preference_sour"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Spicy"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_spicy_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preference_spicy"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preference_meat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preference_spicy"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Meat"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_meat_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preference_meat"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preference_seafood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preference_meat"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Seafood"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_seafood_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preference_seafood"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preference_vegetables"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preference_seafood"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Vegetables"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_vegetables_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preference_vegetables"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_dessert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profile_preference_vegetables"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/profile_preference_vegetables"
+                android:layout_marginTop="18dp"
+                android:layout_marginLeft="5dp"
+                android:text="Dessert"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profile_preferences_dessert_yn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/profile_preferences_dessert"
+                android:layout_alignParentRight="true"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

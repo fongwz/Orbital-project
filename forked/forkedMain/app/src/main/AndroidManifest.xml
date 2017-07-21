@@ -4,7 +4,9 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" android:protectionLevel="signature" />
+    <uses-permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
@@ -13,27 +15,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".homescreens.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Settings1" />
-        <activity android:name=".Settings2" />
-        <activity android:name=".Settings3" />
-        <activity android:name=".LoggedInPage"/>
-        <activity android:name=".Register" />
+        <activity android:name=".settings.Settings1" />
+        <activity android:name=".settings.Settings2" />
+        <activity android:name=".settings.Settings3" />
+        <activity android:name=".homescreens.LoggedInPage" />
+        <activity android:name=".homescreens.Register" />
         <activity
-            android:name=".userUploadSlide"
+            android:name=".uploads.userUploadSlide"
             android:label="@string/title_activity_user_upload_slide"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Result" />
+        <activity android:name=".results.Result" />
         <activity
-            android:name=".ResultDetails"
+            android:name=".results.ResultDetails"
             android:label="@string/title_activity_result_details"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".profilesettings.ProfilePage" />
+        <activity android:name=".profilesettings.ProfileAccountInformation" />
+        <activity android:name=".profilesettings.ProfileMyPreferences" />
+        <activity android:name=".profilesettings.ProfileMyUploads" />
+        <activity android:name=".profilesettings.ProfileChangePassword"></activity>
     </application>
 
 </manifest>

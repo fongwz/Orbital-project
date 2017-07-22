@@ -1,6 +1,7 @@
 package com.example.weizheng.forkedmain.profilesettings;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,17 +64,18 @@ public class ProfileMyPreferences extends AppCompatActivity {
                 dessertYN = (TextView) findViewById(R.id.profile_preferences_dessert_yn);
 
                 chineseYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isChinese").getValue().toString())));
-                malayYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isMalay").getValue().toString())));
-                indianYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isIndian").getValue().toString())));
-                westernYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isWestern").getValue().toString())));
-                koreanYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isKorean").getValue().toString())));
-                sweetYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isSweet").getValue().toString())));
-                sourYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isSour").getValue().toString())));
-                spicyYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isSpicy").getValue().toString())));
-                meatYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isMeat").getValue().toString())));
-                seafoodYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isSeafood").getValue().toString())));
-                vegetableYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isVegetables").getValue().toString())));
-                dessertYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isDessert").getValue().toString())));
+
+                setColor(malayYN, setYN(Integer.valueOf(dataSnapshot.child("isMalay").getValue().toString())));
+                setColor(indianYN, setYN(Integer.valueOf(dataSnapshot.child("isIndian").getValue().toString())));
+                setColor(westernYN, setYN(Integer.valueOf(dataSnapshot.child("isWestern").getValue().toString())));
+                setColor(koreanYN, setYN(Integer.valueOf(dataSnapshot.child("isKorean").getValue().toString())));
+                setColor(sweetYN, setYN(Integer.valueOf(dataSnapshot.child("isSweet").getValue().toString())));
+                setColor(sourYN, setYN(Integer.valueOf(dataSnapshot.child("isSour").getValue().toString())));
+                setColor(spicyYN, setYN(Integer.valueOf(dataSnapshot.child("isSpicy").getValue().toString())));
+                setColor(meatYN, setYN(Integer.valueOf(dataSnapshot.child("isMeat").getValue().toString())));
+                setColor(seafoodYN, setYN(Integer.valueOf(dataSnapshot.child("isSeafood").getValue().toString())));
+                setColor(vegetableYN, setYN(Integer.valueOf(dataSnapshot.child("isVegetables").getValue().toString())));
+                setColor(dessertYN, setYN(Integer.valueOf(dataSnapshot.child("isDessert").getValue().toString())));
             }
 
             @Override
@@ -81,6 +83,17 @@ public class ProfileMyPreferences extends AppCompatActivity {
                 Log.i(TAG, databaseError.getMessage());
             }
         });
+
+    }
+
+    public void setColor(TextView textYN, String yn){
+
+        textYN.setText(yn);
+        if(yn.equals("Yes")){
+            textYN.setTextColor(Color.GREEN);
+        } else if(yn.equals("No")){
+            textYN.setTextColor(Color.RED);
+        }
 
     }
 

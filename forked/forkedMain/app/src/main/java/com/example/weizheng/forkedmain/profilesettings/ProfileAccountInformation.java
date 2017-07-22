@@ -1,8 +1,10 @@
 package com.example.weizheng.forkedmain.profilesettings;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.weizheng.forkedmain.R;
@@ -33,8 +35,10 @@ public class ProfileAccountInformation extends AppCompatActivity {
         myFirebaseAuth = FirebaseAuth.getInstance();
         display = (TextView) findViewById(R.id.account_information_display_details);
         email = (TextView) findViewById(R.id.account_information_email_details);
+        loadInfo();
+    }
 
-
+    public void loadInfo(){
 
         DatabaseReference displayRef = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Display");
         displayRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -53,5 +57,14 @@ public class ProfileAccountInformation extends AppCompatActivity {
 
         email.setText(myFirebaseAuth.getCurrentUser().getEmail());
         Log.i(TAG, "Loaded email");
+    }
+
+    public void updateFields(View view){
+
+        Intent i = new Intent(this, ProfileUpdateDetails.class);
+        i.putExtra("Display", display.getText().toString());
+        i.putExtra("Email", email.getText().toString());
+        startActivity(i);
+
     }
 }

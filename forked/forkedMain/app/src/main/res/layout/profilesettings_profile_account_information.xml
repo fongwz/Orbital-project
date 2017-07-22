@@ -55,4 +55,15 @@
         android:layout_below="@+id/account_information_email"
         android:textSize="23sp" />
 
+    <Button
+        android:id="@+id/account_information_update_fields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/account_information_email_details"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="124dp"
+        android:onClick="updateFields"
+        android:text="Update details"
+        android:textSize="18sp" />
+
 </RelativeLayout>

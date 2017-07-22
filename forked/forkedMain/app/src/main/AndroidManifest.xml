@@ -40,7 +40,8 @@
         <activity android:name=".profilesettings.ProfileAccountInformation" />
         <activity android:name=".profilesettings.ProfileMyPreferences" />
         <activity android:name=".profilesettings.ProfileMyUploads" />
-        <activity android:name=".profilesettings.ProfileChangePassword"></activity>
+        <activity android:name=".profilesettings.ProfileChangePassword" />
+        <activity android:name=".profilesettings.ProfileUpdateDetails"></activity>
     </application>
 
 </manifest>

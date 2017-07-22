@@ -1,6 +1,7 @@
 package com.example.weizheng.forkedmain.homescreens;
 
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import com.example.weizheng.forkedmain.results.Result;
 import com.example.weizheng.forkedmain.settings.Settings1;
 import com.example.weizheng.forkedmain.uploads.userUploadSlide;
 import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
@@ -75,7 +78,17 @@ public class LoggedInPage extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 FirebaseUser user = myFirebaseAuth.getCurrentUser();
                 AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), dataSnapshot.getValue().toString());
-                user.reauthenticate(credential);
+                user.reauthenticate(credential).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i(TAG, "reauthenticate OK");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i(TAG, "reauthenticate FAIL");
+                    }
+                });
             }
 
             @Override

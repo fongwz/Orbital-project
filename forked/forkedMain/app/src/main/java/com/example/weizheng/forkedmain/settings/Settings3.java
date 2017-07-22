@@ -1,5 +1,6 @@
 package com.example.weizheng.forkedmain.settings;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.example.weizheng.forkedmain.homescreens.LoggedInPage;
 import com.example.weizheng.forkedmain.R;
 import com.example.weizheng.forkedmain.results.Result;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -104,6 +106,7 @@ public class Settings3 extends AppCompatActivity {
             Intent i = new Intent(this, LoggedInPage.class);
             i.putExtra("firstSetup", true);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            finish();
             startActivity(i);
 
         } else if (updatePreferences) {
@@ -114,26 +117,33 @@ public class Settings3 extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     int i = 0;
                     for(DataSnapshot postSnapShot : dataSnapshot.getChildren()) {
-                        postSnapShot.getRef().setValue(preferenceValues[i]);
+                        postSnapShot.getRef().setValue(preferenceValues[i]).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.i(TAG, e.getMessage());
+                            }
+                        });
                         i++;
                     }
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
+                    Log.i(TAG, databaseError.getMessage());
                 }
             });
 
             Intent i = new Intent(this, LoggedInPage.class);
             Toast.makeText(this, "Preferences Updated", Toast.LENGTH_SHORT).show();
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            finish();
             startActivity(i);
 
         } else {
             Intent i = new Intent(this, Result.class);
             i.putExtra("preferences", preferenceValues);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            finish();
             startActivity(i);
         }
     }

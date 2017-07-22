@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class ProfileMyUploads extends AppCompatActivity {
     private FirebaseDatabase myFirebaseDatabase;
     private DatabaseReference myFirebaseRef;
     private FirebaseAuth myFirebaseAuth;
+    private static final String TAG = "Results";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class ProfileMyUploads extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(ProfileMyUploads.this, "There was an error", Toast.LENGTH_SHORT).show();
+                Log.i(TAG, databaseError.getMessage());
             }
         });
     }

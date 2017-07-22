@@ -67,6 +67,7 @@ public class ProfileChangePassword extends AppCompatActivity {
                                 } else {
                                     myFirebaseAuth.getCurrentUser().updatePassword(pw2);
                                     Log.i(TAG, "pw changed");
+                                    Toast.makeText(ProfileChangePassword.this, "Password updated", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(ProfileChangePassword.this, ProfilePage.class);
                                     finish();
                                     startActivity(i);

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.weizheng.forkedmain.R;
 
-public class profileAdapter extends ArrayAdapter<String> {
+public class    profileAdapter extends ArrayAdapter<String> {
 
     private static final String TAG = "Results";
 

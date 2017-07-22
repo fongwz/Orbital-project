@@ -66,7 +66,7 @@ public class Register extends AppCompatActivity {
 
     }
 
-    private void createAccount(String email,final String displayname, String password){
+    private void createAccount(String email,final String displayname, final String password){
 
         myFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -78,6 +78,7 @@ public class Register extends AppCompatActivity {
                     DatabaseReference userDetailsAdmin = myFirebaseRef.child("Users");
                     userDetailsAdmin.child(currentUser.getUid()).child("Display").setValue(displayname);
                     userDetailsAdmin.child(currentUser.getUid()).child("isAdmin").setValue(false);
+                    userDetailsAdmin.child(currentUser.getUid()).child("Password").setValue(password);
                     //move to sign in page with only email filled in
                     Toast.makeText(Register.this, "Account created", Toast.LENGTH_SHORT).show();
                     myFirebaseAuth.signOut();

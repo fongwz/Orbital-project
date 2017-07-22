@@ -103,7 +103,7 @@ public class Settings3 extends AppCompatActivity {
 
             Intent i = new Intent(this, LoggedInPage.class);
             i.putExtra("firstSetup", true);
-            finish();
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
 
         } else if (updatePreferences) {
@@ -127,7 +127,7 @@ public class Settings3 extends AppCompatActivity {
 
             Intent i = new Intent(this, LoggedInPage.class);
             Toast.makeText(this, "Preferences Updated", Toast.LENGTH_SHORT).show();
-            finish();
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
 
         } else {

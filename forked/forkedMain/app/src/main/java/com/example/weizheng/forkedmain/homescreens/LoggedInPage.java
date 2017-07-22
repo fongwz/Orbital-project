@@ -16,7 +16,11 @@ import com.example.weizheng.forkedmain.results.Result;
 import com.example.weizheng.forkedmain.settings.Settings1;
 import com.example.weizheng.forkedmain.uploads.userUploadSlide;
 import com.firebase.client.Firebase;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,7 +59,7 @@ public class LoggedInPage extends AppCompatActivity {
 
         if(firstSetup){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("You have successfully set your preferences! To change your preferences at any time, click on <Update Preferences> in the main menu.")
+            builder.setMessage("You have successfully set your preferences! To change your preferences at any time, go to your profile and click on Preferences!")
                     .setCancelable(false)
                     .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -64,6 +68,21 @@ public class LoggedInPage extends AppCompatActivity {
             AlertDialog alert = builder.create();
             alert.show();
         }
+
+        DatabaseReference passwordRef = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Password");
+        passwordRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FirebaseUser user = myFirebaseAuth.getCurrentUser();
+                AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), dataSnapshot.getValue().toString());
+                user.reauthenticate(credential);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         DatabaseReference displayReference = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Display");

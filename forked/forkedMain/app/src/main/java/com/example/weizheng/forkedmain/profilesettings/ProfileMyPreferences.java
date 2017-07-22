@@ -63,8 +63,7 @@ public class ProfileMyPreferences extends AppCompatActivity {
                 vegetableYN = (TextView) findViewById(R.id.profile_preferences_vegetables_yn);
                 dessertYN = (TextView) findViewById(R.id.profile_preferences_dessert_yn);
 
-                chineseYN.setText(setYN(Integer.valueOf(dataSnapshot.child("isChinese").getValue().toString())));
-
+                setColor(chineseYN, setYN(Integer.valueOf(dataSnapshot.child("isChinese").getValue().toString())));
                 setColor(malayYN, setYN(Integer.valueOf(dataSnapshot.child("isMalay").getValue().toString())));
                 setColor(indianYN, setYN(Integer.valueOf(dataSnapshot.child("isIndian").getValue().toString())));
                 setColor(westernYN, setYN(Integer.valueOf(dataSnapshot.child("isWestern").getValue().toString())));

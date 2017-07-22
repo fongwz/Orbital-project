@@ -1,5 +1,6 @@
 package com.example.weizheng.forkedmain.profilesettings;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,4 +68,5 @@ public class ProfileAccountInformation extends AppCompatActivity {
         startActivity(i);
 
     }
+
 }

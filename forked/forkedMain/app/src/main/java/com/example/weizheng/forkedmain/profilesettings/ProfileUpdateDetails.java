@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.weizheng.forkedmain.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -61,8 +62,11 @@ public class ProfileUpdateDetails extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.i(TAG, "email changed successfully");
-                        onBackPressed();
+                        Toast.makeText(ProfileUpdateDetails.this, "Updated account information", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(ProfileUpdateDetails.this, ProfilePage.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         finish();
+                        startActivity(i);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

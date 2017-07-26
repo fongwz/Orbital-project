@@ -1,22 +1,43 @@
 package com.example.weizheng.forkedmain.results;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.weizheng.forkedmain.homescreens.LoggedInPage;
 import com.example.weizheng.forkedmain.R;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 public class Result extends AppCompatActivity {
 
@@ -27,19 +48,27 @@ public class Result extends AppCompatActivity {
     private DatabaseReference myFirebaseRef;
     private FirebaseAuth myFirebaseAuth;
     private static final String TAG = "Results";
+    private static final String animTAG = "Animations";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.results_result);
+
 
         myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
         myFirebaseRef = myFirebaseDatabase.getReference();
         myFirebaseAuth = FirebaseAuth.getInstance();
 
-
         data = getIntent().getExtras();
+        new FetchData().execute(data);
+    }
+
+    public View showResults(Bundle data){
+
+        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View view = inflater.inflate(R.layout.results_result, null);
+
         if(data==null){
 
             /** Taking user preference data from firebase to compare */
@@ -52,12 +81,12 @@ public class Result extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     int i=0;
-                    String[] recipes = new String[5];
+                    ArrayList<String> recipes = new ArrayList<String>();
                     for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                         DataSnapshot categoryValues = postSnapshot.child("Categories");
                         if(giveList(firebasePreferences, categoryValues)){
                             String name = postSnapshot.getKey();
-                            recipes[i]=name;
+                            recipes.add(name);
                             i++;
                         }
                         if(i>4){break;}
@@ -81,8 +110,10 @@ public class Result extends AppCompatActivity {
                         alert.show();
                     } else {
                         Log.i(TAG, "loading adapter");
-                        ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes);
-                        ListView list = (ListView) findViewById(R.id.result_list_view);
+
+                        String[] recipesArray = new String[recipes.size()];
+                        ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes.toArray(recipesArray));
+                        ListView list = (ListView) view.findViewById(R.id.result_list_view);
                         list.setAdapter(adapter);
                     }
                 }
@@ -91,6 +122,7 @@ public class Result extends AppCompatActivity {
 
                 }
             });
+
         } else {
 
             /** Discover a recipe */
@@ -104,12 +136,12 @@ public class Result extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     int i=0;
-                    String[] recipes = new String[5];
+                    ArrayList<String> recipes = new ArrayList<String>();
                     for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                         DataSnapshot categoryValues = postSnapshot.child("Categories");
                         if(giveList(tempPreferences, categoryValues)){
                             String name = postSnapshot.getKey();
-                            recipes[i]=name;
+                            recipes.add(name);
                             i++;
                         }
                         if(i>4){break;}
@@ -131,8 +163,10 @@ public class Result extends AppCompatActivity {
                         AlertDialog alert = builder.create();
                         alert.show();
                     } else {
-                        ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes);
-                        ListView list = (ListView) findViewById(R.id.result_list_view);
+
+                        String[] recipeArray = new String[recipes.size()];
+                        ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes.toArray(recipeArray));
+                        ListView list = (ListView) view.findViewById(R.id.result_list_view);
                         list.setAdapter(adapter);
                     }
                 }
@@ -143,6 +177,7 @@ public class Result extends AppCompatActivity {
                 }
             });
         }
+        return view;
     }
 
     public boolean giveList(final int[] mPreferences, DataSnapshot categoryValues){
@@ -197,10 +232,132 @@ public class Result extends AppCompatActivity {
         return preferences;
     }
 
+    public void animateLoadScreen(){
+
+
+        final ImageView viewRight = (ImageView) findViewById(R.id.loading_screen_icon_right);
+        final ImageView viewLeft = (ImageView) findViewById(R.id.loading_screen_icon_left);
+
+        final RotateAnimation anim = new RotateAnimation(0, 20, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(400);
+        anim.setRepeatCount(Animation.INFINITE);
+        anim.setInterpolator(new LinearInterpolator());
+
+        final RotateAnimation anim2 = new RotateAnimation(20, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim2.setDuration(400);
+        anim2.setRepeatCount(Animation.INFINITE);
+        anim2.setInterpolator(new LinearInterpolator());
+
+        final RotateAnimation anim3 = new RotateAnimation(340, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim3.setDuration(400);
+        anim3.setRepeatCount(Animation.INFINITE);
+        anim3.setInterpolator(new LinearInterpolator());
+
+        final RotateAnimation anim4 = new RotateAnimation(360, 340, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim4.setDuration(400);
+        anim4.setRepeatCount(Animation.INFINITE);
+        anim4.setInterpolator(new LinearInterpolator());
+
+
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                Log.i(animTAG, "loading anim2");
+                viewRight.startAnimation(anim2);
+
+            }
+        });
+
+
+        anim2.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                Log.i(animTAG, "loading anim1");
+                viewRight.startAnimation(anim);
+
+            }
+        });
+
+        anim3.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                viewLeft.startAnimation(anim4);
+            }
+        });
+
+        anim4.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                int i=0;
+                viewLeft.startAnimation(anim3);
+                i++;
+                Log.i(TAG, Integer.valueOf(i).toString());
+            }
+        });
+
+        viewLeft.startAnimation(anim4);
+        viewRight.startAnimation(anim);
+    }
+
+    private class FetchData extends AsyncTask<Bundle, Void, View> {
+
+        @Override
+        protected void onPreExecute() {
+            setContentView(R.layout.loading_screen);
+            animateLoadScreen();
+        }
+
+        @Override
+        protected View doInBackground(Bundle... data) {
+            View view = showResults(data[0]);
+            return view;
+        }
+
+        @Override
+        protected void onPostExecute(View view) {
+            setContentView(view);
+
+            super.onPostExecute(view);
+        }
+    }
+
     @Override
     public void onBackPressed(){
         Intent i = new Intent(this, LoggedInPage.class);
         finish();
         startActivity(i);
     }
+
 }

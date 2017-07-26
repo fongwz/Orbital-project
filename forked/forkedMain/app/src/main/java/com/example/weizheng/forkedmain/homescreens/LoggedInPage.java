@@ -1,5 +1,6 @@
 package com.example.weizheng.forkedmain.homescreens;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
@@ -7,8 +8,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,9 +51,10 @@ public class LoggedInPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         deleteCache(this);
         setContentView(R.layout.homescreen_logged_in_page);
+
 
         data = getIntent().getExtras();
         if(data!=null){
@@ -151,36 +157,43 @@ public class LoggedInPage extends AppCompatActivity {
 
     public void onPreferenceClick(View view){
 
-        Intent i = new Intent(this, Result.class);
-        startActivity(i);
+        Explode explode = new Explode();
+        explode.setDuration(500);
+        getWindow().setExitTransition(explode);
 
+        Intent i = new Intent(this, Result.class);
+        startActivity(i, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
     public void onDiscoverClick(View view){
 
         Intent i = new Intent(this, Settings1.class);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
     }
 
     public void onUploadClick(View view){
 
         Intent i = new Intent(this, userUploadSlide.class);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_from_bottom, R.anim.stay);
 
     }
 
     public void onUpdatePrefClick(View view){
 
+        Explode explode = new Explode();
+        getWindow().setExitTransition(explode);
 
+        Intent i = new Intent(this, ProfilePage.class);
 
-         Intent i = new Intent(this, ProfilePage.class);
-         startActivity(i);
+        View sharedView = (TextView) findViewById(R.id.logged_in_shared_profile_textview);
+        String transitionName = "profileString";
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(LoggedInPage.this, sharedView, transitionName);
 
+        startActivity(i, transitionActivityOptions.toBundle());
+        //startActivity(i, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 
-        /**
-        Intent i = new Intent(this, Settings1.class);
-        i.putExtra("updatePreferences", true);
-        startActivity(i); */
     }
 
     public void onSignOutClick(View view){

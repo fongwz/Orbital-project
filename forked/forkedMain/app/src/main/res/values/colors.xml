@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="splashBG">#C07150</color>
+    <color name="resultodd">#F3CC5C</color>
+    <color name="resulteven">#FBDF8F</color>
     <drawable name="red_color">#ff0000</drawable>
     <drawable name="blue_color">#0000ff</drawable>
     <drawable name="green_color">#00ff00</drawable>

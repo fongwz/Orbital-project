@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
@@ -30,10 +32,12 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Result extends AppCompatActivity {
 
     private Bundle data;
+    private Random random;
     private int[] firebasePreferences;
     private int[] tempPreferences;
     private FirebaseDatabase myFirebaseDatabase;
@@ -46,9 +50,12 @@ public class Result extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.loading_screen);
+        animateLoadScreen();
 
+        random = new Random();
         myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
         myFirebaseRef = myFirebaseDatabase.getReference();
         myFirebaseAuth = FirebaseAuth.getInstance();
@@ -82,7 +89,16 @@ public class Result extends AppCompatActivity {
                             recipes.add(name);
                             i++;
                         }
-                        if(i>4){break;}
+                    }
+                    if(recipes.size()>5){
+                        //repeat num generator process size-5 times
+                        //delete the recipes in those num positions
+
+                        int repeatNum = recipes.size()-5;
+                        int[] removeNumArray = generateNumbers(recipes.size(),repeatNum);
+                        for(int j=0; j<repeatNum; j++){
+                            recipes.remove(removeNumArray[j]);
+                        }
                     }
                     Log.i(TAG, "created string array to display in adapter");
 
@@ -105,8 +121,10 @@ public class Result extends AppCompatActivity {
                         Log.i(TAG, "loading adapter");
 
                         String[] recipesArray = new String[recipes.size()];
-                        ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes.toArray(recipesArray));
+                        ListAdapter adapter = new resultAdapter(Result.this, recipes.toArray(recipesArray));
                         ListView list = (ListView) view.findViewById(R.id.result_list_view);
+                        list.setDivider(null);
+                        list.setDividerHeight(0);
                         list.setAdapter(adapter);
                     }
                 }
@@ -137,7 +155,16 @@ public class Result extends AppCompatActivity {
                             recipes.add(name);
                             i++;
                         }
-                        if(i>4){break;}
+                        if(recipes.size()>5){
+                            //repeat num generator process size-5 times
+                            //delete the recipes in those num positions
+
+                            int repeatNum = recipes.size()-5;
+                            int[] removeNumArray = generateNumbers(recipes.size(),repeatNum);
+                            for(int j=0; j<repeatNum; j++){
+                                recipes.remove(removeNumArray[j]);
+                            }
+                        }
                     }
                     Log.i(TAG, "created string array to display in adapter");
 
@@ -158,9 +185,12 @@ public class Result extends AppCompatActivity {
                     } else {
 
                         String[] recipeArray = new String[recipes.size()];
-                        ListAdapter adapter = new resultAdapter(getApplicationContext(), recipes.toArray(recipeArray));
+                        ListAdapter adapter = new resultAdapter(Result.this, recipes.toArray(recipeArray));
                         ListView list = (ListView) view.findViewById(R.id.result_list_view);
+                        list.setDivider(null);
+                        list.setDividerHeight(0);
                         list.setAdapter(adapter);
+
                     }
                 }
 
@@ -177,8 +207,26 @@ public class Result extends AppCompatActivity {
         /** Take in preference values, filter according to result, and returns a boolean value to indicate whether recipe should be added to list */
 
         int i = 0;
-        for(DataSnapshot postSnapshot : categoryValues.getChildren()){
+        for(DataSnapshot postSnapshot : categoryValues.getChildren()) {
+            String preferenceValue = String.valueOf(mPreferences[i]);
             String recipeValue = postSnapshot.getValue().toString();
+            Log.i(TAG, preferenceValue + " : " + recipeValue);
+            if (recipeValue.equals("1")) {
+                if (!preferenceValue.equals(recipeValue)) {
+                    Log.i(TAG, "failed comparison");
+                    return false;
+                } else {
+                    i++;
+                    continue;
+                }
+            } else {
+                i++;
+                continue;
+            }
+        }
+        Log.i(TAG, "passed comparison");
+        return true;
+            /** Old version ********************
             String preferenceValue = String.valueOf(mPreferences[i]);
             Log.i(TAG, preferenceValue + " : " + recipeValue);
             if( Integer.valueOf(postSnapshot.getValue().toString()) != mPreferences[i] ){
@@ -190,7 +238,7 @@ public class Result extends AppCompatActivity {
             }
         }
         Log.i(TAG, "passed comparison");
-        return true;
+        return true; */
     }
 
     public int[] getUserPreference(){
@@ -328,8 +376,7 @@ public class Result extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            setContentView(R.layout.loading_screen);
-            animateLoadScreen();
+
         }
 
         @Override
@@ -345,11 +392,32 @@ public class Result extends AppCompatActivity {
         }
     }
 
+    public int[] generateNumbers(int max, int repeatCount){
+
+        int val = random.nextInt(max);
+        int[] numArray = new int[repeatCount];
+        ArrayList<Integer> numList = new ArrayList<Integer>();
+        for(int i = 0;i<repeatCount;i++){
+            //generate random number
+            //if random number not inside arraylist, add to numArray
+            //if inside arraylist, generate again.
+
+            while(numList.contains(val)){
+                val = random.nextInt(max);
+            }
+            numList.add(val);
+            numArray[i]=val;
+            val = random.nextInt(max);
+        }
+        return numArray;
+    }
+
     @Override
     public void onBackPressed(){
         Intent i = new Intent(this, LoggedInPage.class);
-        finish();
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+        finish();
     }
 
 }

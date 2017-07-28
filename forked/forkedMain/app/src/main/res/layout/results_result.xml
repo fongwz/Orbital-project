@@ -6,11 +6,45 @@
     android:layout_height="match_parent"
     tools:context="com.example.weizheng.forkedmain.results.Result">
 
+        <TextView
+            android:id="@+id/result_result_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <ImageView
+            android:id="@+id/result_forked_imageview"
+            android:layout_width="80dp"
+            android:layout_height="180dp"
+            android:layout_above="@+id/result_top_shelf"
+            android:background="@drawable/forked_mascot"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="70dp"/>
+
+        <ImageView
+            android:id="@+id/result_top_shelf"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_above="@+id/result_list_view"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/top_shelf" />
+
         <ListView
             android:id="@+id/result_list_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:layout_above="@+id/result_bottom_shelf"
+             />
+
+        <ImageView
+            android:id="@+id/result_bottom_shelf"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bottom_shelf" />
 
 </RelativeLayout>

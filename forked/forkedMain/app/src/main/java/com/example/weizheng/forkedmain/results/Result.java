@@ -3,39 +3,31 @@ package com.example.weizheng.forkedmain.results;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.example.weizheng.forkedmain.homescreens.LoggedInPage;
 import com.example.weizheng.forkedmain.R;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+
 
 import java.util.ArrayList;
 
@@ -54,6 +46,7 @@ public class Result extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
 
         myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
@@ -234,7 +227,7 @@ public class Result extends AppCompatActivity {
 
     public void animateLoadScreen(){
 
-
+        Log.i(animTAG, "started animation for loadscreen");
         final ImageView viewRight = (ImageView) findViewById(R.id.loading_screen_icon_right);
         final ImageView viewLeft = (ImageView) findViewById(R.id.loading_screen_icon_left);
 
@@ -348,7 +341,6 @@ public class Result extends AppCompatActivity {
         @Override
         protected void onPostExecute(View view) {
             setContentView(view);
-
             super.onPostExecute(view);
         }
     }

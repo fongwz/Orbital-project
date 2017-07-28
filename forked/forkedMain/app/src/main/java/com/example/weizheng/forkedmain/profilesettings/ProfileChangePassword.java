@@ -90,4 +90,10 @@ public class ProfileChangePassword extends AppCompatActivity {
             Log.i(TAG, e.getMessage());
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+    }
 }

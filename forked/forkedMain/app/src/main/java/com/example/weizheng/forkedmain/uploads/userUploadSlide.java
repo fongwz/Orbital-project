@@ -1,5 +1,6 @@
 package com.example.weizheng.forkedmain.uploads;
 
+import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -11,6 +12,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.transition.Slide;
+import android.view.Window;
+import android.widget.RelativeLayout;
 
 import com.example.weizheng.forkedmain.homescreens.LoggedInPage;
 import com.example.weizheng.forkedmain.R;
@@ -25,8 +29,9 @@ public class userUploadSlide extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.uploads_user_upload_slide);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 
+        setContentView(R.layout.uploads_user_upload_slide);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -92,8 +97,9 @@ public class userUploadSlide extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent i = new Intent(userUploadSlide.this, LoggedInPage.class);
-                        finish();
                         startActivity(i);
+                        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+                        finish();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

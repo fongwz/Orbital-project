@@ -1,7 +1,7 @@
 package com.example.weizheng.forkedmain.profilesettings;
 
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -19,7 +19,7 @@ public class    profileAdapter extends ArrayAdapter<String> {
 
     private static final String TAG = "Results";
 
-    public profileAdapter(@NonNull Context context, String[] profileSettings) {
+    public profileAdapter(@NonNull Activity context, String[] profileSettings) {
         super(context, R.layout.results_custom_row, profileSettings);
     }
 
@@ -39,7 +39,7 @@ public class    profileAdapter extends ArrayAdapter<String> {
         customView.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(final View v) {
                         TextView settingsText = (TextView) customView.findViewById(R.id.profile_settings_rows_textview);
                         chooseProfileChild(settingsText.getText().toString(), v);
                     }
@@ -57,6 +57,9 @@ public class    profileAdapter extends ArrayAdapter<String> {
             Intent i = new Intent(v.getContext(), ProfileAccountInformation.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(i);
+            Activity activity = (Activity) profileAdapter.this.getContext();
+            activity.overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
+
 
         } else if(settingsText.equals("My Preferences")) {
 
@@ -64,6 +67,8 @@ public class    profileAdapter extends ArrayAdapter<String> {
             Intent i = new Intent(v.getContext(), ProfileMyPreferences.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(i);
+            Activity activity = (Activity) profileAdapter.this.getContext();
+            activity.overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
 
         } else if(settingsText.equals("My Uploads")) {
 
@@ -71,6 +76,8 @@ public class    profileAdapter extends ArrayAdapter<String> {
             Intent i = new Intent(v.getContext(), ProfileMyUploads.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(i);
+            Activity activity = (Activity) profileAdapter.this.getContext();
+            activity.overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
 
         } else if(settingsText.equals("Change Password")){
 
@@ -78,6 +85,8 @@ public class    profileAdapter extends ArrayAdapter<String> {
             Intent i = new Intent(v.getContext(), ProfileChangePassword.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             v.getContext().startActivity(i);
+            Activity activity = (Activity) profileAdapter.this.getContext();
+            activity.overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
 
         }
     }

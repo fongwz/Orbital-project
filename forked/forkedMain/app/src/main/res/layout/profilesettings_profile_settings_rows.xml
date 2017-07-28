@@ -12,12 +12,12 @@
             android:id="@+id/profile_settings_rows_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8sp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="8sp"
             android:layout_weight="1"
             android:text="TextView"
             android:textAppearance="@android:style/TextAppearance.Large"
-            android:textSize="30sp"
-            android:layout_marginLeft="15sp"
-            android:layout_marginTop="8sp"
-            android:layout_marginBottom="8sp"/>
+            android:textSize="30sp" />
     </LinearLayout>
 </LinearLayout>

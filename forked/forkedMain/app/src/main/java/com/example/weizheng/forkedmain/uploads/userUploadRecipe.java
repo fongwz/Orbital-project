@@ -175,6 +175,7 @@ public class userUploadRecipe extends Fragment {
                 0,
                 0
         );
+        addName.setMaxLines(1);
         wzsLayout.addView(addName);
 
 
@@ -197,6 +198,7 @@ public class userUploadRecipe extends Fragment {
                 0,
                 0
         );
+        addQty.setMaxLines(1);
         wzsLayout.addView(addQty);
 
         /** Translating button downwards */
@@ -259,6 +261,7 @@ public class userUploadRecipe extends Fragment {
                 0,
                 0
         );
+        addStepName.setMaxLines(1);
         wzsBottomLayout.addView(addStepName);
 
         /** Updating Step parameters */

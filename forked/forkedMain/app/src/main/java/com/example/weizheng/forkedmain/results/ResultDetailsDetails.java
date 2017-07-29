@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class ResultDetailsDetails extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.results_result_detail_detail, container, false);
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         String recipeName = ResultDetails.resultData.getString("recipeName");
         myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
@@ -164,7 +166,6 @@ public class ResultDetailsDetails extends Fragment {
                 Toast.makeText(getActivity(), "error for steps", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         return rootView;

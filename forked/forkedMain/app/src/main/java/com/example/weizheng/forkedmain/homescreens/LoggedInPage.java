@@ -14,6 +14,7 @@ import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,10 +53,16 @@ public class LoggedInPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+=======
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+>>>>>>> b21c98be40bbb6d8a691fd04ccebde11265a343b
         deleteCache(this);
 >>>>>>> 3dc1e89040a9184e4fad6c8bc48baef603d818e2
         setContentView(R.layout.homescreen_logged_in_page);
@@ -162,12 +169,8 @@ public class LoggedInPage extends AppCompatActivity {
 
     public void onPreferenceClick(View view){
 
-        Explode explode = new Explode();
-        explode.setDuration(500);
-        getWindow().setExitTransition(explode);
-
         Intent i = new Intent(this, Result.class);
-        startActivity(i, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        startActivity(i);
     }
 
     public void onDiscoverClick(View view){
@@ -187,16 +190,9 @@ public class LoggedInPage extends AppCompatActivity {
 
     public void onUpdatePrefClick(View view){
 
-        Explode explode = new Explode();
-        getWindow().setExitTransition(explode);
-
         Intent i = new Intent(this, ProfilePage.class);
 
-        View sharedView = (TextView) findViewById(R.id.logged_in_shared_profile_textview);
-        String transitionName = "profileString";
-        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(LoggedInPage.this, sharedView, transitionName);
-
-        startActivity(i, transitionActivityOptions.toBundle());
+        startActivity(i);
         //startActivity(i, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
 
     }

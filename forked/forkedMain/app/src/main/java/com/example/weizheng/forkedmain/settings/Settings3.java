@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.content.Intent;
 import android.widget.Toast;
@@ -38,6 +39,8 @@ public class Settings3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.settings_settings3);
 
         data = getIntent().getExtras();
@@ -106,8 +109,9 @@ public class Settings3 extends AppCompatActivity {
             Intent i = new Intent(this, LoggedInPage.class);
             i.putExtra("firstSetup", true);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            finish();
             startActivity(i);
+            finish();
+            overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
 
         } else if (updatePreferences) {
 
@@ -136,15 +140,23 @@ public class Settings3 extends AppCompatActivity {
             Intent i = new Intent(this, LoggedInPage.class);
             Toast.makeText(this, "Preferences Updated", Toast.LENGTH_SHORT).show();
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            finish();
             startActivity(i);
+            finish();
+            overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
 
         } else {
             Intent i = new Intent(this, Result.class);
             i.putExtra("preferences", preferenceValues);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            finish();
             startActivity(i);
+            finish();
+            overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_from_left,R.anim.slide_out_to_right);
     }
 }

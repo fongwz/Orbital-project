@@ -9,6 +9,7 @@ import android.transition.Fade;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -23,6 +24,7 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.profilesettings_profile_page);
         getWindow().setEnterTransition(new Fade().setDuration(1500));

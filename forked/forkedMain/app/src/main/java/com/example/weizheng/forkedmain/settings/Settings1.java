@@ -3,6 +3,7 @@ package com.example.weizheng.forkedmain.settings;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.view.View;
 
@@ -23,6 +24,8 @@ public class Settings1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.settings_settings1);
         mRemove = this;
 
@@ -80,6 +83,7 @@ public class Settings1 extends AppCompatActivity {
         i.putExtra("updatePreferences",updatePreferences);
         i.putExtra("setupPreferences",setupPreferences);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_from_right,R.anim.slide_out_to_left);
     }
 
     public static Settings1 getInstance(){

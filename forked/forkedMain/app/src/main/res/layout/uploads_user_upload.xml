@@ -4,8 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.weizheng.forkedmain.uploads.userUploadSlide"
-    >
+    tools:context="com.example.weizheng.forkedmain.uploads.userUploadSlide" >
+
+
+    <!-- Dummy item to prevent edittext from gaining focus -->
+    <LinearLayout
+        android:id="@+id/linearLayout_focus"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:orientation="vertical">
+    </LinearLayout>
+    <!-- Dummy item to prevent edittext from gaining focus -->
+
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -45,6 +57,7 @@
                 android:paddingLeft="5dp"
                 android:ems="10"
                 android:background="@drawable/user_upload_rectangle_border"
+                android:scrollHorizontally="true"
                 android:inputType="textPersonName"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
@@ -77,6 +90,7 @@
                 android:layout_below="@+id/upload_recipe_ingredients_textView"
                 android:background="@drawable/user_upload_rectangle_border"
                 android:ems="10"
+                android:hint="Enter Ingredient Name"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:paddingLeft="5dp"
@@ -94,7 +108,7 @@
 
             <EditText
                 android:id="@+id/upload_recipe_ingredients_qty"
-                android:layout_width="60dp"
+                android:layout_width="80dp"
                 android:layout_height="30sp"
                 android:layout_alignBaseline="@+id/upload_recipe_ingredients_name"
                 android:layout_alignBottom="@+id/upload_recipe_ingredients_name"
@@ -102,6 +116,7 @@
                 android:layout_toEndOf="@+id/upload_recipe_ingredients_name"
                 android:background="@drawable/user_upload_rectangle_border"
                 android:ems="10"
+                android:hint="Amount"
                 android:inputType="textPersonName"
                 android:maxLines="1"
                 android:paddingLeft="5dp"
@@ -144,7 +159,7 @@
 
                 <EditText
                     android:id="@+id/upload_recipe_recipe_name"
-                    android:layout_width="240sp"
+                    android:layout_width="280sp"
                     android:layout_height="30sp"
                     android:layout_alignBaseline="@id/upload_recipe_recipe_num"
                     android:layout_alignBottom="@id/upload_recipe_recipe_num"
@@ -152,8 +167,10 @@
                     android:layout_toEndOf="@+id/upload_recipe_recipe_num"
                     android:background="@drawable/user_upload_rectangle_border"
                     android:ems="10"
+                    android:hint="Enter Step #1 for Recipe"
                     android:inputType="textPersonName"
                     android:maxLines="1"
+                    android:scrollHorizontally="true"
                     android:paddingLeft="5dp"
                     android:textAppearance="@android:style/TextAppearance.Small"
                     android:textSize="18sp" />

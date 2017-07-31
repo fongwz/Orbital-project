@@ -4,15 +4,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -45,6 +42,7 @@ public class Result extends AppCompatActivity {
     private FirebaseAuth myFirebaseAuth;
     private static final String TAG = "Results";
     private static final String animTAG = "Animations";
+    private static final String numTAG = "Numbers";
 
 
     @Override
@@ -93,12 +91,9 @@ public class Result extends AppCompatActivity {
                     if(recipes.size()>5){
                         //repeat num generator process size-5 times
                         //delete the recipes in those num positions
+                        Log.i(numTAG, "Result size : " + String.valueOf(recipes.size()));
+                        recipes = pruneArrayList(recipes);
 
-                        int repeatNum = recipes.size()-5;
-                        int[] removeNumArray = generateNumbers(recipes.size(),repeatNum);
-                        for(int j=0; j<repeatNum; j++){
-                            recipes.remove(removeNumArray[j]);
-                        }
                     }
                     Log.i(TAG, "created string array to display in adapter");
 
@@ -159,11 +154,8 @@ public class Result extends AppCompatActivity {
                             //repeat num generator process size-5 times
                             //delete the recipes in those num positions
 
-                            int repeatNum = recipes.size()-5;
-                            int[] removeNumArray = generateNumbers(recipes.size(),repeatNum);
-                            for(int j=0; j<repeatNum; j++){
-                                recipes.remove(removeNumArray[j]);
-                            }
+                            Log.i(numTAG, "Recipe size : " + String.valueOf(recipes.size()));
+                            recipes = pruneArrayList(recipes);
                         }
                     }
                     Log.i(TAG, "created string array to display in adapter");
@@ -392,24 +384,18 @@ public class Result extends AppCompatActivity {
         }
     }
 
-    public int[] generateNumbers(int max, int repeatCount){
+    public ArrayList<String> pruneArrayList(ArrayList<String> list){
 
-        int val = random.nextInt(max);
-        int[] numArray = new int[repeatCount];
-        ArrayList<Integer> numList = new ArrayList<Integer>();
-        for(int i = 0;i<repeatCount;i++){
-            //generate random number
-            //if random number not inside arraylist, add to numArray
-            //if inside arraylist, generate again.
+        int pruneCount = list.size()-5;
+        Log.i(numTAG, "Prune count : " + pruneCount);
+        for(int i=0 ; i<pruneCount ; i++){
 
-            while(numList.contains(val)){
-                val = random.nextInt(max);
-            }
-            numList.add(val);
-            numArray[i]=val;
-            val = random.nextInt(max);
+            int pruneIndex = random.nextInt(list.size());
+            Log.i(numTAG, "Prune index : " + pruneIndex);
+            list.remove(pruneIndex);
+
         }
-        return numArray;
+        return list;
     }
 
     @Override

@@ -13,11 +13,11 @@
 
         <ImageView
             android:id="@+id/resultImage"
-            android:layout_width="72dp"
+            android:layout_width="40dp"
             android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="15dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
             app:srcCompat="@drawable/black_add_box" />
 
         <TextView

@@ -3,6 +3,10 @@ package com.example.weizheng.forkedmain.uploads;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +46,7 @@ import static android.app.Activity.RESULT_OK;
 public class userUploadRecipe extends Fragment {
 
     private static final int GET_FROM_GALLERY = 1;
+    private static final String uploadTAG = "Uploads";
     private float ingredientButtonTranslation = 0;
     private float ingredientTextTranslation = 0;
     private Integer stepNumber = 2;
@@ -175,14 +180,16 @@ public class userUploadRecipe extends Fragment {
                 0,
                 0
         );
+        addName.setHint("Enter Ingredient Name");
         addName.setMaxLines(1);
+        addName.setHorizontallyScrolling(true);
         wzsLayout.addView(addName);
 
 
         /** Creating new Edit Text for qty */
         EditText addQty = new EditText(getActivity());
         RelativeLayout.LayoutParams addQtyParams = new RelativeLayout.LayoutParams(
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, r.getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, r.getDisplayMetrics()),
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())
         );
         addQtyParams.addRule(RelativeLayout.BELOW, R.id.upload_recipe_ingredients_qty);
@@ -198,7 +205,9 @@ public class userUploadRecipe extends Fragment {
                 0,
                 0
         );
+        addQty.setHint("Amount");
         addQty.setMaxLines(1);
+        addQty.setHorizontallyScrolling(true);
         wzsLayout.addView(addQty);
 
         /** Translating button downwards */
@@ -245,7 +254,7 @@ public class userUploadRecipe extends Fragment {
         /** Creating new Step name */
         EditText addStepName = new EditText(getActivity());
         RelativeLayout.LayoutParams addStepNameParams = new RelativeLayout.LayoutParams(
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 240, r.getDisplayMetrics()),
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 280, r.getDisplayMetrics()),
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())
         );
         addStepNameParams.addRule(RelativeLayout.BELOW, R.id.upload_recipe_recipe_name);
@@ -261,7 +270,9 @@ public class userUploadRecipe extends Fragment {
                 0,
                 0
         );
+        addStepName.setHint("Enter Step #" + stepNumber + " for Recipe");
         addStepName.setMaxLines(1);
+        addStepName.setHorizontallyScrolling(true);
         wzsBottomLayout.addView(addStepName);
 
         /** Updating Step parameters */
@@ -284,18 +295,59 @@ public class userUploadRecipe extends Fragment {
     /**** Uploading Recipe ********************************************************/
     public void uploadRecipe(View view){
 
-        Integer stepNum=2;
-
         /** Getting reference to initial edit texts */
         EditText firstIngredientName = (EditText) rootView.findViewById(R.id.upload_recipe_ingredients_name);
         EditText firstIngredientQty = (EditText) rootView.findViewById(R.id.upload_recipe_ingredients_qty);
         EditText firstRecipeName = (EditText) rootView.findViewById(R.id.upload_recipe_recipe_name);
         EditText firstRecipeTitle = (EditText) rootView.findViewById(R.id.upload_recipe_recipe_title);
 
+
+        /** Check whether title is blank, and whether user has set categories */
+        try{
+            if(TextUtils.isEmpty(firstRecipeTitle.getText().toString())){
+                firstRecipeTitle.setError("You didn't enter a title for the recipe!");
+                return;
+            }
+
+            if(userUploadSlide.myBundle.getInt("isChinese") == 0 &&
+                    userUploadSlide.myBundle.getInt("isMalay") == 0 &&
+                    userUploadSlide.myBundle.getInt("isIndian") == 0 &&
+                    userUploadSlide.myBundle.getInt("isWestern") == 0 &&
+                    userUploadSlide.myBundle.getInt("isKorean") == 0 ){
+                ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.container);
+                Toast.makeText(getActivity() , "Please select your cuisine categories!" , Toast.LENGTH_SHORT).show();
+                mViewPager.setCurrentItem(1);
+                return;
+            }
+
+            if(userUploadSlide.myBundle.getInt("isSweet") == 0 &&
+                    userUploadSlide.myBundle.getInt("isSour") == 0 &&
+                    userUploadSlide.myBundle.getInt("isSpicy") == 0 ){
+                ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.container);
+                Toast.makeText(getActivity() , "Please select your taste categories!" , Toast.LENGTH_SHORT).show();
+                mViewPager.setCurrentItem(1);
+                return;
+            }
+
+            if(userUploadSlide.myBundle.getInt("isMeat") == 0 &&
+                    userUploadSlide.myBundle.getInt("isSeafood") == 0 &&
+                    userUploadSlide.myBundle.getInt("isVegetables") == 0 &&
+                    userUploadSlide.myBundle.getInt("isDessert") == 0){
+                ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.container);
+                Toast.makeText(getActivity() , "Please select your dish type categories!" , Toast.LENGTH_SHORT).show();
+                mViewPager.setCurrentItem(1);
+                return;
+            }
+
+        } catch (Exception e){
+            Log.i(uploadTAG, e.getMessage());
+        }
+        /*********************************************************************/
+
         String ingredientName = firstIngredientName.getText().toString();
         String ingredientQty = firstIngredientQty.getText().toString();
         String recipeName = firstRecipeName.getText().toString();
-        String recipeTitle = firstRecipeTitle.getText().toString();
+        final String recipeTitle = firstRecipeTitle.getText().toString();
 
         /** Updating list of user uploads in FireBase */
         final DatabaseReference userUploadsRef = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Uploads").child(recipeTitle);
@@ -334,65 +386,102 @@ public class userUploadRecipe extends Fragment {
 
             }
         });
-        ingredientNameRef.setValue(ingredientQty);
-        recipeRef.setValue(recipeName);
+        ingredientNameRef.setValue(ingredientQty)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i(uploadTAG, "first ingredient upload success");
+                        /** Uploading subsequent ingredient edit texts to FireBase */
+                        for (int i = 0, j = 100; i < ingredientNameID && j < ingredientQtyID; i++, j++) {
 
-        /** Uploading subsequent ingredient edit texts to FireBase */
-        for(int i=0,j=100 ; i<ingredientNameID && j<ingredientQtyID ; i++,j++){
+                            int nameID = userUploadRecipe.this.getResources().getIdentifier("" + i, "id", getActivity().getPackageName());
+                            int qtyID = userUploadRecipe.this.getResources().getIdentifier("" + j, "id", getActivity().getPackageName());
+                            EditText subsequentIngredientName = (EditText) rootView.findViewById(nameID);
+                            EditText subsequentIngredientQty = (EditText) rootView.findViewById(qtyID);
 
-            int nameID = this.getResources().getIdentifier(""+i, "id", getActivity().getPackageName());
-            int qtyID = this.getResources().getIdentifier(""+j, "id", getActivity().getPackageName());
-            EditText subsequentIngredientName = (EditText) rootView.findViewById(nameID);
-            EditText subsequentIngredientQty = (EditText) rootView.findViewById(qtyID);
+                            String name = subsequentIngredientName.getText().toString();
+                            String qty = subsequentIngredientQty.getText().toString();
 
-            ingredientName = subsequentIngredientName.getText().toString();
-            ingredientQty = subsequentIngredientQty.getText().toString();
+                            DatabaseReference ref = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(name);
+                            ref.setValue(qty)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.i(uploadTAG, "consequent upload ingredient and qty success");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.i(uploadTAG, "consequent upload ingredient and qty failed");
+                                        }
+                                    });
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i(uploadTAG, "first ingredient upload failed");
+                    }
+                });
 
-            ingredientNameRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Ingredients").child(ingredientName);
-            ingredientNameRef.setValue(ingredientQty);
-        }
 
-        /** Uploading subsequent recipe edit texts to Fire base */
-        for(int i=200; i<recipeID ; i++){
+        recipeRef.setValue(recipeName)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i(uploadTAG, "first step upload success");
 
-            int id = this.getResources().getIdentifier(""+i, "id", getActivity().getPackageName());
-            EditText subsequentRecipe = (EditText) rootView.findViewById(id);
-            String stepNumToDB = stepNum.toString();
+                        Integer stepNum=2;
+                        /** Uploading subsequent recipe edit texts to Fire base */
+                        for(int i=200; i<recipeID ; i++){
 
-            recipeName = subsequentRecipe.getText().toString();
-            recipeRef = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child(stepNumToDB);
-            recipeRef.setValue(recipeName);
-            stepNum++;
-        }
-        stepNum=2; //housekeeping in case
+                            int id = userUploadRecipe.this.getResources().getIdentifier(""+i, "id", getActivity().getPackageName());
+                            EditText subsequentRecipe = (EditText) rootView.findViewById(id);
+                            String stepNumToDB = stepNum.toString();
 
-        /** Uploading Image to Fire Base */
-        try {
-            StorageReference uploadPath = myStorageRef.child(recipeTitle);
-            uploadPath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(getActivity(), "Upload Success", Toast.LENGTH_SHORT).show();
+                            String name = subsequentRecipe.getText().toString();
+                            DatabaseReference ref = myFirebaseRef.child("Recipe List").child(recipeTitle).child("Steps").child(stepNumToDB);
+                            ref.setValue(name);
+                            stepNum++;
+                        }
 
-                    /** Sending back to main screen */
-                    getActivity().finish();
-                    Intent i = new Intent(getActivity(), LoggedInPage.class);
-                    startActivity(i);
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(getActivity(), "Upload In Progress", Toast.LENGTH_SHORT).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getActivity(), "Upload Failed", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }catch (Exception e) {
-            Toast.makeText(getActivity(), "No Image has been uploaded", Toast.LENGTH_LONG).show();
-        }
+                        /** Uploading Image to Fire Base */
+                        try {
+                            StorageReference uploadPath = myStorageRef.child(recipeTitle);
+                            uploadPath.putFile(selectedImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(getActivity(), "Upload Success", Toast.LENGTH_SHORT).show();
+
+                                    /** Sending back to main screen */
+                                    getActivity().finish();
+                                    Intent i = new Intent(getActivity(), LoggedInPage.class);
+                                    startActivity(i);
+                                }
+                            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(getActivity(), "Upload In Progress", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getActivity(), "Upload Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }catch (Exception e) {
+                            Toast.makeText(getActivity(), "No Image has been uploaded", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i(uploadTAG, "first step upload failed");
+                    }
+                });
 
 
     }

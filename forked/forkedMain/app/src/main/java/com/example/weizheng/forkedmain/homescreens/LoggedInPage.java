@@ -52,10 +52,19 @@ public class LoggedInPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+
+=======
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+=======
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+>>>>>>> b21c98be40bbb6d8a691fd04ccebde11265a343b
         deleteCache(this);
+>>>>>>> 3dc1e89040a9184e4fad6c8bc48baef603d818e2
         setContentView(R.layout.homescreen_logged_in_page);
 
 
@@ -199,29 +208,6 @@ public class LoggedInPage extends AppCompatActivity {
         finish();
     }
 
-    public static void deleteCache(Context context) {
-        try {
-            File dir = context.getCacheDir();
-            deleteDir(dir);
-        } catch (Exception e) {}
-    }
-
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
-                }
-            }
-            return dir.delete();
-        } else if(dir!= null && dir.isFile()) {
-            return dir.delete();
-        } else {
-            return false;
-        }
-    }
 
     /** Override back button functionality *****************************************/
     @Override

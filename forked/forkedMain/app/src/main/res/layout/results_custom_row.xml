@@ -13,20 +13,22 @@
 
         <ImageView
             android:id="@+id/resultImage"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
             app:srcCompat="@drawable/black_add_box" />
 
         <TextView
             android:id="@+id/resultText"
             android:layout_width="wrap_content"
             android:layout_height="59dp"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
             android:text="TextView"
+            android:minLines="2"
             android:textAppearance="@android:style/TextAppearance.Large"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>

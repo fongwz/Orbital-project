@@ -10,58 +10,70 @@
         android:id="@+id/settings1Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="50dp"
         android:text="Cuisine preferences"
+        android:textAlignment="textStart"
         android:textAppearance="@android:style/TextAppearance.Large"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="83dp"
-        android:layout_marginStart="11dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp" />
+        tools:layout_editor_absoluteY="83dp" />
 
     <CheckBox
         android:id="@+id/settings_cuisine_chinese"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Chinese"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textSize="40sp"
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
         android:layout_below="@+id/settings1Title"
-        android:layout_alignStart="@+id/settings1Title"
-        android:layout_marginStart="28dp" />
+        android:layout_alignStart="@+id/settings1Title" />
 
     <CheckBox
         android:id="@+id/settings_cuisine_malay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="28dp"
-        android:text="Malay"
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
         android:layout_below="@+id/settings_cuisine_chinese"
         android:layout_alignStart="@+id/settings_cuisine_chinese" />
 
     <CheckBox
         android:id="@+id/settings_cuisine_indian"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignStart="@+id/settings_cuisine_malay"
         android:layout_below="@+id/settings_cuisine_malay"
         android:layout_marginTop="28dp"
-        android:text="Indian" />
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple" />
 
     <CheckBox
         android:id="@+id/settings_cuisine_western"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignStart="@+id/settings_cuisine_indian"
         android:layout_below="@+id/settings_cuisine_indian"
         android:layout_marginTop="28dp"
-        android:text="Western" />
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple" />
 
     <CheckBox
         android:id="@+id/settings_cuisine_korean"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="28dp"
-        android:text="Korean"
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
         android:layout_below="@+id/settings_cuisine_western"
         android:layout_alignStart="@+id/settings_cuisine_western" />
 
@@ -69,10 +81,65 @@
         android:id="@+id/settings_cuisine_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="135dp"
         android:onClick="onCuisineClick"
-        android:text="Next" />
+        android:text="Next"
+        android:layout_below="@+id/settings_cuisine_korean"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp" />
+
+    <TextView
+        android:id="@+id/settings_cuisine_chineseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chinese"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignBaseline="@+id/settings_cuisine_chinese"
+        android:layout_alignBottom="@+id/settings_cuisine_chinese"
+        android:layout_toEndOf="@+id/settings_cuisine_chinese" />
+
+    <TextView
+        android:id="@+id/settings_cuisine_malayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/settings_cuisine_chineseText"
+        android:layout_alignTop="@+id/settings_cuisine_malay"
+        android:layout_marginTop="13dp"
+        android:text="Malay"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/settings_cuisine_indianText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/settings_cuisine_malayText"
+        android:layout_alignTop="@+id/settings_cuisine_indian"
+        android:layout_marginTop="13dp"
+        android:text="Indian"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/settings_cuisine_westernText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/settings_cuisine_indianText"
+        android:layout_alignTop="@+id/settings_cuisine_western"
+        android:layout_marginTop="13dp"
+        android:text="Western"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/settings_cuisine_koreanText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/settings_cuisine_westernText"
+        android:layout_alignTop="@+id/settings_cuisine_korean"
+        android:layout_marginTop="12dp"
+        android:text="Korean"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp" />
 
 </RelativeLayout>

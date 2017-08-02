@@ -7,7 +7,8 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/forked_up_logo_resize"/>
+            android:src="@drawable/splash_fork"
+            />
     </item>
 
 </layer-list>

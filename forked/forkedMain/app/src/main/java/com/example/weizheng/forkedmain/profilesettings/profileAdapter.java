@@ -4,9 +4,11 @@ package com.example.weizheng.forkedmain.profilesettings;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +32,17 @@ public class profileAdapter extends ArrayAdapter<String> {
 
         LayoutInflater wzsInflator = LayoutInflater.from(getContext());
         final View customView = wzsInflator.inflate(R.layout.profilesettings_profile_settings_rows, parent, false);
+        customView.setBackgroundResource(R.drawable.profile_list);
+        Typeface good_dog_typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/good_dog.otf");
 
         String setting = getItem(position);
         TextView settingsText = (TextView) customView.findViewById(R.id.profile_settings_rows_textview);
         settingsText.setText(setting);
         settingsText.setTextColor(Color.BLACK);
+        settingsText.setTypeface(good_dog_typeface);
+        settingsText.setScaleX((float)1.6);
+        settingsText.setScaleY((float)1.6);
+        settingsText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         customView.setOnClickListener(
                 new View.OnClickListener() {

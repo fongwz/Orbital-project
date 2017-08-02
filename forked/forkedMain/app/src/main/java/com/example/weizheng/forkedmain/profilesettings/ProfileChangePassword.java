@@ -42,7 +42,7 @@ public class ProfileChangePassword extends AppCompatActivity {
 
         try {
 
-            String curr = currentPW.getText().toString();
+            final String curr = currentPW.getText().toString();
             FirebaseUser user = myFirebaseAuth.getCurrentUser();
             AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), curr);
             user.reauthenticate(credential)
@@ -67,12 +67,22 @@ public class ProfileChangePassword extends AppCompatActivity {
                                     Toast.makeText(ProfileChangePassword.this, "Password is too short!", Toast.LENGTH_SHORT).show();
 
                                 } else {
-                                    myFirebaseAuth.getCurrentUser().updatePassword(pw2);
-                                    Log.i(TAG, "pw changed");
-                                    Toast.makeText(ProfileChangePassword.this, "Password updated", Toast.LENGTH_SHORT).show();
-                                    Intent i = new Intent(ProfileChangePassword.this, ProfilePage.class);
-                                    finish();
-                                    startActivity(i);
+
+                                    if(curr.equals(pw1)){
+
+                                        Log.i(TAG, "old and new PW same!");
+                                        Toast.makeText(ProfileChangePassword.this, "Please set a NEW password.", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+
+                                        myFirebaseAuth.getCurrentUser().updatePassword(pw2);
+                                        Log.i(TAG, "pw changed");
+                                        Toast.makeText(ProfileChangePassword.this, "Password updated", Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(ProfileChangePassword.this, ProfilePage.class);
+                                        finish();
+                                        startActivity(i);
+
+                                    }
                                 }
 
                             } catch (Exception e) {

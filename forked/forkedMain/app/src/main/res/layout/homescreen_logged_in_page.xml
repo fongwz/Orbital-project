@@ -53,8 +53,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="64dp"
                 android:background="@drawable/pref_button"
+                android:fontFamily="casual"
                 android:onClick="onPreferenceClick"
-                android:text="               Use current preferences  " />
+                android:text="            Use current preferences  "
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/logged_in_discover_button"
@@ -65,44 +67,51 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/discover_button"
+                android:fontFamily="casual"
                 android:onClick="onDiscoverClick"
-                android:text="                   Discover a recipe!        " />
+                android:text="        Discover a recipe! "
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/logged_in_upload_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/logged_in_welcome1"
-                android:layout_alignStart="@+id/logged_in_welcome1"
                 android:layout_below="@+id/logged_in_discover_button"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/upload_button"
+                android:fontFamily="casual"
                 android:onClick="onUploadClick"
-                android:text="                  Upload          " />
+                android:text="        Upload  "
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/logged_in_profile_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@id/logged_in_upload_button"
                 android:layout_below="@+id/logged_in_upload_button"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="7dp"
                 android:layout_marginTop="73dp"
                 android:background="@drawable/profile_button"
+                android:fontFamily="casual"
                 android:onClick="onUpdatePrefClick"
-                android:text="                Profile        " />
+                android:text="           Profile     "
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/logged_in_sign_out_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@id/logged_in_upload_button"
+                android:layout_alignStart="@id/logged_in_profile_button"
                 android:layout_below="@+id/logged_in_profile_button"
-                android:layout_marginLeft="5dp"
+
                 android:layout_marginTop="10dp"
                 android:background="@drawable/signout_button"
+                android:fontFamily="casual"
                 android:onClick="onSignOutClick"
-                android:text="               Sign out       " />
+                android:text="          Sign out    "
+                android:textStyle="bold" />
         </RelativeLayout>
     </ScrollView>
 

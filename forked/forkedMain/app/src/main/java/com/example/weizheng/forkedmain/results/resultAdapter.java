@@ -57,6 +57,7 @@ public class resultAdapter extends ArrayAdapter<String> {
         } catch (Exception e) {
             Log.i(TAG, e.toString());
         }
+        wzsImage.setMaxHeight(50);
 
         customView.setOnClickListener(
                 new View.OnClickListener() {

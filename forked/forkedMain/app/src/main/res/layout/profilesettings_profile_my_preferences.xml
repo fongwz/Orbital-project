@@ -23,7 +23,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="18dp"
-                android:text="Preferences"
+                android:text=" Preferences"
+                android:textColor="@android:color/black"
                 android:textSize="35sp" />
 
             <Button
@@ -39,14 +40,16 @@
 
             <TextView
                 android:id="@+id/profile_preferences_chinese"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preferences_textview"
                 android:layout_marginTop="23dp"
-                android:layout_marginLeft="5dp"
-                android:text="Chinese"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Chinese"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -61,15 +64,17 @@
 
             <TextView
                 android:id="@+id/profile_preferences_malay"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preferences_chinese"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Malay"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Malay"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_malay_yn"
@@ -83,15 +88,17 @@
 
             <TextView
                 android:id="@+id/profile_preferences_indian"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preferences_malay"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Indian"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Indian"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_indian_yn"
@@ -105,15 +112,17 @@
 
             <TextView
                 android:id="@+id/profile_preferences_western"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preferences_indian"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Western"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Western"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_western_yn"
@@ -127,15 +136,17 @@
 
             <TextView
                 android:id="@+id/profile_preferences_korean"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preferences_western"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Korean"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Korean"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_korean_yn"
@@ -149,15 +160,17 @@
 
             <TextView
                 android:id="@+id/profile_preferences_sweet"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preferences_korean"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Sweet"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Sweet"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_sweet_yn"
@@ -171,15 +184,17 @@
 
             <TextView
                 android:id="@+id/profile_preference_sour"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preferences_sweet"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Sour"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Sour"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_sour_yn"
@@ -193,15 +208,17 @@
 
             <TextView
                 android:id="@+id/profile_preference_spicy"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preference_sour"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Spicy"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Spicy"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_spicy_yn"
@@ -215,15 +232,17 @@
 
             <TextView
                 android:id="@+id/profile_preference_meat"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preference_spicy"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Meat"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Meat"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_meat_yn"
@@ -237,15 +256,17 @@
 
             <TextView
                 android:id="@+id/profile_preference_seafood"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preference_meat"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Seafood"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Seafood"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_seafood_yn"
@@ -259,14 +280,16 @@
 
             <TextView
                 android:id="@+id/profile_preference_vegetables"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preference_seafood"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Vegetables"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Vegetables"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_vegetables_yn"
@@ -280,15 +303,17 @@
 
             <TextView
                 android:id="@+id/profile_preferences_dessert"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/profile_preference_vegetables"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/profile_preference_vegetables"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="5dp"
-                android:text="Dessert"
-                android:textSize="20sp" />
+                android:background="@drawable/profile_list_small"
+                android:text=" Dessert"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/profile_preferences_dessert_yn"

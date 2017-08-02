@@ -44,8 +44,8 @@ public class ProfileAccountInformation extends AppCompatActivity {
         myFirebaseDatabase = FirebaseDatabase.getInstance();
         myFirebaseRef = myFirebaseDatabase.getReference();
         myFirebaseAuth = FirebaseAuth.getInstance();
-        display = (TextView) findViewById(R.id.account_information_display_details);
-        email = (TextView) findViewById(R.id.account_information_email_details);
+        display = (TextView) findViewById(R.id.account_information_display);
+        email = (TextView) findViewById(R.id.account_information_email);
         loadInfo();
     }
 
@@ -55,7 +55,7 @@ public class ProfileAccountInformation extends AppCompatActivity {
         displayRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                display.setText(dataSnapshot.getValue().toString());
+                display.setText(display.getText() + "\n  " + dataSnapshot.getValue().toString());
                 Log.i(TAG, "Loaded display name");
             }
 
@@ -66,7 +66,7 @@ public class ProfileAccountInformation extends AppCompatActivity {
         });
 
 
-        email.setText(myFirebaseAuth.getCurrentUser().getEmail());
+        email.setText(email.getText() + "\n  " + myFirebaseAuth.getCurrentUser().getEmail());
         Log.i(TAG, "Loaded email");
     }
 

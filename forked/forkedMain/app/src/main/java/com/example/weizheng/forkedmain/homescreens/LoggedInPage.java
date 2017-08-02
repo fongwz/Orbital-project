@@ -3,6 +3,7 @@ package com.example.weizheng.forkedmain.homescreens;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -47,26 +48,24 @@ public class LoggedInPage extends AppCompatActivity {
     private Bundle data;
     private Boolean firstSetup = false;
     private static final String TAG = "Results";
-
+    private Typeface good_dog_typeface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-=======
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-=======
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
->>>>>>> b21c98be40bbb6d8a691fd04ccebde11265a343b
-        deleteCache(this);
->>>>>>> 3dc1e89040a9184e4fad6c8bc48baef603d818e2
         setContentView(R.layout.homescreen_logged_in_page);
 
+        good_dog_typeface = Typeface.createFromAsset(getAssets(), "fonts/good_dog.otf");
+        TextView welcome1 = (TextView) findViewById(R.id.logged_in_welcome1);
+        TextView welcome2 = (TextView) findViewById(R.id.logged_in_welcome2);
+        welcome1.setTypeface(good_dog_typeface);
+        welcome2.setTypeface(good_dog_typeface);
+        welcome1.setScaleX((float)1.80);
+        welcome1.setScaleY((float)1.80);
+        welcome2.setScaleY((float)1.80);
+        welcome2.setScaleX((float)1.80);
 
         data = getIntent().getExtras();
         if(data!=null){

@@ -17,54 +17,46 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="15dp"
         android:text="Account Information"
+        android:textColor="@android:color/black"
         android:textSize="30sp" />
+
 
     <TextView
         android:id="@+id/account_information_display"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_marginTop="104dp"
+        android:background="@drawable/profile_list"
+        android:fontFamily="sans-serif"
+        android:lineSpacingExtra="8sp"
+        android:text="  Display Name:"
+        android:textSize="30sp"
         android:layout_below="@+id/account_information_textview"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="48dp"
-        android:text="Display Name"
-        android:textSize="23sp" />
+        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/account_information_display_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/account_information_display"
-        android:layout_below="@+id/account_information_display"
-        android:textSize="23sp" />
 
     <TextView
         android:id="@+id/account_information_email"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/account_information_display"
-        android:layout_below="@+id/account_information_display_details"
-        android:layout_marginTop="62dp"
-        android:text="Email Address"
-        android:textSize="23sp" />
+        android:layout_marginTop="48dp"
+        android:background="@drawable/profile_list"
+        android:lineSpacingExtra="8sp"
+        android:text="  Email Address:"
+        android:textSize="30sp"
+        android:layout_below="@+id/account_information_display"
+        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/account_information_email_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/account_information_email"
-        android:layout_below="@+id/account_information_email"
-        android:textSize="23sp" />
 
     <Button
         android:id="@+id/account_information_update_fields"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/account_information_email_details"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="62dp"
         android:onClick="updateFields"
         android:text="Update details"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_below="@+id/account_information_email"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

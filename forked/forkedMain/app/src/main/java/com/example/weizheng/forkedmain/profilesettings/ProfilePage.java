@@ -1,17 +1,14 @@
 package com.example.weizheng.forkedmain.profilesettings;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
 import android.util.Log;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.weizheng.forkedmain.R;
 import com.example.weizheng.forkedmain.homescreens.LoggedInPage;
@@ -23,11 +20,12 @@ public class ProfilePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.profilesettings_profile_page);
-        getWindow().setEnterTransition(new Fade().setDuration(1500));
+        //Typeface good_dog_typeface = Typeface.createFromAsset(getAssets(), "fonts/good_dog.otf");
+
 
         String[] profileSettings = new String[4];
         profileSettings[0] = "Account Information"; //email,display,password

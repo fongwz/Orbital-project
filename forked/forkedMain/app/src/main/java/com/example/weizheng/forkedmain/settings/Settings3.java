@@ -60,10 +60,10 @@ public class Settings3 extends AppCompatActivity {
     }
 
     public void onDishClick(View view) {
-        meat = (CheckBox) findViewById(R.id.checkboxMeat);
-        seafood = (CheckBox) findViewById(R.id.checkBoxFish);
-        veg = (CheckBox) findViewById(R.id.checkBoxVeg);
-        dessert = (CheckBox) findViewById(R.id.checkBoxDessert);
+        meat = (CheckBox) findViewById(R.id.settings_dish_meat);
+        seafood = (CheckBox) findViewById(R.id.settings_dish_seafood);
+        veg = (CheckBox) findViewById(R.id.settings_dish_vegetables);
+        dessert = (CheckBox) findViewById(R.id.settings_dish_dessert);
 
         if (meat.isChecked()) {
             preferenceValues[5] = 1;

@@ -15,37 +15,78 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="50dp"
         android:text="Taste Preferences"
-        android:textAppearance="@android:style/TextAppearance.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
 
     <CheckBox
         android:id="@+id/settings_taste_sweet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="Sweet"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textSize="40sp"
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
         android:layout_below="@+id/settings2Title"
-        android:layout_alignStart="@+id/settings2Title"
-        android:layout_marginStart="28dp" />
+        android:layout_alignStart="@+id/settings2Title" />
 
     <CheckBox
         android:id="@+id/settings_taste_sour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sour"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="156dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
         android:layout_below="@+id/settings_taste_sweet"
         android:layout_alignStart="@+id/settings_taste_sweet"
-        android:layout_marginTop="28dp" />
+        />
 
     <CheckBox
         android:id="@+id/settings_taste_spicy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="28dp"
-        android:text="Spicy"
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
         android:layout_below="@+id/settings_taste_sour"
         android:layout_alignStart="@+id/settings_taste_sour" />
+
+    <TextView
+        android:id="@+id/settings_taste_sweetText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sweet"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignTop="@+id/settings_taste_sweet"
+        android:layout_toEndOf="@+id/settings_taste_sweet"
+        android:layout_marginTop="13dp" />
+
+    <TextView
+        android:id="@+id/settings_taste_sourText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sour"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignStart="@id/settings_taste_sweetText"
+        android:layout_alignTop="@id/settings_taste_sour"
+        android:layout_marginTop="13dp"/>
+
+    <TextView
+        android:id="@+id/settings_taste_spicyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spicy"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignStart="@id/settings_taste_sweetText"
+        android:layout_alignTop="@id/settings_taste_spicy"
+        android:layout_marginTop="13dp"/>
 
     <Button
         android:id="@+id/tasteButton"
@@ -53,7 +94,7 @@
         android:layout_height="wrap_content"
         android:onClick="onTasteClick"
         android:text="Next"
-        android:layout_marginTop="142dp"
+        android:layout_marginTop="58dp"
         android:layout_below="@+id/settings_taste_spicy"
         android:layout_centerHorizontal="true" />
 

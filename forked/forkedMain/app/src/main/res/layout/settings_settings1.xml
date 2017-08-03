@@ -15,10 +15,9 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="50dp"
         android:text="Cuisine preferences"
-        android:textAlignment="textStart"
-        android:textAppearance="@android:style/TextAppearance.Large"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="83dp" />
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
 
     <CheckBox
         android:id="@+id/settings_cuisine_chinese"

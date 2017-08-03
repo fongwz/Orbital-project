@@ -10,69 +10,113 @@
         android:id="@+id/log_in_email_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dish Type Preference"
-        android:textAppearance="@android:style/TextAppearance.Large"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="61dp"
-        android:layout_marginStart="11dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/dishButton"
+        android:layout_marginStart="11dp"
         android:layout_marginTop="50dp"
-        android:layout_alignParentStart="true" />
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:text="Dish Type Preference"
+        />
 
     <CheckBox
-        android:id="@+id/checkboxMeat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meat"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="144dp"
+        android:id="@+id/settings_dish_meat"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
         android:layout_below="@+id/log_in_email_textview"
         android:layout_alignStart="@+id/log_in_email_textview"
-        android:layout_marginTop="56dp"
-        android:layout_marginStart="28dp" />
+        />
 
     <CheckBox
-        android:id="@+id/checkBoxFish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seafood"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="213dp"
+        android:id="@+id/settings_dish_seafood"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="28dp"
-        android:layout_below="@+id/checkboxMeat"
-        android:layout_alignStart="@+id/checkboxMeat" />
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
+        android:layout_below="@+id/settings_dish_meat"
+        android:layout_alignStart="@+id/settings_dish_meat" />
 
     <CheckBox
-        android:id="@+id/checkBoxVeg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vegetables"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="284dp"
+        android:id="@+id/settings_dish_vegetables"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="28dp"
-        android:layout_below="@+id/checkBoxFish"
-        android:layout_alignStart="@+id/checkBoxFish" />
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
+        android:layout_below="@+id/settings_dish_seafood"
+        android:layout_alignStart="@+id/settings_dish_seafood" />
 
     <CheckBox
-        android:id="@+id/checkBoxDessert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Desserts"
+        android:id="@+id/settings_dish_dessert"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="28dp"
-        android:layout_below="@+id/checkBoxVeg"
-        android:layout_alignStart="@+id/checkBoxVeg" />
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
+        android:layout_below="@+id/settings_dish_vegetables"
+        android:layout_alignStart="@+id/settings_dish_vegetables" />
 
     <Button
         android:id="@+id/dishButton"
-        android.onClick="onDishClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/checkBoxVeg"
-        android:layout_marginEnd="143dp"
-        android:layout_marginTop="149dp"
+        android:layout_marginTop="54dp"
         android:onClick="onDishClick"
-        android:text="Next" />
+        android:text="Next"
+        android:layout_below="@+id/settings_dish_dessert"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/settings_dish_meatText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meat"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignTop="@+id/settings_dish_meat"
+        android:layout_toEndOf="@+id/settings_dish_meat"
+        android:layout_marginTop="13dp" />
+
+    <TextView
+        android:id="@+id/settings_dish_seafoodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seafood"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignStart="@id/settings_dish_meatText"
+        android:layout_alignTop="@id/settings_dish_seafood"
+        android:layout_marginTop="13dp"/>
+
+    <TextView
+        android:id="@+id/settings_dish_vegetablesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vegetables"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignStart="@id/settings_dish_meatText"
+        android:layout_alignTop="@id/settings_dish_vegetables"
+        android:layout_marginTop="13dp"/>
+
+    <TextView
+        android:id="@+id/settings_dish_dessertText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dessert"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignStart="@id/settings_dish_meatText"
+        android:layout_alignTop="@id/settings_dish_dessert"
+        android:layout_marginTop="13dp"/>
 
 </RelativeLayout>

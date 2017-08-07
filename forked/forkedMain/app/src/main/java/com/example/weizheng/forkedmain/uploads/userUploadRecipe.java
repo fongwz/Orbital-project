@@ -322,7 +322,8 @@ public class userUploadRecipe extends Fragment {
 
             if(userUploadSlide.myBundle.getInt("isSweet") == 0 &&
                     userUploadSlide.myBundle.getInt("isSour") == 0 &&
-                    userUploadSlide.myBundle.getInt("isSpicy") == 0 ){
+                    userUploadSlide.myBundle.getInt("isSpicy") == 0 &&
+                    userUploadSlide.myBundle.getInt("isSalty") == 0){
                 ViewPager mViewPager = (ViewPager) getActivity().findViewById(R.id.container);
                 Toast.makeText(getActivity() , "Please select your taste categories!" , Toast.LENGTH_SHORT).show();
                 mViewPager.setCurrentItem(1);
@@ -364,6 +365,7 @@ public class userUploadRecipe extends Fragment {
         categoryRef.child("isSweet").setValue(userUploadSlide.myBundle.getInt("isSweet"));
         categoryRef.child("isSour").setValue(userUploadSlide.myBundle.getInt("isSour"));
         categoryRef.child("isSpicy").setValue(userUploadSlide.myBundle.getInt("isSpicy"));
+        categoryRef.child("isSalty").setValue(userUploadSlide.myBundle.getInt("isSalty"));
         categoryRef.child("isMeat").setValue(userUploadSlide.myBundle.getInt("isMeat"));
         categoryRef.child("isSeafood").setValue(userUploadSlide.myBundle.getInt("isSeafood"));
         categoryRef.child("isVegetables").setValue(userUploadSlide.myBundle.getInt("isVegetables"));

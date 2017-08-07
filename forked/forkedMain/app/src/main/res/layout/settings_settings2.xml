@@ -55,6 +55,17 @@
         android:layout_below="@+id/settings_taste_sour"
         android:layout_alignStart="@+id/settings_taste_sour" />
 
+    <CheckBox
+        android:id="@+id/settings_taste_salty"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:text=""
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"
+        android:layout_below="@+id/settings_taste_spicy"
+        android:layout_alignStart="@+id/settings_taste_spicy" />
+
     <TextView
         android:id="@+id/settings_taste_sweetText"
         android:layout_width="wrap_content"
@@ -88,14 +99,25 @@
         android:layout_alignTop="@id/settings_taste_spicy"
         android:layout_marginTop="13dp"/>
 
+    <TextView
+        android:id="@+id/settings_taste_saltyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salty"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        android:textSize="26sp"
+        android:layout_alignStart="@id/settings_taste_sweetText"
+        android:layout_alignTop="@id/settings_taste_salty"
+        android:layout_marginTop="13dp"/>
+
     <Button
         android:id="@+id/tasteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onTasteClick"
         android:text="Next"
-        android:layout_marginTop="58dp"
-        android:layout_below="@+id/settings_taste_spicy"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/settings_taste_salty"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

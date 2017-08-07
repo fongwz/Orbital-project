@@ -14,6 +14,7 @@ public class    Settings2 extends AppCompatActivity {
     private static CheckBox sweet;
     private static CheckBox sour;
     private static CheckBox spicy;
+    private static CheckBox salty;
     private Bundle data;
     private Boolean updatePreferences;
     private Boolean setupPreferences;
@@ -43,23 +44,30 @@ public class    Settings2 extends AppCompatActivity {
         sweet = (CheckBox) findViewById(R.id.settings_taste_sweet);
         sour = (CheckBox) findViewById(R.id.settings_taste_sour);
         spicy = (CheckBox) findViewById(R.id.settings_taste_spicy);
+        salty = (CheckBox) findViewById(R.id.settings_taste_salty);
 
         if (sweet.isChecked()) {
+            preferenceValues[10] = 1;
+        } else {
+            preferenceValues[10] = 0;
+        }
+
+        if (sour.isChecked()) {
+            preferenceValues[8] = 1;
+        } else {
+            preferenceValues[8] = 0;
+        }
+
+        if (spicy.isChecked()) {
             preferenceValues[9] = 1;
         } else {
             preferenceValues[9] = 0;
         }
 
-        if (sour.isChecked()) {
-            preferenceValues[7] = 1;
+        if (salty.isChecked()) {
+            preferenceValues[6] = 1;
         } else {
-            preferenceValues[7] = 0;
-        }
-
-        if (spicy.isChecked()) {
-            preferenceValues[8] = 1;
-        } else {
-            preferenceValues[8] = 0;
+            preferenceValues[6] = 0;
         }
 
         Intent i = new Intent(this, Settings3.class);

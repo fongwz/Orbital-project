@@ -6,19 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.weizheng.forkedmain.results.Result">
 
-        <TextView
-            android:id="@+id/result_result_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textAppearance="@android:style/TextAppearance.Large" />
 
         <ImageView
             android:id="@+id/result_forked_imageview"
-            android:layout_width="80dp"
+            android:layout_width="195dp"
             android:layout_height="180dp"
             android:layout_above="@+id/result_top_shelf"
-            android:background="@drawable/forked_mascot"
+            android:background="@drawable/forked_select"
             android:layout_alignParentRight="true"
             android:layout_marginRight="70dp"/>
 

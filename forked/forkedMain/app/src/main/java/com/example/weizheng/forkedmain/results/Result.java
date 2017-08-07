@@ -51,7 +51,6 @@ public class Result extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.loading_screen);
-        animateLoadScreen();
 
         random = new Random();
         myFirebaseDatabase = FirebaseDatabase.getInstance(); //reference to root directory
@@ -235,7 +234,7 @@ public class Result extends AppCompatActivity {
 
     public int[] getUserPreference(){
 
-        final int[] preferences = new int[12];
+        final int[] preferences = new int[13];
 
         /*** Obtains user preference values from FireBase database */
         DatabaseReference preferenceReference = myFirebaseRef.child("Users").child(myFirebaseAuth.getCurrentUser().getUid()).child("Preferences");
@@ -265,104 +264,6 @@ public class Result extends AppCompatActivity {
         return preferences;
     }
 
-    public void animateLoadScreen(){
-
-        Log.i(animTAG, "started animation for loadscreen");
-        final ImageView viewRight = (ImageView) findViewById(R.id.loading_screen_icon_right);
-        final ImageView viewLeft = (ImageView) findViewById(R.id.loading_screen_icon_left);
-
-        final RotateAnimation anim = new RotateAnimation(0, 20, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        anim.setDuration(400);
-        anim.setRepeatCount(Animation.INFINITE);
-        anim.setInterpolator(new LinearInterpolator());
-
-        final RotateAnimation anim2 = new RotateAnimation(20, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        anim2.setDuration(400);
-        anim2.setRepeatCount(Animation.INFINITE);
-        anim2.setInterpolator(new LinearInterpolator());
-
-        final RotateAnimation anim3 = new RotateAnimation(340, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        anim3.setDuration(400);
-        anim3.setRepeatCount(Animation.INFINITE);
-        anim3.setInterpolator(new LinearInterpolator());
-
-        final RotateAnimation anim4 = new RotateAnimation(360, 340, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        anim4.setDuration(400);
-        anim4.setRepeatCount(Animation.INFINITE);
-        anim4.setInterpolator(new LinearInterpolator());
-
-
-        anim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                Log.i(animTAG, "loading anim2");
-                viewRight.startAnimation(anim2);
-
-            }
-        });
-
-
-        anim2.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                Log.i(animTAG, "loading anim1");
-                viewRight.startAnimation(anim);
-
-            }
-        });
-
-        anim3.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                viewLeft.startAnimation(anim4);
-            }
-        });
-
-        anim4.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                int i=0;
-                viewLeft.startAnimation(anim3);
-                i++;
-                Log.i(TAG, Integer.valueOf(i).toString());
-            }
-        });
-
-        viewLeft.startAnimation(anim4);
-        viewRight.startAnimation(anim);
-    }
 
     private class FetchData extends AsyncTask<Bundle, Void, View> {
 

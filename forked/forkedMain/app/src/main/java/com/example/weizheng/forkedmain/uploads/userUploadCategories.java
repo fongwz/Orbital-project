@@ -26,6 +26,7 @@ public class userUploadCategories extends Fragment {
         final CheckBox sweet = (CheckBox) rootView.findViewById(R.id.user_upload_categories_sweet);
         final CheckBox sour = (CheckBox) rootView.findViewById(R.id.user_upload_categories_sour);
         final CheckBox spicy = (CheckBox) rootView.findViewById(R.id.user_upload_categories_spicy);
+        final CheckBox salty = (CheckBox) rootView.findViewById(R.id.user_upload_categories_salty);
 
         final CheckBox meat = (CheckBox) rootView.findViewById(R.id.user_upload_categories_meat);
         final CheckBox seafood = (CheckBox) rootView.findViewById(R.id.user_upload_categories_seafood);
@@ -40,6 +41,7 @@ public class userUploadCategories extends Fragment {
         userUploadSlide.myBundle.putInt("isSweet", 0);
         userUploadSlide.myBundle.putInt("isSour", 0);
         userUploadSlide.myBundle.putInt("isSpicy", 0);
+        userUploadSlide.myBundle.putInt("isSalty", 0);
         userUploadSlide.myBundle.putInt("isMeat", 0);
         userUploadSlide.myBundle.putInt("isSeafood", 0);
         userUploadSlide.myBundle.putInt("isVegetables", 0);
@@ -122,6 +124,16 @@ public class userUploadCategories extends Fragment {
                     public void onClick(View v) {
                         int isSpicy = spicy.isChecked() ? 1 : 0;
                         userUploadSlide.myBundle.putInt("isSpicy", isSpicy);
+                    }
+                }
+        );
+
+        salty.setOnClickListener(
+                new CheckBox.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int isSalty = salty.isChecked() ? 1 : 0;
+                        userUploadSlide.myBundle.putInt("isSalty", isSalty);
                     }
                 }
         );

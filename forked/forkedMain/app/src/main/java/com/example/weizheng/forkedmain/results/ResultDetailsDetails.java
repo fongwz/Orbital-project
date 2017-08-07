@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class ResultDetailsDetails extends Fragment {
 
     private FirebaseDatabase myFirebaseDatabase;
     private DatabaseReference myFirebaseRef;
+    private static final String TAG = "Results";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -163,7 +165,7 @@ public class ResultDetailsDetails extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getActivity(), "error for steps", Toast.LENGTH_SHORT).show();
+                Log.i(TAG,databaseError.toString());
             }
         });
 

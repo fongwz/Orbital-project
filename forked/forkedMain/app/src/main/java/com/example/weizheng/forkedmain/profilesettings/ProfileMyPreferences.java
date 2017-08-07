@@ -28,6 +28,7 @@ public class ProfileMyPreferences extends AppCompatActivity {
     private TextView sweetYN;
     private TextView sourYN;
     private TextView spicyYN;
+    private TextView saltyYN;
     private TextView meatYN;
     private TextView seafoodYN;
     private TextView vegetableYN;
@@ -60,10 +61,13 @@ public class ProfileMyPreferences extends AppCompatActivity {
                 sweetYN = (TextView) findViewById(R.id.profile_preferences_sweet_yn);
                 sourYN = (TextView) findViewById(R.id.profile_preferences_sour_yn);
                 spicyYN = (TextView) findViewById(R.id.profile_preferences_spicy_yn);
+                saltyYN = (TextView) findViewById(R.id.profile_preferences_salty_yn);
                 meatYN = (TextView) findViewById(R.id.profile_preferences_meat_yn);
                 seafoodYN = (TextView) findViewById(R.id.profile_preferences_seafood_yn);
                 vegetableYN = (TextView) findViewById(R.id.profile_preferences_vegetables_yn);
                 dessertYN = (TextView) findViewById(R.id.profile_preferences_dessert_yn);
+
+                Log.i(TAG, dataSnapshot.child("isSalty").getValue().toString());
 
                 setColor(chineseYN, setYN(Integer.valueOf(dataSnapshot.child("isChinese").getValue().toString())));
                 setColor(malayYN, setYN(Integer.valueOf(dataSnapshot.child("isMalay").getValue().toString())));
@@ -73,6 +77,7 @@ public class ProfileMyPreferences extends AppCompatActivity {
                 setColor(sweetYN, setYN(Integer.valueOf(dataSnapshot.child("isSweet").getValue().toString())));
                 setColor(sourYN, setYN(Integer.valueOf(dataSnapshot.child("isSour").getValue().toString())));
                 setColor(spicyYN, setYN(Integer.valueOf(dataSnapshot.child("isSpicy").getValue().toString())));
+                setColor(saltyYN, setYN(Integer.valueOf(dataSnapshot.child("isSalty").getValue().toString())));
                 setColor(meatYN, setYN(Integer.valueOf(dataSnapshot.child("isMeat").getValue().toString())));
                 setColor(seafoodYN, setYN(Integer.valueOf(dataSnapshot.child("isSeafood").getValue().toString())));
                 setColor(vegetableYN, setYN(Integer.valueOf(dataSnapshot.child("isVegetables").getValue().toString())));

@@ -72,15 +72,15 @@ public class Settings3 extends AppCompatActivity {
         }
 
         if (seafood.isChecked()) {
-            preferenceValues[6] = 1;
+            preferenceValues[7] = 1;
         } else {
-            preferenceValues[6] = 0;
+            preferenceValues[7] = 0;
         }
 
         if (veg.isChecked()) {
-            preferenceValues[10] = 1;
+            preferenceValues[11] = 1;
         } else {
-            preferenceValues[10] = 0;
+            preferenceValues[11] = 0;
         }
 
         if (dessert.isChecked()) {
@@ -99,12 +99,13 @@ public class Settings3 extends AppCompatActivity {
             preferenceReference.child("isKorean").setValue(preferenceValues[3]);
             preferenceReference.child("isMalay").setValue(preferenceValues[4]);
             preferenceReference.child("isMeat").setValue(preferenceValues[5]);
-            preferenceReference.child("isSeafood").setValue(preferenceValues[6]);
-            preferenceReference.child("isSour").setValue(preferenceValues[7]);
-            preferenceReference.child("isSpicy").setValue(preferenceValues[8]);
-            preferenceReference.child("isSweet").setValue(preferenceValues[9]);
-            preferenceReference.child("isVegetables").setValue(preferenceValues[10]);
-            preferenceReference.child("isWestern").setValue(preferenceValues[11]);
+            preferenceReference.child("isSalty").setValue(preferenceValues[6]);
+            preferenceReference.child("isSeafood").setValue(preferenceValues[7]);
+            preferenceReference.child("isSour").setValue(preferenceValues[8]);
+            preferenceReference.child("isSpicy").setValue(preferenceValues[9]);
+            preferenceReference.child("isSweet").setValue(preferenceValues[10]);
+            preferenceReference.child("isVegetables").setValue(preferenceValues[11]);
+            preferenceReference.child("isWestern").setValue(preferenceValues[12]);
 
             Intent i = new Intent(this, LoggedInPage.class);
             i.putExtra("firstSetup", true);

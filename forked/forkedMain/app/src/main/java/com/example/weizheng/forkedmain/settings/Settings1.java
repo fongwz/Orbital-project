@@ -40,7 +40,7 @@ public class Settings1 extends AppCompatActivity {
 
     public void onCuisineClick(View view) {
 
-        int[] preferenceValues = new int[12];
+        int[] preferenceValues = new int[13];
         chinese = (CheckBox) findViewById(R.id.settings_cuisine_chinese);
         malay = (CheckBox) findViewById(R.id.settings_cuisine_malay);
         indian = (CheckBox) findViewById(R.id.settings_cuisine_indian);
@@ -66,9 +66,9 @@ public class Settings1 extends AppCompatActivity {
         }
 
         if (western.isChecked()) {
-            preferenceValues[11] = 1;
+            preferenceValues[12] = 1;
         } else {
-            preferenceValues[11] = 0;
+            preferenceValues[12] = 0;
         }
 
         if (korean.isChecked()) {

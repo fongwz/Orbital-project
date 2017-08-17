@@ -10,13 +10,16 @@
         android:id="@+id/log_in_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:textSize="50sp"
-        tools:layout_editor_absoluteX="87dp"
-        tools:layout_editor_absoluteY="96dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="78dp" />
+        android:layout_marginTop="78dp"
+        android:fontFamily="casual"
+        android:text="Welcome!"
+        android:textColor="@android:color/black"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="96dp" />
 
     <TextView
         android:id="@+id/log_in_text"
@@ -27,60 +30,62 @@
         android:layout_marginTop="88dp"
         android:text="Login"
         android:textSize="30sp"
-         />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/log_in_email_textview"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_alignBaseline="@+id/log_in_email_edittext"
         android:layout_alignBottom="@+id/log_in_email_edittext"
         android:layout_toStartOf="@+id/log_in_email_edittext"
         android:text="Email :"
-        android:textSize="20sp"
-        />
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/log_in_email_edittext"
         android:layout_width="210dp"
-        android:layout_height="44dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/log_in_password_edittext"
+        android:layout_alignStart="@+id/log_in_password_edittext"
+        android:layout_marginBottom="23dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:textSize="23sp"
-        android:layout_below="@+id/log_in_text"
-        android:layout_alignEnd="@+id/log_in_password_edittext"
-        android:layout_marginTop="25dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/log_in_password_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/log_in_email_textview"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/log_in_text"
+        android:layout_marginTop="119dp"
+        android:layout_toStartOf="@+id/log_in_email_edittext"
         android:text="Password :"
-        android:textSize="20sp"
-         />
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/log_in_password_edittext"
         android:layout_width="211dp"
-        android:layout_height="44dp"
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/log_in_password_textview"
+        android:layout_alignBottom="@+id/log_in_password_textview"
+        android:layout_alignStart="@+id/log_in_register_button"
+        android:layout_marginStart="24dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:textSize="23sp"
-        android:layout_marginStart="28dp"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/log_in_welcome" />
+        android:textSize="20sp" />
 
     <CheckBox
         android:id="@+id/log_in_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/log_in_password_edittext"
-        android:layout_toEndOf="@+id/log_in_password_textview"
         android:text="Show password"
         android:textSize="12sp"
-        android:onClick="loginDisplayPassword"/>
+        android:onClick="loginDisplayPassword"
+        android:layout_below="@+id/log_in_password_edittext"
+        android:layout_toEndOf="@+id/log_in_password_textview"
+        android:layout_marginTop="13dp" />
 
     <Button
         android:id="@+id/log_in_login_button"

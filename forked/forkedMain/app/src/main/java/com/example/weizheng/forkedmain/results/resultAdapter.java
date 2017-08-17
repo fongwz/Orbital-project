@@ -65,7 +65,11 @@ public class resultAdapter extends ArrayAdapter<String> {
                     public void onClick(final View v) {
                         TextView myText = (TextView) customView.findViewById(R.id.resultText);
                         String name = myText.getText().toString();
-                        animateTransition(v, name);
+
+                        Intent i = new Intent(v.getContext(), ResultDetails.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        i.putExtra("recipeName", name);
+                        v.getContext().startActivity(i);
 
                     }
                 }

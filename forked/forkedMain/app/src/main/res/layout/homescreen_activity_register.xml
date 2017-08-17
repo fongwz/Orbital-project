@@ -21,11 +21,12 @@
         android:id="@+id/register_email_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email:"
-        android:textSize="18sp"
         android:layout_alignBaseline="@+id/register_email_edittext"
         android:layout_alignBottom="@+id/register_email_edittext"
-        android:layout_alignEnd="@+id/register_displayname_textview" />
+        android:layout_alignEnd="@+id/register_displayname_textview"
+        android:text="Email:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/register_email_edittext"
@@ -40,33 +41,35 @@
 
     <TextView
         android:id="@+id/register_displayname_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/register_displayname_edittext"
+        android:layout_toStartOf="@+id/register_displayname_edittext"
+        android:lines="2"
         android:text="Display Name:"
-        android:textSize="18sp"
-        android:layout_alignBaseline="@+id/register_displayname_edittext"
-        android:layout_alignBottom="@+id/register_displayname_edittext"
-        android:layout_toStartOf="@+id/register_displayname_edittext" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/register_displayname_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/register_email_edittext"
-        android:layout_below="@+id/register_email_edittext"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="17dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:layout_below="@+id/register_email_edittext"
+        android:layout_alignStart="@+id/register_email_edittext" />
 
     <TextView
         android:id="@+id/register_password_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password:"
-        android:textSize="18sp"
         android:layout_alignBaseline="@+id/register_password_edittext"
         android:layout_alignBottom="@+id/register_password_edittext"
-        android:layout_toStartOf="@+id/register_password_edittext" />
+        android:layout_toStartOf="@+id/register_password_edittext"
+        android:text="Password:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/register_password_edittext"

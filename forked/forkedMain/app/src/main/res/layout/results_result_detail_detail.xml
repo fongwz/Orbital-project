@@ -5,45 +5,57 @@
     tools:context="com.example.weizheng.forkedmain.results.ResultDetails">
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:id="@+id/result_detail_detail_scrollview"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/result_detail_detail_ingredient_layout"
             android:layout_width="match_parent"
-            android:layout_height="170dp">
+            android:layout_height="150dp">
 
             <TextView
                 android:id="@+id/result_detail_detail_textview1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="6dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginTop="15dp"
-                android:text="Ingredients"
+                android:text=" Ingredients"
                 android:textAppearance="@android:style/TextAppearance.Large"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:background="@drawable/profile_list_small_gradient"/>
 
-            <RelativeLayout
-                android:id="@+id/result_detail_detail_steps_layout"
+            <TextView
+                android:id="@+id/result_detail_detail_textview2"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/result_detail_detail_textview1"
                 android:layout_below="@+id/result_detail_detail_textview1"
-                android:layout_marginBottom="18dp">
+                android:layout_marginTop="23dp"
+                android:text=" Recipe"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:background="@drawable/profile_list_small_gradient"/>
 
-                <TextView
-                    android:id="@+id/result_detail_detail_textview2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="Recipe"
-                    android:textColor="#000000"
-                    android:textSize="24sp" />
-
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/result_detail_detail_steps"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/result_detail_detail_textview2"
+                android:layout_below="@+id/result_detail_detail_textview2"
+                android:layout_marginRight="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:text=""
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:paddingLeft="6dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="3dp"
+                android:background="@drawable/rectangle_black_border_with_fill"
+                />
 
         </RelativeLayout>
     </ScrollView>

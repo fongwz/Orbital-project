@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.weizheng.forkedmain.R;
 import com.google.firebase.database.DataSnapshot;
@@ -21,14 +21,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 public class ResultDetailsDetails extends Fragment {
 
     private FirebaseDatabase myFirebaseDatabase;
     private DatabaseReference myFirebaseRef;
+    private TextView recipeSteps;
     private static final String TAG = "Results";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         final View rootView = inflater.inflate(R.layout.results_result_detail_detail, container, false);
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -47,7 +51,7 @@ public class ResultDetailsDetails extends Fragment {
                 float stepTranslation = 0;
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     Resources r = getResources();
-                    RelativeLayout bottomLayout = (RelativeLayout) rootView.findViewById(R.id.result_detail_detail_steps_layout);
+
                     RelativeLayout topLayout = (RelativeLayout) rootView.findViewById(R.id.result_detail_detail_ingredient_layout);
 
                     /** Creating new TextView to store ingredients name */
@@ -58,6 +62,9 @@ public class ResultDetailsDetails extends Fragment {
                     );
                     addIngredientNameParams.addRule(RelativeLayout.ALIGN_START, R.id.result_detail_detail_textview1);
                     addIngredientNameParams.addRule(RelativeLayout.BELOW, R.id.result_detail_detail_textview1);
+                    addIngredientNameParams.setMargins(
+                            20,0,0,0
+                    );
                     addIngredientName.setLayoutParams(addIngredientNameParams);
                     addIngredientName.setPadding(
                             (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, r.getDisplayMetrics()),
@@ -70,13 +77,14 @@ public class ResultDetailsDetails extends Fragment {
                     addIngredientName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     addIngredientName.setTextColor(Color.BLACK);
                     addIngredientName.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ingredientTranslation, r.getDisplayMetrics()));
+                    addIngredientName.setBackgroundResource(R.drawable.rectangle_black_border_with_fill);
                     topLayout.addView(addIngredientName);
 
 
                     /** Creating new TextView to store ingredients qty */
                     TextView addQty = new TextView(getActivity());
                     RelativeLayout.LayoutParams addQtyParams = new RelativeLayout.LayoutParams(
-                            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, r.getDisplayMetrics()),
+                            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 90, r.getDisplayMetrics()),
                             (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())
                     );
                     addQtyParams.addRule(RelativeLayout.ALIGN_START, R.id.result_detail_detail_textview1);
@@ -99,17 +107,22 @@ public class ResultDetailsDetails extends Fragment {
                     addQty.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
                     addQty.setTextColor(Color.BLACK);
                     addQty.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ingredientTranslation, r.getDisplayMetrics()));
+                    addQty.setBackgroundResource(R.drawable.rectangle_black_border_with_fill);
                     topLayout.addView(addQty);
 
                     /** Readjusting layout */
-                    topLayout.getLayoutParams().height+=((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics()));
-                    //topLayout.setMinimumHeight((topLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())));
+                    topLayout.getLayoutParams().height+=((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, r.getDisplayMetrics()));
+                    topLayout.setMinimumHeight((topLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, r.getDisplayMetrics())));
 
                     /** Shifting steps downwards */
                     stepTranslation += 30;
                     ingredientTranslation += 30;
-                    RelativeLayout stepLayout = (RelativeLayout)rootView.findViewById(R.id.result_detail_detail_steps_layout);
-                    stepLayout.setTranslationY((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, stepTranslation, r.getDisplayMetrics()));
+                    TextView stepsTitle = (TextView) rootView.findViewById(R.id.result_detail_detail_textview2);
+                    TextView stepsDetail = (TextView) rootView.findViewById(R.id.result_detail_detail_steps);
+                    stepsTitle.setTranslationY((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, stepTranslation, r.getDisplayMetrics()));
+                    stepsDetail.setTranslationY((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, stepTranslation, r.getDisplayMetrics()));
+                    //RelativeLayout stepLayout = (RelativeLayout)rootView.findViewById(R.id.result_detail_detail_steps_layout);
+                    //stepLayout.setTranslationY((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, stepTranslation, r.getDisplayMetrics()));
 
                 }
             }
@@ -120,45 +133,37 @@ public class ResultDetailsDetails extends Fragment {
             }
         });
 
+
         stepsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                float stepsTranslation = 0;
+                //float stepsTranslation = 0;
+                int newlineChecker = 0;
+                int currHeight = 0;
+                int newHeight = 0;
+                String text = "";
+                recipeSteps = (TextView) rootView.findViewById(R.id.result_detail_detail_steps);
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
 
                     Resources r = getResources();
-                    RelativeLayout bottomLayout = (RelativeLayout) rootView.findViewById(R.id.result_detail_detail_steps_layout);
+
                     RelativeLayout topLayout = (RelativeLayout) rootView.findViewById(R.id.result_detail_detail_ingredient_layout);
 
+                    if(newlineChecker == 0){
 
-                    /** Creating new TextView to store steps */
-                    TextView addSteps = new TextView(getActivity());
-                    RelativeLayout.LayoutParams addStepsParams = new RelativeLayout.LayoutParams(
-                            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300, r.getDisplayMetrics()),
-                            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())
-                    );
-                    addStepsParams.addRule(RelativeLayout.ALIGN_START, R.id.result_detail_detail_textview2);
-                    addStepsParams.addRule(RelativeLayout.BELOW, R.id.result_detail_detail_textview2);
-                    addSteps.setLayoutParams(addStepsParams);
-                    addSteps.setPadding(
-                            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, r.getDisplayMetrics()),
-                            0,
-                            0,
-                            0
-                    );
-                    addSteps.setBackgroundResource(R.drawable.user_upload_rectangle_border);
-                    addSteps.setText(postSnapshot.getValue().toString());
-                    addSteps.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-                    addSteps.setTextColor(Color.BLACK);
-                    addSteps.setTranslationY((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, stepsTranslation, r.getDisplayMetrics()));
-                    bottomLayout.addView(addSteps);
+                        text = text + postSnapshot.getValue().toString();
+                        recipeSteps.setText(recipeSteps.getText() + postSnapshot.getValue().toString() );
+                        newlineChecker=1;
 
-                    /** Readjusting Layout */
-                    //topLayout.setMinimumHeight((topLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())));
-                    //bottomLayout.setMinimumHeight((bottomLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, r.getDisplayMetrics())));
-                    topLayout.getLayoutParams().height+=((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, r.getDisplayMetrics()));
-                    bottomLayout.getLayoutParams().height+=((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, r.getDisplayMetrics()));
-                    stepsTranslation+=30;
+                    } else {
+
+                        text = text + " \n" + postSnapshot.getValue().toString();
+                        recipeSteps.setText( recipeSteps.getText() + " \n" + postSnapshot.getValue().toString() );
+
+                    }
+                    Log.i(TAG, Integer.valueOf(recipeSteps.getHeight()).toString());
+                    topLayout.getLayoutParams().height+=((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75, r.getDisplayMetrics()));
+                    topLayout.setMinimumHeight((topLayout.getHeight())+((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75, r.getDisplayMetrics())));
 
                 }
             }
